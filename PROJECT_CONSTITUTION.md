@@ -36,11 +36,13 @@ Agents inspect before editing, state assumptions, preserve user work, cite files
 
 ## Product trust and commercial sustainability
 
+- Amplytrix exists to create user value, revenue, and sustainable growth. It competes aggressively through superior outcomes, speed, experience, differentiation, pricing, responsible gamification, and persuasive execution; competitors' misconduct never lowers this standard.
 - Every feature names a measurable contribution to acquisition, activation, conversion, retention, revenue, expansion, referral, churn reduction, cost reduction, or differentiation.
 - Monetization may be assertive only when value, price, renewal, limits, consent, cancellation, downgrade, and export are clear and controllable.
 - Dark patterns, fabricated urgency or scarcity, hidden costs, forced consent, confirmshaming, obstructed cancellation, data captivity, addictive coercion, invented evidence, and exploitation of vulnerability are prohibited.
 - Gamification rewards useful progress and outcomes. It must be explainable, optional where practical, notification-controllable, and must not punish pauses, manipulate odds, erase progress coercively, or resemble gambling.
 - Retention must come from accumulated legitimate value: history, integrations, automation, personalization, collaboration, knowledge, and measurable outcomes. Artificial exit costs are prohibited.
+- No commercial target authorizes lies, illegal/criminal/immoral conduct, manipulation, deceptive comparisons, unauthorized social proof, harmful targeting, silent plan/price/data-purpose changes, privacy violations, or impaired user autonomy. User trust is a permanent commercial and architectural asset.
 
 ## Development governance
 

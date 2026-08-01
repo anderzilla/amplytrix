@@ -9,5 +9,5 @@ Record tester, SHA, environment, date, evidence link and result for each applica
 - Permissions/tenant separation; upgrade, downgrade, cancellation, renewal, limits, export and failed payment behavior.
 - Injection/prompt/tool/retrieval defenses, secrets, dependencies, abuse/bot/fraud/rate/quota/idempotency and legitimate-user recovery.
 - Telemetry, redaction, audit, privacy/retention/consent and alert diagnostics.
-- Monetization value/price transparency, truthful persuasion, non-coercive gamification and trust guardrails.
+- Monetization value/price/renewal/limit transparency; refusal/cancel/downgrade/export; authorized social proof and reproducible comparisons; truthful persuasion; commercial-integrity review; non-coercive gamification; experiment stop controls; revenue plus trust guardrails.
 - Build/lint/types/tests/contracts/migrations/rollback/docs/wiki evidence and all findings dispositioned.

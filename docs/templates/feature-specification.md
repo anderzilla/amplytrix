@@ -6,11 +6,11 @@ Frontend/backend/infrastructure/transversal; persona; problem; exclusions; rules
 
 ## Commercial case
 
-Objective; benefit; hypothesis; primary and guardrail metrics; expected impact; cost; monetization; retention; success; abandonment.
+Objective; user value; persuasion technique; hypothesis; monetization; retention; gamification; revenue/retention and guardrail metrics; expected impact; cost; manipulation/legal/reputation risk; evidence; success and interruption criteria.
 
 ## Experience and assurance
 
-UX; accessibility; internationalization; communication; security/privacy; abuse; gamification; tests; observability.
+UX; accessibility; internationalization; communication; security/privacy; abuse; gamification; refusal; cancellation; downgrade; export; consent; social proof and comparison integrity; tests; observability.
 
 ## Delivery
 

@@ -5,4 +5,4 @@ description: Review commercially strong Amplytrix persuasion without deception o
 
 # Ethical persuasion review
 
-Read `docs/source-of-truth/{communication,monetization}.md`. Map every proof, comparison, saving, urgency, scarcity, guarantee and recommendation to verifiable evidence. Check total price, consent, renewal and exit parity. Block fabricated proof, hidden cost, disguised opt-in, guilt/fear, obstruction or harmful dependency. Suggest a truthful high-conversion alternative.
+Read `docs/source-of-truth/{ethical-persuasion,commercial-integrity,communication,monetization}.md`. Map every proof, comparison, saving, urgency, scarcity, guarantee and recommendation to verifiable evidence. For each recommendation report technique, user/business benefit, evidence, manipulation risk, ethical limit, success/guardrail metrics, less-aggressive alternative and verdict. Check total price, consent, renewal and exit parity. Block fabricated proof, hidden cost, disguised opt-in, guilt/fear, obstruction, capability mismatch or harmful dependency. Suggest the strongest truthful alternative.
