@@ -48,9 +48,9 @@ jobs:
       - uses: anchore/sbom-action@v0
         with:
           { image: 'amplytrix-backend:pr', format: 'spdx-json', output-file: 'backend.spdx.json' }
-      - uses: aquasecurity/trivy-action@0.36.0
+      - uses: aquasecurity/trivy-action@v0.36.0
         with: { image-ref: 'amplytrix-backend:pr', severity: 'CRITICAL,HIGH', exit-code: '1' }
-      - uses: aquasecurity/trivy-action@0.36.0
+      - uses: aquasecurity/trivy-action@v0.36.0
         with: { image-ref: 'amplytrix-web:pr', severity: 'CRITICAL,HIGH', exit-code: '1' }
   terraform:
     runs-on: ubuntu-latest
