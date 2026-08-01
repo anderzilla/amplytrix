@@ -24,3 +24,10 @@ Statuses: `proposed`, `accepted`, `superseded`, `rejected`. Accepted ADRs are im
 | 0036-0039 | Migrations/runtime/tests/model isolation     | accepted   |
 | 0040      | Development governance and homologation gate | accepted   |
 | 0041      | Ethical persuasion and commercial integrity  | accepted   |
+| 0042-0044 | Catalog, plans/prices and entitlements       | accepted   |
+| 0045-0046 | Mercado Pago and Stripe adapters             | proposed   |
+| 0047-0054 | Billing boundary, states, events and tenancy | accepted   |
+| 0055      | Provider-calculated disclosed proration      | proposed   |
+| 0056-0058 | Async roles, connections and artifacts       | accepted   |
+| 0059      | PostgreSQL-first vector data                 | proposed   |
+| 0060-0061 | Evidence-driven scale and pricing hypotheses | accepted   |
