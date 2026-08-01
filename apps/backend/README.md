@@ -13,4 +13,4 @@ uv run alembic heads
 uv run uvicorn amplytrix.main:app --host 0.0.0.0 --port 8080
 ```
 
-Migrations run as a separately approved Cloud Run Job, never at service startup. No business bounded context is implemented in Phase Zero; `shared` contains only proven cross-cutting contracts and health transport.
+Migrations run as a separately approved Cloud Run Job, never at service startup. The first commercial slice implements the versioned `catalog` bounded context and PostgreSQL schema; `shared` contains only proven cross-cutting contracts and health transport. Seed prices are explicitly non-final local/sandbox hypotheses.
