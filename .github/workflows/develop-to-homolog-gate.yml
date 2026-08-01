@@ -1,0 +1,37 @@
+name: Develop to homolog gate
+on:
+  pull_request:
+    branches: [homolog]
+    types: [opened, synchronize, reopened]
+permissions:
+  contents: read
+jobs:
+  homologation-gate:
+    name: homologation-gate
+    if: github.head_ref == 'develop'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with: { run_install: false }
+      - uses: actions/setup-node@v5
+        with: { node-version-file: .node-version, cache: pnpm }
+      - uses: astral-sh/setup-uv@v6
+        with: { version: '0.11.17', enable-cache: true }
+      - uses: actions/setup-python@v6
+        with: { python-version-file: apps/backend/.python-version }
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: uv sync --directory apps/backend --locked
+      - name: Full automated validation
+        run: pnpm validate
+      - name: Consolidate honest evidence report
+        if: success()
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: node scripts/write-homologation-report.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homologation-gate-report
+          path: artifacts/homologation-gate-report.md
+          if-no-files-found: warn

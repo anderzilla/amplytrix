@@ -1,0 +1,4 @@
+interface:
+  display_name: 'event-storming'
+  short_description: 'Run the Amplytrix event-storming workflow'
+  default_prompt: 'Use the event-storming skill and report evidence.'

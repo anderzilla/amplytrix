@@ -1,0 +1,4 @@
+interface:
+  display_name: 'c4-diagram'
+  short_description: 'Execute the c4-diagram workflow for Amplytrix'
+  default_prompt: 'Use the c4-diagram skill and report evidence.'

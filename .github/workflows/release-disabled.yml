@@ -1,0 +1,14 @@
+name: Release (disabled foundation scaffold)
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'This workflow performs validation only; enter VALIDATE'
+        required: true
+permissions: { contents: read }
+jobs:
+  validate-only:
+    if: inputs.confirmation == 'VALIDATE'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "No build publication, deployment, release, or cloud mutation is configured in Phase Zero."

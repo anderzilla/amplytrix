@@ -1,0 +1,3 @@
+# Cloud Run deployment plan
+
+Build immutable linux/amd64 web and Python images in CI, generate SBOM, scan, publish to Artifact Registry, deploy by digest to staging, smoke, require approval, then promote the same digest. Backend runs direct Uvicorn with one worker; Cloud Run scales instances. Inject secrets via Secret Manager and config via environment. Start min=0, bounded max, concurrency 40, 1 CPU/512 MiB, timeout 30s and tune from telemetry. Configure probes, Cloud SQL connector, graceful shutdown, JSON/correlation, budgets and PITR. Run Alembic only in a separately approved migration Job using expand/contract; never at API startup. No automatic deploy exists in Phase Zero.

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'domain-modeling'
+  short_description: 'Execute the domain-modeling workflow for Amplytrix'
+  default_prompt: 'Use the domain-modeling skill and report evidence.'

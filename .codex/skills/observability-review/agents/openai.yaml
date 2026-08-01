@@ -1,0 +1,4 @@
+interface:
+  display_name: 'observability-review'
+  short_description: 'Execute the observability-review workflow for Amplytrix'
+  default_prompt: 'Use the observability-review skill and report evidence.'

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'catalog-item-design'
+  short_description: 'Execute the catalog-item-design workflow for Amplytrix'
+  default_prompt: 'Use the catalog-item-design skill and report evidence.'

@@ -1,0 +1,20 @@
+name: Bug report
+description: Report a reproducible defect without sensitive data
+title: 'fix: '
+body:
+  - type: textarea
+    id: observed
+    attributes: { label: Observed behavior and impact }
+    validations: { required: true }
+  - type: textarea
+    id: reproduce
+    attributes:
+      { label: Minimal reproduction, description: Redact secrets and personal/customer data. }
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes: { label: Expected behavior }
+    validations: { required: true }
+  - type: input
+    id: version
+    attributes: { label: Version or commit }

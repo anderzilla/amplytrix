@@ -1,0 +1,4 @@
+interface:
+  display_name: 'ubiquitous-language'
+  short_description: 'Run the Amplytrix ubiquitous-language workflow'
+  default_prompt: 'Use the ubiquitous-language skill and report evidence.'

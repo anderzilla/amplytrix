@@ -1,0 +1,4 @@
+interface:
+  display_name: 'release-readiness'
+  short_description: 'Execute the release-readiness workflow for Amplytrix'
+  default_prompt: 'Use the release-readiness skill and report evidence.'

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'python-backend-feature'
+  short_description: 'Run the Amplytrix python-backend-feature workflow'
+  default_prompt: 'Use the python-backend-feature skill and report evidence.'

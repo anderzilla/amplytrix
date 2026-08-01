@@ -1,0 +1,24 @@
+name: Branch policy
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with: { fetch-depth: 0 }
+      - uses: pnpm/action-setup@v4
+        with: { run_install: false }
+      - uses: actions/setup-node@v5
+        with: { node-version-file: .node-version, cache: pnpm }
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Validate source, target, naming and governance assets
+        env:
+          PR_SOURCE: ${{ github.head_ref }}
+          PR_TARGET: ${{ github.base_ref }}
+        run: pnpm validate:governance

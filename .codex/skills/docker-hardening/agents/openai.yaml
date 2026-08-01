@@ -1,0 +1,4 @@
+interface:
+  display_name: 'docker-hardening'
+  short_description: 'Execute the docker-hardening workflow for Amplytrix'
+  default_prompt: 'Use the docker-hardening skill and report evidence.'

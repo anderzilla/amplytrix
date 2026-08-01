@@ -1,0 +1,4 @@
+interface:
+  display_name: 'pull-request-review'
+  short_description: 'Execute the pull-request-review workflow for Amplytrix'
+  default_prompt: 'Use the pull-request-review skill and report evidence.'

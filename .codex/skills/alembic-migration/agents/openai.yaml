@@ -1,0 +1,4 @@
+interface:
+  display_name: 'alembic-migration'
+  short_description: 'Run the Amplytrix alembic-migration workflow'
+  default_prompt: 'Use the alembic-migration skill and report evidence.'

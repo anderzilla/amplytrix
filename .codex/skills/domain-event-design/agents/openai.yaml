@@ -1,0 +1,4 @@
+interface:
+  display_name: 'domain-event-design'
+  short_description: 'Run the Amplytrix domain-event-design workflow'
+  default_prompt: 'Use the domain-event-design skill and report evidence.'

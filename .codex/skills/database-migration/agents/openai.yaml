@@ -1,0 +1,4 @@
+interface:
+  display_name: 'database-migration'
+  short_description: 'Execute the database-migration workflow for Amplytrix'
+  default_prompt: 'Use the database-migration skill and report evidence.'

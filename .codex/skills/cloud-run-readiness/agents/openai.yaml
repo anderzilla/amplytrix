@@ -1,0 +1,4 @@
+interface:
+  display_name: 'cloud-run-readiness'
+  short_description: 'Execute the cloud-run-readiness workflow for Amplytrix'
+  default_prompt: 'Use the cloud-run-readiness skill and report evidence.'

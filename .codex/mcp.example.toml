@@ -1,0 +1,17 @@
+# Illustrative only. Verify current Codex schema and each official server before copying to ignored mcp.toml.
+# Never place tokens, production URLs, or production database credentials here.
+
+[mcp_servers.filesystem]
+command = "official-filesystem-mcp"
+args = ["--root", "Z:\\Amplytrix", "--read-write"]
+
+[mcp_servers.postgres_local]
+command = "official-postgres-mcp"
+args = ["--connection-env", "AMPLYTRIX_LOCAL_DATABASE_URL", "--read-only"]
+
+[mcp_servers.playwright]
+command = "official-playwright-mcp"
+args = ["--isolated", "--allowed-origin", "http://localhost:3000"]
+
+# GitHub and OpenAI documentation integrations are preferably installed/managed by Codex.
+# Google Cloud MCP remains disabled until an official compatible server passes security review.

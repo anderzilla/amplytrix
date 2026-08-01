@@ -1,0 +1,4 @@
+interface:
+  display_name: 'incident-runbook'
+  short_description: 'Execute the incident-runbook workflow for Amplytrix'
+  default_prompt: 'Use the incident-runbook skill and report evidence.'

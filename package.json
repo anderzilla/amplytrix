@@ -1,0 +1,53 @@
+{
+  "name": "amplytrix",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "backend:format": "uv run --directory apps/backend ruff format .",
+    "backend:format:check": "uv run --directory apps/backend ruff format --check .",
+    "backend:lint": "uv run --directory apps/backend ruff check . && uv run --directory apps/backend lint-imports",
+    "backend:typecheck": "uv run --directory apps/backend pyright",
+    "backend:test": "uv run --directory apps/backend pytest",
+    "backend:build": "uv build --project apps/backend",
+    "backend:security": "uv run --directory apps/backend bandit -c pyproject.toml -r src && uvx --from semgrep==1.172.0 semgrep scan --config p/python --error apps/backend/src && uv run --directory apps/backend pip-audit --skip-editable",
+    "backend:openapi": "uv run --directory apps/backend python scripts/export_openapi.py",
+    "build": "pnpm build:web && pnpm backend:build",
+    "build:web": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "turbo run lint && pnpm backend:lint",
+    "typecheck": "turbo run typecheck && pnpm backend:typecheck",
+    "test": "turbo run test && pnpm backend:test",
+    "test:architecture": "uv run --directory apps/backend pytest tests/architecture && uv run --directory apps/backend lint-imports",
+    "security": "pnpm backend:security && pnpm audit --audit-level high",
+    "docs:check": "node scripts/validate-foundation.mjs",
+    "validate:governance": "node scripts/validate-governance.mjs",
+    "verify": "pnpm format:check && pnpm backend:format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm docs:check && pnpm validate:governance",
+    "validate": "pnpm verify && pnpm build && pnpm security",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.39.1",
+    "vitest": "^3.2.4"
+  },
+  "lint-staged": {
+    "*.{js,mjs,ts,tsx,json,md,yaml,yml}": "prettier --check"
+  }
+}
