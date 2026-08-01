@@ -1,0 +1,3 @@
+# Branching
+
+Permanent protected branches are lowercase `develop`, `homolog`, and `master`; `master` is default. Allowed PRs: `task/* -> develop`, `architecture/* -> develop`, `develop -> homolog`, `homolog -> master`. All other source/target combinations fail. Task branches are `task/<frontend|backend|infrastructure|transversal>/<kebab-name>` from `develop`; architecture branches are `architecture/<kebab-name>` from `develop`. No direct commit, deletion, force-push, pending/failing-check merge, or silent exception. Legacy cased branches and `main` are frozen pending safe retirement. See ADR-0040.

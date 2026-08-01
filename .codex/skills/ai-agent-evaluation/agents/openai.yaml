@@ -1,0 +1,4 @@
+interface:
+  display_name: 'ai-agent-evaluation'
+  short_description: 'Execute the ai-agent-evaluation workflow for Amplytrix'
+  default_prompt: 'Use the ai-agent-evaluation skill and report evidence.'

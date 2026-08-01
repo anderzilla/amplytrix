@@ -1,0 +1,4 @@
+interface:
+  display_name: 'python-type-safety'
+  short_description: 'Run the Amplytrix python-type-safety workflow'
+  default_prompt: 'Use the python-type-safety skill and report evidence.'

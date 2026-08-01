@@ -1,0 +1,18 @@
+name: Feature specification
+description: Propose a bounded, testable Amplytrix outcome
+title: 'feat: '
+body:
+  - type: textarea
+    id: problem
+    attributes: { label: Problem and evidence, description: Name persona/JTBD and current impact. }
+    validations: { required: true }
+  - type: textarea
+    id: outcome
+    attributes: { label: Outcome and acceptance criteria }
+    validations: { required: true }
+  - type: textarea
+    id: exclusions
+    attributes: { label: Scope exclusions, description: State what this will not do. }
+  - type: textarea
+    id: risk
+    attributes: { label: Data, security, operational and cost risks }

@@ -1,0 +1,101 @@
+[project]
+name = "amplytrix-backend"
+version = "0.0.0"
+description = "Amplytrix Python modular-monolith foundation"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "alembic>=1.16,<2",
+  "asyncpg>=0.30,<1",
+  "fastapi>=0.116,<1",
+  "pydantic>=2.11,<3",
+  "pydantic-settings>=2.10,<3",
+  "sqlalchemy[asyncio]>=2.0.51,<3",
+  "structlog>=25.4,<26",
+  "uvicorn[standard]>=0.35,<1",
+]
+
+[dependency-groups]
+dev = [
+  "bandit>=1.8,<2",
+  "coverage[toml]>=7.10,<8",
+  "hypothesis>=6.138,<7",
+  "import-linter>=2.3,<3",
+  "pip-audit>=2.9,<3",
+  "pyright>=1.1.404,<2",
+  "pytest>=9.0.3,<10",
+  "pytest-asyncio>=1.1,<2",
+  "pytest-cov>=6.2,<8",
+  "httpx>=0.28,<1",
+  "ruff>=0.12,<1",
+]
+
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/amplytrix"]
+
+[tool.uv]
+required-version = ">=0.11,<0.12"
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "ASYNC", "S", "C4", "DTZ", "LOG", "PIE", "RUF"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "S105", "S106"]
+
+[tool.pyright]
+include = ["src", "tests"]
+pythonVersion = "3.13"
+typeCheckingMode = "strict"
+reportMissingTypeStubs = "error"
+reportUnknownMemberType = "error"
+reportUnknownArgumentType = "error"
+reportUnknownVariableType = "error"
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers --disable-warnings --cov=amplytrix --cov-report=term-missing --cov-fail-under=85"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = ["integration: requires a disposable PostgreSQL instance"]
+
+[tool.coverage.run]
+branch = true
+source = ["amplytrix"]
+omit = [
+  "src/amplytrix/main.py",
+  "src/amplytrix/shared/application/messages.py",
+  "src/amplytrix/shared/application/ports.py",
+  "src/amplytrix/shared/domain/errors.py",
+]
+
+[tool.coverage.report]
+exclude_also = ["if TYPE_CHECKING:", '\.\.\.']
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+skips = ["B101"]
+
+[tool.importlinter]
+root_packages = ["amplytrix"]
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "Domain is framework independent"
+type = "forbidden"
+source_modules = ["amplytrix.shared.domain"]
+forbidden_modules = ["fastapi", "pydantic", "sqlalchemy", "alembic", "asyncpg"]
+
+[[tool.importlinter.contracts]]
+name = "Application does not depend on presentation or infrastructure"
+type = "forbidden"
+source_modules = ["amplytrix.shared.application"]
+forbidden_modules = ["amplytrix.shared.presentation", "amplytrix.shared.infrastructure"]

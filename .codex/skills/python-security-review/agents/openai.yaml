@@ -1,0 +1,4 @@
+interface:
+  display_name: 'python-security-review'
+  short_description: 'Run the Amplytrix python-security-review workflow'
+  default_prompt: 'Use the python-security-review skill and report evidence.'

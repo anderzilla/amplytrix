@@ -1,0 +1,4 @@
+interface:
+  display_name: 'prompt-injection-review'
+  short_description: 'Execute the prompt-injection-review workflow for Amplytrix'
+  default_prompt: 'Use the prompt-injection-review skill and report evidence.'

@@ -1,0 +1,3 @@
+# MCP threat model
+
+MCP servers can expose files, credentials, SaaS data, and write tools. Threats include malicious server/update, prompt injection in retrieved content, confused-deputy writes, token theft, overbroad scopes, exfiltration, and destructive automation. Controls: official provenance, pinned/reviewed configuration, repository/local-only scope, tool allowlist, read-only production, separate identities, short-lived OAuth, schema validation, output treated as untrusted, approval for external writes, audit, and immediate revocation. Test with canary data and denied out-of-scope access before real use.

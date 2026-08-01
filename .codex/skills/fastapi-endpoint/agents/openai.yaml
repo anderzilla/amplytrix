@@ -1,0 +1,4 @@
+interface:
+  display_name: 'fastapi-endpoint'
+  short_description: 'Run the Amplytrix fastapi-endpoint workflow'
+  default_prompt: 'Use the fastapi-endpoint skill and report evidence.'

@@ -1,0 +1,78 @@
+name: Validate
+on:
+  pull_request:
+  push:
+    branches: [develop, homolog, master]
+permissions:
+  contents: read
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+        with: { run_install: false }
+      - uses: actions/setup-node@v5
+        with: { node-version-file: .node-version, cache: pnpm }
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm format:check
+      - run: pnpm exec turbo run lint typecheck test build
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+        with: { version: '0.11.17', enable-cache: true }
+      - uses: actions/setup-python@v6
+        with: { python-version-file: apps/backend/.python-version }
+      - run: uv sync --directory apps/backend --locked
+      - run: uv run --directory apps/backend ruff format --check .
+      - run: uv run --directory apps/backend ruff check .
+      - run: uv run --directory apps/backend pyright
+      - run: uv run --directory apps/backend pytest
+      - run: uv run --directory apps/backend lint-imports
+      - run: uv run --directory apps/backend alembic heads
+      - run: uv run --directory apps/backend python scripts/export_openapi.py
+      - run: git diff --exit-code -- packages/api-contracts/openapi.json
+      - run: uv run --directory apps/backend bandit -c pyproject.toml -r src
+      - run: uvx --from semgrep==1.172.0 semgrep scan --config p/python --error apps/backend/src
+      - run: uv run --directory apps/backend pip-audit --skip-editable
+  containers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/setup-buildx-action@v3
+      - run: docker build -f apps/backend/Dockerfile -t amplytrix-backend:pr apps/backend
+      - run: docker build -f apps/web/Dockerfile -t amplytrix-web:pr .
+      - uses: anchore/sbom-action@v0
+        with:
+          { image: 'amplytrix-backend:pr', format: 'spdx-json', output-file: 'backend.spdx.json' }
+      - uses: aquasecurity/trivy-action@0.32.0
+        with: { image-ref: 'amplytrix-backend:pr', severity: 'CRITICAL,HIGH', exit-code: '1' }
+      - uses: aquasecurity/trivy-action@0.32.0
+        with: { image-ref: 'amplytrix-web:pr', severity: 'CRITICAL,HIGH', exit-code: '1' }
+  terraform:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: infrastructure/terraform } }
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive
+      - run: terraform init -backend=false
+      - run: terraform validate
+      - uses: bridgecrewio/checkov-action@v12
+        with: { directory: infrastructure/terraform, framework: terraform, quiet: true }
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with: { fetch-depth: 0 }
+      - uses: gitleaks/gitleaks-action@v2
+        env: { GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}' }
+  dependency-review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/dependency-review-action@v4
+        with: { fail-on-severity: high }

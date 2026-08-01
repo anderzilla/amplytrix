@@ -1,0 +1,4 @@
+interface:
+  display_name: 'aggregate-design'
+  short_description: 'Run the Amplytrix aggregate-design workflow'
+  default_prompt: 'Use the aggregate-design skill and report evidence.'

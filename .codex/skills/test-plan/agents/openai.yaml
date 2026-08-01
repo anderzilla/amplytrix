@@ -1,0 +1,4 @@
+interface:
+  display_name: 'test-plan'
+  short_description: 'Execute the test-plan workflow for Amplytrix'
+  default_prompt: 'Use the test-plan skill and report evidence.'

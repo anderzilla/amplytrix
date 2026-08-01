@@ -1,0 +1,4 @@
+interface:
+  display_name: 'openapi-client-generation'
+  short_description: 'Run the Amplytrix openapi-client-generation workflow'
+  default_prompt: 'Use the openapi-client-generation skill and report evidence.'

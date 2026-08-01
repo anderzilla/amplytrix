@@ -1,0 +1,13 @@
+packages:
+  - apps/*
+  - packages/*
+
+allowBuilds:
+  '@nestjs/core': true
+  esbuild: true
+  sharp: true
+
+overrides:
+  find-my-way: '>=9.6.1 <10'
+  postcss: '>=8.5.18 <9'
+  sharp: '>=0.35.0 <0.36'

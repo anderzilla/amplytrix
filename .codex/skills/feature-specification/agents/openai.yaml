@@ -1,0 +1,4 @@
+interface:
+  display_name: 'feature-specification'
+  short_description: 'Execute the feature-specification workflow for Amplytrix'
+  default_prompt: 'Use the feature-specification skill and report evidence.'
