@@ -1,4 +1,4 @@
-# Candidate bounded contexts
+# Commercial bounded contexts
 
 | Context                                 | Value      | Dependency/complexity/risk          | Revenue/MVP                         | Externalization |
 | --------------------------------------- | ---------- | ----------------------------------- | ----------------------------------- | --------------- |
@@ -16,3 +16,5 @@
 | Marketplace                             | Supporting | catalog/billing/identity; very high | not MVP                             | partial         |
 
 Do not create modules from this table alone. A context becomes accepted only after language, ownership, transaction and integration boundaries are demonstrated.
+
+The commercial architecture refines the candidates into Identity & Access, Product Catalog, Entitlements, Billing & Subscriptions, Trials & Promotions, Usage & Metering, AI Execution, Workspaces & Repositories, Technical Memory, Audit & Compliance, Notifications and Experimentation. They remain modules in one deployable modular monolith; each owns its schema and published application contracts.
