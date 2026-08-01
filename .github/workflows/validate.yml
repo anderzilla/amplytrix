@@ -5,6 +5,7 @@ on:
     branches: [develop, homolog, master]
 permissions:
   contents: read
+  pull-requests: read
 jobs:
   frontend:
     runs-on: ubuntu-latest
@@ -47,9 +48,9 @@ jobs:
       - uses: anchore/sbom-action@v0
         with:
           { image: 'amplytrix-backend:pr', format: 'spdx-json', output-file: 'backend.spdx.json' }
-      - uses: aquasecurity/trivy-action@0.32.0
+      - uses: aquasecurity/trivy-action@0.36.0
         with: { image-ref: 'amplytrix-backend:pr', severity: 'CRITICAL,HIGH', exit-code: '1' }
-      - uses: aquasecurity/trivy-action@0.32.0
+      - uses: aquasecurity/trivy-action@0.36.0
         with: { image-ref: 'amplytrix-web:pr', severity: 'CRITICAL,HIGH', exit-code: '1' }
   terraform:
     runs-on: ubuntu-latest
@@ -74,5 +75,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/dependency-review-action@v4
+      - uses: pnpm/action-setup@v4
+        with: { run_install: false }
+      - uses: actions/setup-node@v5
+        with: { node-version-file: .node-version, cache: pnpm }
+      - uses: astral-sh/setup-uv@v6
+        with: { version: '0.11.17', enable-cache: true }
+      - uses: actions/setup-python@v6
+        with: { python-version-file: apps/backend/.python-version }
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: uv sync --directory apps/backend --locked
+      - name: Required dependency vulnerability fallback
+        run: pnpm audit --audit-level high && uv run --directory apps/backend pip-audit --skip-editable
+      - name: GitHub dependency review when licensed and enabled
+        if: vars.DEPENDENCY_REVIEW_ENABLED == 'true'
+        uses: actions/dependency-review-action@v5
         with: { fail-on-severity: high }
