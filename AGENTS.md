@@ -23,6 +23,8 @@ The only promotion flow is `task/*|architecture/* -> develop -> homolog -> maste
 
 Conserve context: identify scope first; read only relevant source-of-truth sections and module documents; reference paths instead of copying documents; reuse templates/checklists; report incrementally; never regenerate an established pattern.
 
+Commercial features must document value, persuasion technique, monetization, retention, gamification, manipulation/legal/reputation risk, revenue/retention/guardrail metrics, refusal/cancellation/export, required evidence, and stop criteria. Never optimize revenue without complaints, refunds, chargebacks, confusion, accidental conversion, accessibility, consent, privacy, satisfaction, and trust guardrails. Suspected deceptive, abusive, illegal, immoral, autonomy-reducing, or harmful behavior blocks work for human review.
+
 Architecture dependencies are presentation/infrastructure -> application -> domain. Domain imports no FastAPI, Pydantic, SQLAlchemy, Alembic, asyncpg, cloud or provider SDK. Application imports neither presentation nor concrete infrastructure. Bounded contexts cannot import another context's internals or tables. Keep domain, application DTO, HTTP, persistence and provider models separate. Validate all external input; use typed known errors, structured redacted logs, correlation IDs, idempotency and deny-default authorization. Indiscriminate `Any`, silent broad exceptions, mutable global state, sensitive errors, secrets, generated output, `.env*`, MCP local config, state files and production dumps are prohibited.
 
 ## Controlled procedures

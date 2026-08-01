@@ -23,3 +23,4 @@ Statuses: `proposed`, `accepted`, `superseded`, `rejected`. Accepted ADRs are im
 | 0034-0035 | Generated TS client and async jobs           | proposed   |
 | 0036-0039 | Migrations/runtime/tests/model isolation     | accepted   |
 | 0040      | Development governance and homologation gate | accepted   |
+| 0041      | Ethical persuasion and commercial integrity  | accepted   |

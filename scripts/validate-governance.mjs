@@ -20,6 +20,9 @@ const requiredSource = [
   'internationalization',
   'communication',
   'monetization',
+  'ethical-persuasion',
+  'commercial-integrity',
+  'competitive-conduct',
   'gamification',
   'privacy',
   'branching',
@@ -36,6 +39,7 @@ const requiredAgents = [
   'bot-abuse-detection-agent',
   'monetization-strategy-agent',
   'ethical-persuasion-agent',
+  'commercial-integrity-agent',
   'gamification-loyalty-agent',
 ];
 const requiredSkills = [
@@ -50,6 +54,7 @@ const requiredSkills = [
   'bot-abuse-review',
   'monetization-review',
   'ethical-persuasion-review',
+  'commercial-integrity-review',
   'gamification-review',
   'retention-review',
   'develop-to-homolog-gate',
@@ -69,6 +74,7 @@ const required = [
   'docs/development/pull-request-policy.md',
   'docs/testing/develop-to-homolog-checklist.md',
   'docs/adr/0040-development-governance.md',
+  'docs/adr/0041-ethical-commercial-integrity.md',
 ];
 for (const file of required) if (!existsSync(join(root, file))) failures.push(`missing: ${file}`);
 for (const file of ['PROJECT_CONSTITUTION.md', 'AGENTS.md', 'docs/source-of-truth/branching.md']) {
@@ -76,6 +82,15 @@ for (const file of ['PROJECT_CONSTITUTION.md', 'AGENTS.md', 'docs/source-of-trut
   const body = readFileSync(join(root, file), 'utf8');
   for (const token of ['develop', 'homolog', 'master'])
     if (!body.includes(token)) failures.push(`${file}: missing ${token}`);
+}
+for (const [file, tokens] of [
+  ['PROJECT_CONSTITUTION.md', ['Dark patterns', 'User trust']],
+  ['docs/source-of-truth/commercial-integrity.md', ['BLOCKER', 'artificial dependency']],
+  ['.codex/skills/develop-to-homolog-gate/SKILL.md', ['commercial-integrity', 'obscure charge']],
+]) {
+  if (!existsSync(join(root, file))) continue;
+  const body = readFileSync(join(root, file), 'utf8');
+  for (const token of tokens) if (!body.includes(token)) failures.push(`${file}: missing ${token}`);
 }
 const source = process.env.PR_SOURCE;
 const target = process.env.PR_TARGET;

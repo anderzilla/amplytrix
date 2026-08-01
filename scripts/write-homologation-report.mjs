@@ -18,7 +18,7 @@ writeFileSync(
 
 ## Agent and skill contracts
 
-Mandatory specifications were presence/consistency checked. Markdown roles were **not** represented as autonomously executed reviewers. Manual UX, assistive-technology, visual, usability, communication, monetization, persuasion and gamification evidence remains required by \`docs/testing/develop-to-homolog-checklist.md\`.
+Mandatory specifications were presence/consistency checked. Markdown roles were **not** represented as autonomously executed reviewers. Manual UX, assistive-technology, visual, usability, communication, monetization, ethical-persuasion, commercial-integrity and gamification evidence remains required by \`docs/testing/develop-to-homolog-checklist.md\`.
 
 ## Findings and approval conditions
 
