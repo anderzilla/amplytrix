@@ -6,25 +6,30 @@
   "task_id": "AMP-2026-DOGFOOD-001",
   "role": "reviewer",
   "reviewer_id": "codex-independent-phase0-reviewer",
-  "review_of": "178fb8966c08043872a8c884e4a3f86e31b37ba2",
+  "review_of": "d472d02d5b23de43280ef7d78c7c851ed1b9ab2d",
   "governance_commit": "3ab73de9c65d0f1be0177b293dab6cbaf710e29b",
   "independence_attestation": "A separate read-only reviewer inspected the exact commit and made no workspace, Git, deployment, provider, or financial changes.",
-  "reviewed_at": "2026-09-04T10:59:25.5159799-03:00",
+  "reviewed_at": "2026-09-04T11:35:38.1322034-03:00",
   "findings": [],
   "contrary_evidence": [
     "The declarative Phase Zero controls do not yet prove authorization, isolation, retrieval safety, retention enforcement, or customer value in a future runtime.",
-    "Python 3.13 was unavailable in the review host, so the executor's successful Python 3.13.9 full-gate result was assessed as explicit environment-specific evidence rather than reproduced there."
+    "Sanitization remains a repository assertion and every client-facing or cross-project reuse still requires human security, privacy, ownership, and contractual review.",
+    "Python 3.13 was unavailable in the review host, so the executor's successful Python 3.13.9 full-gate result was assessed as explicit environment-specific evidence rather than reproduced there.",
+    "CodeQL analysis passed, while its SARIF upload remains intentionally non-enforcing in the current workflow."
   ],
   "validation": [
-    "Phase Zero validation passed with 14 compiled schemas, 5 capabilities, and 3 evidence records.",
+    "Phase Zero validation passed with 16 compiled schemas, 7 capabilities, 3 evidence records, and 5 known errors.",
     "The review gate correctly blocked the reviewed core commit because the evidence pack belongs only in its governed child commit.",
     "Foundation validation, targeted Prettier validation, and pnpm audit passed.",
-    "Field-level comparison limits project.json and change-proposal.json to the derived review-state transitions and rejects all other changes."
+    "All nine GitHub checks passed on the reviewed head, including container startup, liveness, non-root execution, Trivy, Gitleaks, dependency fallback, and CodeQL.",
+    "Known-error evidence IDs resolve through the project index, and schema plus negative fixtures enforce resolved, validated, sanitized, selected-solution, and customer-reuse invariants.",
+    "The merged architecture baseline has the same tree as the corrected pre-squash branch and is an ancestor of the reviewed follow-up."
   ],
   "unresolved_blocking_findings": [],
   "confidence": "high",
   "verdict": "pass",
   "limitations": [
-    "The PASS covers repository-only Phase Zero architecture and governance artifacts; it does not authorize merge, deployment, production, cloud/provider resources, acceptance, or financial actions."
+    "The PASS covers repository-only Phase Zero architecture, known-error learning, and governance artifacts; it does not authorize merge, deployment, production, cloud/provider resources, customer reuse, acceptance, or financial actions.",
+    "A future runtime must separately prove project isolation, retrieval authorization, retention enforcement, and safe client-facing projections."
   ]
 }
