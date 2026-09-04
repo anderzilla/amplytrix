@@ -103,6 +103,17 @@
         "The backend and web images built and Trivy reported no blocking high or critical findings."
       ],
       "observed_at": "2026-09-04T11:08:18-03:00"
+    },
+    {
+      "id": "ci-containers-runtime-smoke-pass",
+      "kind": "ci",
+      "commit": "748160051f58ad6967605810b3df62ef2fdae5e4",
+      "source_ref": "https://github.com/anderzilla/amplytrix/actions/runs/33883890466/job/101058866941",
+      "claims": [
+        "The assembled backend image started successfully, ran as user 10001:10001, and answered the liveness endpoint.",
+        "The same job built both images and completed the high and critical Trivy scans."
+      ],
+      "observed_at": "2026-09-04T11:31:00-03:00"
     }
   ]
 }
