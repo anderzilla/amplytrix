@@ -388,6 +388,39 @@ if (process.argv.includes('--require-independent-review')) {
     changedSinceReview.every((path) => evidenceOnly.has(path)),
     `review evidence commit contains non-governance changes: ${changedSinceReview.join(', ')}`,
   );
+  const readParentJson = (path) =>
+    JSON.parse(execFileSync('git', ['show', `${expectedCommit}:${path}`], { encoding: 'utf8' }));
+  const withoutFields = (document, fields) => {
+    const copy = structuredClone(document);
+    for (const field of fields) delete copy[field];
+    return copy;
+  };
+  const parentProject = readParentJson(`${projectRoot}/project.json`);
+  expect(
+    JSON.stringify(withoutFields(project, ['independent_reviewer'])) ===
+      JSON.stringify(withoutFields(parentProject, ['independent_reviewer'])),
+    'project evidence update changed fields beyond independent_reviewer',
+  );
+  expect(
+    project?.independent_reviewer === pack?.reviewer_id,
+    'project reviewer does not match review pack',
+  );
+  const parentProposal = readParentJson(`${projectRoot}/governance/change-proposal.json`);
+  const reviewStateFields = ['review_status', 'unresolved_divergences', 'completion_eligibility'];
+  expect(
+    JSON.stringify(withoutFields(changeProposal, reviewStateFields)) ===
+      JSON.stringify(withoutFields(parentProposal, reviewStateFields)),
+    'change proposal evidence update changed non-review fields',
+  );
+  expect(changeProposal?.review_status === 'passed', 'change proposal review status is not passed');
+  expect(
+    changeProposal?.unresolved_divergences?.length === 0,
+    'change proposal retains unresolved divergences',
+  );
+  expect(
+    changeProposal?.completion_eligibility === 'eligible_after_gate',
+    'change proposal is not eligible after the remaining publication gate',
+  );
 }
 
 if (failures.length) {
