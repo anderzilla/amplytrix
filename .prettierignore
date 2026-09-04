@@ -1,0 +1,8 @@
+pnpm-lock.yaml
+apps/backend/uv.lock
+apps/backend/.import_linter_cache
+packages/api-contracts/openapi.json
+.next
+dist
+coverage
+apps/web/next-env.d.ts

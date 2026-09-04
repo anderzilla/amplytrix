@@ -1,0 +1,4 @@
+interface:
+  display_name: 'cost-impact-analysis'
+  short_description: 'Execute the cost-impact-analysis workflow for Amplytrix'
+  default_prompt: 'Use the cost-impact-analysis skill and report evidence.'

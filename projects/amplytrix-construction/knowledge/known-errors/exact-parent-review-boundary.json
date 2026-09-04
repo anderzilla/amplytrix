@@ -1,0 +1,67 @@
+{
+  "$schema": "../../../../schemas/v1/known-error.schema.json",
+  "schema_version": "1.0.0",
+  "id": "exact-parent-review-boundary",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "title": "A filename-only evidence allowlist permitted unreviewed semantic changes",
+  "domain": "governance",
+  "status": "resolved",
+  "classification": "internal-redacted",
+  "symptom": "The review gate allowed whole project and proposal files in the evidence-only child commit.",
+  "impact": "A child could retain a valid review reference while changing authority, scope, retention, or acceptance fields that the reviewer never inspected.",
+  "root_cause": {
+    "status": "confirmed",
+    "statement": "The gate constrained changed paths but not the fields or derived values permitted inside those paths."
+  },
+  "evidence_refs": ["review-phase-zero-pass", "repository-ajv-validator"],
+  "solution_options": [
+    {
+      "id": "field-level-derived-transition",
+      "description": "Compare allowed documents with the reviewed parent and permit only reviewer identity and derived review-state transitions.",
+      "decision": "selected",
+      "validation_state": "independently-validated",
+      "evidence": ["review-phase-zero-pass", "repository-ajv-validator"],
+      "tradeoffs": ["Adds validator complexity", "Retains explicit repository review state"]
+    },
+    {
+      "id": "single-evidence-file-child",
+      "description": "Permit only a new reviewer evidence file and derive all state outside Git.",
+      "decision": "alternative",
+      "validation_state": "unverified",
+      "evidence": ["review-phase-zero-pass"],
+      "tradeoffs": [
+        "Simpler gate",
+        "Leaves repository status fields stale or requires a separate projection"
+      ]
+    }
+  ],
+  "selected_solution_id": "field-level-derived-transition",
+  "validation": {
+    "status": "validated",
+    "checks": [
+      "Independent reviewer inspected the exact corrective commit",
+      "Review gate compared all non-review fields to the parent"
+    ]
+  },
+  "prevention": [
+    "Treat evidence commits as semantic transitions, not filename allowlists",
+    "Review the exact immutable parent and reject unrelated child changes"
+  ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "No credential, personal data, customer identity, raw confidential log, or proprietary payload is present."
+    ]
+  },
+  "customer_reuse": {
+    "eligibility": "candidate-after-review",
+    "requirements": [
+      "Map allowed transitions to the customer's approval model",
+      "Retain independent reviewer separation"
+    ]
+  },
+  "recorded_at": "2026-09-04T11:11:55.9228382-03:00",
+  "recorded_by": "codex-primary-executor"
+}

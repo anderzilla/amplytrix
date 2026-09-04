@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:baseline-decision",
+  "title": "Amplytrix baseline decision v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "project_id",
+    "scenario_id",
+    "status",
+    "decided_by",
+    "authority_ref",
+    "decided_at",
+    "scope",
+    "cost",
+    "schedule",
+    "acceptance_criteria",
+    "client_dependencies",
+    "exclusions",
+    "change_policy"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "scenario_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "status": { "enum": ["proposed", "accepted", "rejected", "superseded"] },
+    "decided_by": { "type": "string", "minLength": 1 },
+    "authority_ref": { "type": "string", "minLength": 1 },
+    "decided_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
+    "scope": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "cost": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/cost" },
+    "schedule": { "type": "string", "minLength": 1 },
+    "acceptance_criteria": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "client_dependencies": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "exclusions": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "change_policy": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

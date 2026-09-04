@@ -1,0 +1,4 @@
+interface:
+  display_name: 'python-performance-review'
+  short_description: 'Run the Amplytrix python-performance-review workflow'
+  default_prompt: 'Use the python-performance-review skill and report evidence.'

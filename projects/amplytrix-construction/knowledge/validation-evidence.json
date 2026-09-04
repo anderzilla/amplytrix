@@ -1,0 +1,119 @@
+{
+  "$schema": "../../../schemas/v1/validation-evidence-index.schema.json",
+  "schema_version": "1.0.0",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "records": [
+    {
+      "id": "review-phase-zero-pass",
+      "kind": "review",
+      "commit": "94d030d28b6882e587dbc894d38b5b7e4333a0e9",
+      "source_ref": "projects/amplytrix-construction/governance/reviewer-evidence-pack.json",
+      "claims": [
+        "Independent review passed after schema compilation and exact-parent gate corrections.",
+        "The review evidence records the environment-specific Python limitation."
+      ],
+      "observed_at": "2026-09-04T10:59:25.5159799-03:00"
+    },
+    {
+      "id": "repository-ajv-validator",
+      "kind": "repository",
+      "commit": "94d030d28b6882e587dbc894d38b5b7e4333a0e9",
+      "source_ref": "scripts/validate-phase-zero.mjs",
+      "claims": [
+        "Ajv Draft 2020-12 compiles registered schemas and validates positive and negative fixtures."
+      ],
+      "observed_at": "2026-09-04T10:59:25.5159799-03:00"
+    },
+    {
+      "id": "repository-dependency-evaluation",
+      "kind": "repository",
+      "commit": "94d030d28b6882e587dbc894d38b5b7e4333a0e9",
+      "source_ref": "docs/development/dependency-evaluations/2026-09-04-transitive-security-overrides.md",
+      "claims": [
+        "The reviewed workspace overrides, ownership, and removal conditions are documented."
+      ],
+      "observed_at": "2026-09-04T10:59:25.5159799-03:00"
+    },
+    {
+      "id": "ci-dependency-fallback-pass",
+      "kind": "ci",
+      "commit": "4b59d17a1147e86208b5fe133430463cadc54c9a",
+      "source_ref": "https://github.com/anderzilla/amplytrix/actions/runs/33882118686/job/101053023894",
+      "claims": [
+        "The required pnpm audit and pip-audit fallback passed.",
+        "The separately licensed GitHub dependency-review step was skipped because it was not enabled."
+      ],
+      "observed_at": "2026-09-04T11:07:00-03:00"
+    },
+    {
+      "id": "ci-secrets-initial-failure",
+      "kind": "ci",
+      "commit": "cdac55e6383169a6c36656cdc499756bb16f1264",
+      "source_ref": "https://github.com/anderzilla/amplytrix/actions/runs/33881355152/job/101050524782",
+      "claims": [
+        "Gitleaks reported the deterministic intake idempotency value under the generic API key rule."
+      ],
+      "observed_at": "2026-09-04T11:01:56-03:00"
+    },
+    {
+      "id": "ci-secrets-corrective-pass",
+      "kind": "ci",
+      "commit": "4b59d17a1147e86208b5fe133430463cadc54c9a",
+      "source_ref": "https://github.com/anderzilla/amplytrix/actions/runs/33882118686/job/101053023921",
+      "claims": [
+        "The secrets job passed with the exact historical fingerprint ignored and default scanning retained."
+      ],
+      "observed_at": "2026-09-04T11:06:40-03:00"
+    },
+    {
+      "id": "repository-gitleaks-fingerprint",
+      "kind": "repository",
+      "commit": "94d030d28b6882e587dbc894d38b5b7e4333a0e9",
+      "source_ref": ".gitleaksignore",
+      "claims": [
+        "The ignore file contains one commit, path, rule, and line fingerprint rather than a path or rule suppression."
+      ],
+      "observed_at": "2026-09-04T11:06:40-03:00"
+    },
+    {
+      "id": "ci-containers-initial-failure",
+      "kind": "ci",
+      "commit": "cdac55e6383169a6c36656cdc499756bb16f1264",
+      "source_ref": "https://github.com/anderzilla/amplytrix/actions/runs/33881355152/job/101050525022",
+      "claims": [
+        "Trivy found high-severity MessagePack and setuptools versions in the assembled backend image."
+      ],
+      "observed_at": "2026-09-04T11:03:13-03:00"
+    },
+    {
+      "id": "repository-backend-lock",
+      "kind": "repository",
+      "commit": "94d030d28b6882e587dbc894d38b5b7e4333a0e9",
+      "source_ref": "apps/backend/uv.lock",
+      "claims": ["The locked application environment selects patched MessagePack 1.2.1."],
+      "observed_at": "2026-09-04T11:03:13-03:00"
+    },
+    {
+      "id": "ci-containers-corrective-scan-pass",
+      "kind": "ci",
+      "commit": "4b59d17a1147e86208b5fe133430463cadc54c9a",
+      "source_ref": "https://github.com/anderzilla/amplytrix/actions/runs/33882118686/job/101053023789",
+      "claims": [
+        "The backend and web images built and Trivy reported no blocking high or critical findings."
+      ],
+      "observed_at": "2026-09-04T11:08:18-03:00"
+    },
+    {
+      "id": "ci-containers-runtime-smoke-pass",
+      "kind": "ci",
+      "commit": "748160051f58ad6967605810b3df62ef2fdae5e4",
+      "source_ref": "https://github.com/anderzilla/amplytrix/actions/runs/33883890466/job/101058866941",
+      "claims": [
+        "The assembled backend image started successfully, ran as user 10001:10001, and answered the liveness endpoint.",
+        "The same job built both images and completed the high and critical Trivy scans."
+      ],
+      "observed_at": "2026-09-04T11:31:00-03:00"
+    }
+  ]
+}

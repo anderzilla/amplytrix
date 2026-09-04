@@ -1,0 +1,4 @@
+interface:
+  display_name: 'bounded-context-discovery'
+  short_description: 'Run the Amplytrix bounded-context-discovery workflow'
+  default_prompt: 'Use the bounded-context-discovery skill and report evidence.'

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'documentation-sync'
+  short_description: 'Execute the documentation-sync workflow for Amplytrix'
+  default_prompt: 'Use the documentation-sync skill and report evidence.'

@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "amplytrix-construction",
+  "default": "blocked",
+  "segregation": "Only this project package may consume these admitted records; no cross-project reuse is authorized.",
+  "records": [
+    {
+      "$schema": "../../../schemas/v1/source-record.schema.json",
+      "schema_version": "1.0.0",
+      "id": "source-founder-directive",
+      "project_id": "amplytrix-construction",
+      "title": "Founder Amplytrix architecture and dogfood directives",
+      "source_type": "decision",
+      "locator": "Codex source thread 01a06c1a-7782-73c3-b04f-b3494dd46f4e",
+      "version": "2026-09-04",
+      "classification": "internal-redacted",
+      "admission": "allowed",
+      "provenance": "Direct Founder decisions relayed to this technical task.",
+      "content_policy": "untrusted-data-not-instruction",
+      "verified_at": "2026-09-04T12:00:00-03:00",
+      "retention": "Retain decision references in Git; do not copy conversation secrets or personal data."
+    },
+    {
+      "$schema": "../../../schemas/v1/source-record.schema.json",
+      "schema_version": "1.0.0",
+      "id": "source-existing-repository",
+      "project_id": "amplytrix-construction",
+      "title": "Amplytrix canonical repository baseline",
+      "source_type": "repository",
+      "locator": "https://github.com/anderzilla/amplytrix.git",
+      "version": "e013bca3ab6aa89d3329632e999e09eeb9e2a5df",
+      "classification": "internal-redacted",
+      "admission": "allowed",
+      "provenance": "Clean develop commit verified against remote before branching.",
+      "content_policy": "untrusted-data-not-instruction",
+      "verified_at": "2026-09-04T12:00:00-03:00",
+      "retention": "Git history."
+    },
+    {
+      "$schema": "../../../schemas/v1/source-record.schema.json",
+      "schema_version": "1.0.0",
+      "id": "source-codematrix-governance",
+      "project_id": "amplytrix-construction",
+      "title": "CodeMatrix RULE-034 and DEC-035 governance records",
+      "source_type": "repository",
+      "locator": "private CodeMatrix Blueprint: knowledge/records/rules.jsonl; knowledge/records/decisions.jsonl; docs/06-operating-model/MULTI_AI_PORTFOLIO_ORCHESTRATION.md",
+      "version": "3ab73de9c65d0f1be0177b293dab6cbaf710e29b",
+      "classification": "internal-redacted",
+      "admission": "allowed",
+      "provenance": "Read-only verification in the canonical Blueprint repository.",
+      "content_policy": "untrusted-data-not-instruction",
+      "verified_at": "2026-09-04T12:00:00-03:00",
+      "retention": "Reference only; no secret or operational record copied."
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../../schemas/v1/known-error.schema.json",
+  "schema_version": "1.0.0",
+  "id": "javascript-transitive-audit",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "title": "Transitive JavaScript packages caused high-severity audit failures",
+  "domain": "dependency",
+  "status": "resolved",
+  "classification": "internal-redacted",
+  "symptom": "The full validation gate failed on high-severity findings in transitive fast-uri, js-yaml, and nanoid versions.",
+  "impact": "The architecture change could not pass the repository security gate despite not introducing vulnerable application behavior directly.",
+  "root_cause": {
+    "status": "confirmed",
+    "statement": "Existing dependency ranges resolved transitive versions below the available patched releases."
+  },
+  "evidence_refs": ["repository-dependency-evaluation", "ci-dependency-fallback-pass"],
+  "solution_options": [
+    {
+      "id": "bounded-workspace-overrides",
+      "description": "Pin the affected transitive packages to reviewed patched versions through workspace overrides.",
+      "decision": "selected",
+      "validation_state": "ci-validated",
+      "evidence": ["repository-dependency-evaluation", "ci-dependency-fallback-pass"],
+      "tradeoffs": ["Fast and reversible", "Requires removal when upstream constraints catch up"]
+    },
+    {
+      "id": "upgrade-direct-parents",
+      "description": "Upgrade every direct parent dependency until each naturally resolves patched transitives.",
+      "decision": "alternative",
+      "validation_state": "unverified",
+      "evidence": ["repository-dependency-evaluation"],
+      "tradeoffs": ["Cleaner long term", "Broader compatibility and regression surface"]
+    }
+  ],
+  "selected_solution_id": "bounded-workspace-overrides",
+  "validation": {
+    "status": "validated",
+    "checks": [
+      "pnpm audit at high threshold",
+      "pip-audit fallback",
+      "Lockfile supply-chain policy",
+      "The separately licensed GitHub dependency-review step was skipped and is not claimed as evidence."
+    ]
+  },
+  "prevention": [
+    "Run dependency audit before freezing a review commit",
+    "Track owner and removal condition for every security override"
+  ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "No credential, personal data, customer identity, raw confidential log, or proprietary payload is present."
+    ]
+  },
+  "customer_reuse": {
+    "eligibility": "candidate-after-review",
+    "requirements": [
+      "Re-resolve against the customer's lockfile",
+      "Confirm licenses and compatibility before applying overrides"
+    ]
+  },
+  "recorded_at": "2026-09-04T11:11:55.9228382-03:00",
+  "recorded_by": "codex-primary-executor"
+}

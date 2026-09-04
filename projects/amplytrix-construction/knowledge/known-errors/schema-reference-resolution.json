@@ -1,0 +1,68 @@
+{
+  "$schema": "../../../../schemas/v1/known-error.schema.json",
+  "schema_version": "1.0.0",
+  "id": "schema-reference-resolution",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "title": "Versioned schemas failed to compile because relative references used URN bases",
+  "domain": "architecture",
+  "status": "resolved",
+  "classification": "internal-redacted",
+  "symptom": "Most Phase Zero schemas parsed as JSON but failed real Draft 2020-12 compilation.",
+  "impact": "Repository validation could report structural success while consumers could not resolve schema references.",
+  "root_cause": {
+    "status": "confirmed",
+    "statement": "Schemas used URN identifiers as bases while retaining relative references that had no resolvable URI hierarchy."
+  },
+  "evidence_refs": ["review-phase-zero-pass", "repository-ajv-validator"],
+  "solution_options": [
+    {
+      "id": "absolute-urn-references",
+      "description": "Register every schema in Ajv Draft 2020-12 and use absolute URN references between schemas.",
+      "decision": "selected",
+      "validation_state": "independently-validated",
+      "evidence": ["repository-ajv-validator", "review-phase-zero-pass"],
+      "tradeoffs": [
+        "Requires maintaining stable schema identifiers",
+        "Preserves portable versioned references"
+      ]
+    },
+    {
+      "id": "filesystem-relative-identifiers",
+      "description": "Replace URN identifiers with hierarchical file URLs and keep relative references.",
+      "decision": "alternative",
+      "validation_state": "unverified",
+      "evidence": ["repository-ajv-validator"],
+      "tradeoffs": ["Simpler local resolution", "Couples identifiers to repository layout"]
+    }
+  ],
+  "selected_solution_id": "absolute-urn-references",
+  "validation": {
+    "status": "validated",
+    "checks": [
+      "Ajv Draft 2020-12 compilation",
+      "Phase Zero instance and negative tests",
+      "Independent review PASS"
+    ]
+  },
+  "prevention": [
+    "Compile every schema rather than checking JSON syntax only",
+    "Keep a negative fixture for malformed review hashes and intake conditions"
+  ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "No credential, personal data, customer identity, raw confidential log, or proprietary payload is present."
+    ]
+  },
+  "customer_reuse": {
+    "eligibility": "candidate-after-review",
+    "requirements": [
+      "Remove repository-specific identifiers",
+      "Review the target customer's schema dialect and tooling"
+    ]
+  },
+  "recorded_at": "2026-09-04T11:11:55.9228382-03:00",
+  "recorded_by": "codex-primary-executor"
+}

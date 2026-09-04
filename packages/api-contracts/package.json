@@ -1,0 +1,11 @@
+{
+  "name": "@amplytrix/api-contracts",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/check-openapi.mjs",
+    "lint": "node scripts/check-openapi.mjs",
+    "typecheck": "node scripts/check-openapi.mjs",
+    "test": "node scripts/check-openapi.mjs"
+  }
+}

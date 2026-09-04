@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "status": "active",
+  "entries": [
+    {
+      "id": "agent-project-conductor",
+      "type": "agent",
+      "version": "1.0.0",
+      "manifest_ref": "registry/agents.json#/agents/0",
+      "status": "active"
+    },
+    {
+      "id": "agent-evidence-supervisor",
+      "type": "agent",
+      "version": "1.0.0",
+      "manifest_ref": "registry/agents.json#/agents/1",
+      "status": "active"
+    },
+    {
+      "id": "skill-project-conduction",
+      "type": "skill",
+      "version": "1.0.0",
+      "manifest_ref": "registry/skills.json#/skills/0",
+      "status": "active"
+    },
+    {
+      "id": "skill-evidence-supervision",
+      "type": "skill",
+      "version": "1.0.0",
+      "manifest_ref": "registry/skills.json#/skills/1",
+      "status": "active"
+    },
+    {
+      "id": "skill-change-capsule",
+      "type": "skill",
+      "version": "1.0.0",
+      "manifest_ref": "registry/skills.json#/skills/2",
+      "status": "active"
+    },
+    {
+      "id": "agent-known-error-librarian",
+      "type": "agent",
+      "version": "1.0.0",
+      "manifest_ref": "registry/agents.json#/agents/2",
+      "status": "active"
+    },
+    {
+      "id": "skill-known-error-learning",
+      "type": "skill",
+      "version": "1.0.0",
+      "manifest_ref": "registry/skills.json#/skills/3",
+      "status": "active"
+    }
+  ]
+}

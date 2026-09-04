@@ -1,0 +1,4 @@
+interface:
+  display_name: 'architecture-decision-record'
+  short_description: 'Execute the architecture-decision-record workflow for Amplytrix'
+  default_prompt: 'Use the architecture-decision-record skill and report evidence.'

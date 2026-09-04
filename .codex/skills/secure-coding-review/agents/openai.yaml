@@ -1,0 +1,4 @@
+interface:
+  display_name: 'secure-coding-review'
+  short_description: 'Execute the secure-coding-review workflow for Amplytrix'
+  default_prompt: 'Use the secure-coding-review skill and report evidence.'

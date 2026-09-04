@@ -1,0 +1,4 @@
+interface:
+  display_name: 'sqlalchemy-repository'
+  short_description: 'Run the Amplytrix sqlalchemy-repository workflow'
+  default_prompt: 'Use the sqlalchemy-repository skill and report evidence.'

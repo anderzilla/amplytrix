@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:project",
+  "title": "Amplytrix project v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "status",
+    "modality",
+    "classification",
+    "decision_owner",
+    "primary_owner",
+    "independent_reviewer",
+    "governance",
+    "source_manifest_ref",
+    "baseline_ref",
+    "capability_registry_ref"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "name": { "type": "string", "minLength": 1 },
+    "status": {
+      "enum": [
+        "draft",
+        "discovery",
+        "baseline-approved",
+        "executing",
+        "paused",
+        "acceptance",
+        "closed",
+        "rejected"
+      ]
+    },
+    "modality": { "enum": ["managed-service", "reviewed-package", "self-service"] },
+    "classification": {
+      "enum": ["public", "internal-redacted", "confidential-client", "restricted"]
+    },
+    "decision_owner": { "type": "string", "minLength": 1 },
+    "primary_owner": { "type": "string", "minLength": 1 },
+    "independent_reviewer": { "type": "string", "minLength": 1 },
+    "governance": {
+      "type": "object",
+      "required": ["task_id", "authority_refs", "governance_commit", "action_level"],
+      "properties": {
+        "task_id": { "type": "string", "minLength": 1 },
+        "authority_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+        "governance_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "action_level": { "enum": ["A0", "A1", "A2", "A3", "A4"] }
+      },
+      "additionalProperties": false
+    },
+    "source_manifest_ref": { "type": "string", "minLength": 1 },
+    "baseline_ref": { "type": "string", "minLength": 1 },
+    "capability_registry_ref": { "type": "string", "minLength": 1 },
+    "acceptance_owner": { "type": "string" },
+    "retention_policy": { "type": "string", "minLength": 1 },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'definition-of-done'
+  short_description: 'Execute the definition-of-done workflow for Amplytrix'
+  default_prompt: 'Use the definition-of-done skill and report evidence.'

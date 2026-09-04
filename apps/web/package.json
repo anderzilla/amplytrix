@@ -1,0 +1,25 @@
+{
+  "name": "@amplytrix/web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0 --port 3000",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0 --port ${PORT:-8080}",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "next": "16.2.11",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

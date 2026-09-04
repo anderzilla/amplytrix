@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:change-capsule",
+  "title": "Amplytrix change capsule v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "project_id",
+    "baseline_ref",
+    "status",
+    "trigger",
+    "cause",
+    "prevention",
+    "alternatives",
+    "benefits",
+    "risks",
+    "impact",
+    "decision_ref",
+    "rollback"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "baseline_ref": { "type": "string", "minLength": 1 },
+    "status": {
+      "enum": ["draft", "awaiting-decision", "approved", "rejected", "executing", "closed"]
+    },
+    "trigger": { "type": "string", "minLength": 1 },
+    "cause": { "type": "string", "minLength": 1 },
+    "prevention": { "type": "string", "minLength": 1 },
+    "alternatives": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "benefits": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "risks": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "impact": {
+      "type": "object",
+      "required": ["scope", "schedule", "cost", "client_effort"],
+      "properties": {
+        "scope": { "type": "string" },
+        "schedule": { "type": "string" },
+        "cost": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/cost" },
+        "client_effort": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "decision_ref": { "type": ["string", "null"] },
+    "rollback": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:mcp-manifest",
+  "title": "Amplytrix MCP admission manifest v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "version",
+    "name",
+    "status",
+    "external_system",
+    "contract_ref",
+    "authentication",
+    "scope",
+    "data_classes",
+    "owner",
+    "revocation",
+    "security_tests",
+    "block_reason"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["planned", "admission-review", "active", "suspended", "revoked"] },
+    "external_system": { "type": "string", "minLength": 1 },
+    "contract_ref": { "type": ["string", "null"] },
+    "authentication": { "type": "string", "minLength": 1 },
+    "scope": { "type": "string", "minLength": 1 },
+    "data_classes": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "owner": { "type": "string", "minLength": 1 },
+    "revocation": { "type": "string", "minLength": 1 },
+    "security_tests": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "block_reason": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

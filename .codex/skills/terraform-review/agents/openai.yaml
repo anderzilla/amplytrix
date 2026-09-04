@@ -1,0 +1,4 @@
+interface:
+  display_name: 'terraform-review'
+  short_description: 'Execute the terraform-review workflow for Amplytrix'
+  default_prompt: 'Use the terraform-review skill and report evidence.'

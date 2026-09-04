@@ -1,0 +1,31 @@
+{
+  "$schema": "../../schemas/v1/project.schema.json",
+  "schema_version": "1.0.0",
+  "id": "amplytrix-construction",
+  "name": "Construção da Amplytrix",
+  "status": "baseline-approved",
+  "modality": "managed-service",
+  "classification": "internal-redacted",
+  "decision_owner": "CodeMatrix Founder",
+  "primary_owner": "Codex primary executor",
+  "independent_reviewer": "codex-independent-phase0-reviewer",
+  "governance": {
+    "task_id": "AMP-2026-DOGFOOD-001",
+    "authority_refs": [
+      "Founder ATUALIZAÇÃO DE ARQUITETURA 2026-09-04",
+      "RULE-034",
+      "DEC-035",
+      "ADR-0062"
+    ],
+    "governance_commit": "3ab73de9c65d0f1be0177b293dab6cbaf710e29b",
+    "action_level": "A2"
+  },
+  "source_manifest_ref": "projects/amplytrix-construction/knowledge/sources.json",
+  "baseline_ref": "projects/amplytrix-construction/baseline-decision.json",
+  "capability_registry_ref": "projects/amplytrix-construction/capabilities.json",
+  "acceptance_owner": "CodeMatrix Founder",
+  "retention_policy": "Repository-only internal-redacted artifacts retained under Git history; client-data reuse and anonymization are prohibited until legal/technical approval.",
+  "notes": [
+    "Portal, persistence, provider integration, MCP activation, cloud provisioning, merge, and deployment are excluded from Phase Zero."
+  ]
+}

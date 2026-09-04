@@ -1,0 +1,4 @@
+interface:
+  display_name: 'api-contract'
+  short_description: 'Execute the api-contract workflow for Amplytrix'
+  default_prompt: 'Use the api-contract skill and report evidence.'

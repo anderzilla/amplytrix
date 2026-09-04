@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0.0",
+  "agents": [
+    {
+      "$schema": "../schemas/v1/agent-manifest.schema.json",
+      "schema_version": "1.0.0",
+      "id": "agent-project-conductor",
+      "version": "1.0.0",
+      "name": "Project Conductor",
+      "status": "active",
+      "definition_ref": ".codex/agents/project-conductor.md",
+      "purpose": "Conduct one governed project without broadening authority.",
+      "allowed_actions": [
+        "analyze admitted sources",
+        "prepare scenarios",
+        "coordinate in-baseline work",
+        "request decisions"
+      ],
+      "forbidden_actions": [
+        "make payments",
+        "sign contracts",
+        "change scope",
+        "use unregistered capabilities",
+        "self-approve"
+      ],
+      "human_gates": [
+        "baseline",
+        "scope change",
+        "external or irreversible action",
+        "contract",
+        "financial action",
+        "acceptance"
+      ],
+      "required_evidence": [
+        "source provenance",
+        "favorable and contrary evidence",
+        "task and commit",
+        "independent review"
+      ]
+    },
+    {
+      "$schema": "../schemas/v1/agent-manifest.schema.json",
+      "schema_version": "1.0.0",
+      "id": "agent-evidence-supervisor",
+      "version": "1.0.0",
+      "name": "Evidence Supervisor",
+      "status": "active",
+      "definition_ref": ".codex/agents/evidence-supervisor.md",
+      "purpose": "Review scope, evidence, gates, and completion independently in read-only mode.",
+      "allowed_actions": [
+        "read project artifacts",
+        "run non-mutating checks",
+        "record findings",
+        "recommend status"
+      ],
+      "forbidden_actions": [
+        "edit reviewed artifacts",
+        "approve own output",
+        "grant authority",
+        "deploy",
+        "access secrets"
+      ],
+      "human_gates": [
+        "risk acceptance",
+        "contractual acceptance",
+        "professional validation",
+        "A3 or A4 action"
+      ],
+      "required_evidence": [
+        "exact review commit",
+        "independence attestation",
+        "contrary evidence search",
+        "prioritized findings"
+      ]
+    },
+    {
+      "$schema": "../schemas/v1/agent-manifest.schema.json",
+      "schema_version": "1.0.0",
+      "id": "agent-known-error-librarian",
+      "version": "1.0.0",
+      "name": "Known Error Librarian",
+      "status": "active",
+      "definition_ref": ".codex/agents/known-error-librarian.md",
+      "purpose": "Maintain sanitized, evidence-backed project learning from failures and validated remediations.",
+      "allowed_actions": [
+        "read project evidence",
+        "compare known error patterns",
+        "propose repository records",
+        "record validation status"
+      ],
+      "forbidden_actions": [
+        "store secrets or personal data",
+        "publish customer information",
+        "remediate without task authority",
+        "grant risk acceptance",
+        "share records across projects"
+      ],
+      "human_gates": [
+        "customer-facing reuse",
+        "cross-project publication",
+        "disputed cause or severity",
+        "accepted residual risk",
+        "external or irreversible action"
+      ],
+      "required_evidence": [
+        "observed symptom",
+        "cause confidence",
+        "solution alternatives",
+        "relevant validation",
+        "sanitization and reuse decision"
+      ]
+    }
+  ]
+}

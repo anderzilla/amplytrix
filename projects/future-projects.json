@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "projects": [
+    {
+      "id": "codematrix-command-center-reformulation",
+      "name": "Reformulação do Command Center CodeMatrix",
+      "status": "planned-after-amplytrix-bootstrap",
+      "problem": "The current Command Center is considered low-value and weak on iPad.",
+      "outcome": "Use the Amplytrix method to unify CodeMatrix tools and design a genuinely useful iPad experience.",
+      "boundary": "Consumer of Amplytrix methodology/integration only; implementation belongs to the CodeMatrix Agency repository, not this repository."
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Technical Documentation Generator'
+  short_description: 'Generate evidence-based Amplytrix engineering docs'
+  default_prompt: 'Use the technical-documentation-generator skill and cite repository evidence.'

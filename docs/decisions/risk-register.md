@@ -1,0 +1,18 @@
+# Risk register
+
+| Risk                                                | Likelihood/impact  | Mitigation                                                                                   | Owner/status                             |
+| --------------------------------------------------- | ------------------ | -------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Prompt/tool injection causes exfiltration or action | High/critical      | Treat context as untrusted, tool allowlists, scoped tokens, approvals, redaction, audit      | AI/security; open                        |
+| Cross-tenant access                                 | Medium/critical    | Tenant-aware authorization at every port, DB constraints/RLS evaluation, adversarial tests   | Backend/security; open                   |
+| Vendor lock-in (AI/auth/payments)                   | High/high          | Application ports, normalized usage, provider contract tests, exit plan                      | Architecture; controlled                 |
+| Cloud cost runaway                                  | Medium/high        | scale-to-zero, max instances, budgets/alerts, quotas, per-tenant metering                    | FinOps; before provision                 |
+| Supply-chain compromise                             | Medium/critical    | lockfile, Renovate delay, review, SAST/SCA, SBOM, provenance                                 | DevSecOps; CI planned                    |
+| LGPD non-compliance                                 | Medium/critical    | minimize/classify, lawful basis, retention/deletion, DPO review                              | Privacy; open                            |
+| Single-region outage/data loss                      | Low/high initially | backups/PITR, restore drills, proportional RTO/RPO                                           | Platform; proposed                       |
+| Project baseline drifts without client decision     | Medium/critical    | immutable baseline ref, change capsule and approval relationship checks                      | Product/project; open                    |
+| Contrary evidence is omitted or buried              | Medium/high        | required evidence polarity, inconclusive state and independent reviewer                      | Evidence owner; controlled in Phase Zero |
+| Poisoned source changes agent behavior              | High/critical      | allowlist, provenance/checksum, content-as-data policy, quarantine and retrieval evals       | Knowledge/security; open                 |
+| CodeMatrix Agency bypasses the Amplytrix boundary   | Low/critical       | separate stores/credentials; versioned API/events only; contract and authorization tests     | Architecture/security; design control    |
+| Declarative policy diverges from future runtime     | Medium/high        | walking-slice contract tests and threat review before persistence/provider activation        | Architecture/QA; open                    |
+| Reviewer is not independent or not commit-linked    | Medium/high        | RULE-034/DEC-035 envelopes, independence attestation and final-commit review                 | Delivery governance; active              |
+| Client data is reused without valid legal basis     | Medium/critical    | prohibit reuse; legal/technical validation before anonymization or derived-pattern retention | Privacy/legal; blocked                   |

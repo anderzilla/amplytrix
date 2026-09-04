@@ -1,0 +1,4 @@
+interface:
+  display_name: 'context-map-review'
+  short_description: 'Run the Amplytrix context-map-review workflow'
+  default_prompt: 'Use the context-map-review skill and report evidence.'

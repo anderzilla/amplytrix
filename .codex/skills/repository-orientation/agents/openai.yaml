@@ -1,0 +1,4 @@
+interface:
+  display_name: 'repository-orientation'
+  short_description: 'Execute the repository-orientation workflow for Amplytrix'
+  default_prompt: 'Use the repository-orientation skill and report evidence.'

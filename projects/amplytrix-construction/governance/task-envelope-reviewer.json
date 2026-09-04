@@ -1,0 +1,55 @@
+{
+  "envelope_id": "AMP-2026-DOGFOOD-001-reviewer",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "role": "reviewer",
+  "kb_commit": "3ab73de9c65d0f1be0177b293dab6cbaf710e29b",
+  "classification": "internal-redacted",
+  "action_level": "A1",
+  "scope": "Read-only review of the exact proposed Amplytrix commit for architecture consistency, contract defects, security/privacy gaps, contrary evidence, and completion eligibility.",
+  "allowed": [
+    "read exact commit/diff",
+    "run non-mutating validation",
+    "report findings with paths and severity"
+  ],
+  "forbidden": [
+    "edit files",
+    "approve own work",
+    "access secrets/personal data",
+    "push, merge, deploy, provision, or spend"
+  ],
+  "output_requirements": [
+    "independence attestation",
+    "review target commit",
+    "findings and contrary evidence",
+    "confidence and pass/changes-required/blocked status"
+  ],
+  "collaboration": {
+    "review_required": true,
+    "materiality": "material",
+    "decision_owner": "CodeMatrix Founder",
+    "participants": [
+      {
+        "envelope_id": "AMP-2026-DOGFOOD-001-primary",
+        "role": "primary",
+        "scope": "architecture and implementation"
+      },
+      {
+        "envelope_id": "AMP-2026-DOGFOOD-001-reviewer",
+        "role": "reviewer",
+        "scope": "read-only exact-commit adversarial review"
+      }
+    ],
+    "providers_allowed": ["Codex internal agent collaboration"],
+    "data_flows": [
+      "Repository commit and redacted project package to reviewer; findings back to primary"
+    ],
+    "fallback": "Return blocked if exact commit or required sources cannot be inspected."
+  },
+  "budget": { "external_cost": 0, "currency": "BRL" },
+  "expires_on": "2026-09-30",
+  "stop_conditions": [
+    "review target changes during review",
+    "restricted data is encountered",
+    "review independence is compromised"
+  ]
+}

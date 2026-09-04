@@ -1,0 +1,3 @@
+# Contributing
+
+Open an issue/spec for non-trivial work. Start from `develop` with `task/<frontend|backend|infrastructure|transversal>/<short-kebab-name>`; architecture changes use `architecture/<short-kebab-name>`. Submit PRs only through `task/*|architecture/* -> develop -> homolog -> master`. Use Conventional Commits, keep pull requests small, link decisions, include tests/rollback, and complete the security checklist. Two approvals are expected for security-sensitive or architectural changes. Run `pnpm verify` and `pnpm validate:governance`. Generated files and lockfiles must be reproducible.

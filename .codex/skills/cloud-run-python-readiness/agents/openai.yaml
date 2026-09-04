@@ -1,0 +1,4 @@
+interface:
+  display_name: 'cloud-run-python-readiness'
+  short_description: 'Run the Amplytrix cloud-run-python-readiness workflow'
+  default_prompt: 'Use the cloud-run-python-readiness skill and report evidence.'

@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:project-intake",
+  "title": "Amplytrix project intake v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "intake_id",
+    "origin",
+    "source_system",
+    "source_artifact_id",
+    "source_artifact_version",
+    "created_at",
+    "idempotency_key",
+    "transfer_basis",
+    "origin_evidence_refs",
+    "classification",
+    "payload",
+    "readiness_check"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "intake_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "origin": {
+      "enum": ["agency_briefing", "client_documents", "third_party_documents", "direct_discovery"]
+    },
+    "source_system": { "type": "string", "minLength": 1 },
+    "source_artifact_id": { "type": "string", "minLength": 1 },
+    "source_artifact_version": { "type": "string", "minLength": 1 },
+    "created_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
+    "idempotency_key": { "type": "string", "minLength": 16 },
+    "transfer_basis": {
+      "type": "object",
+      "required": ["purpose", "status", "evidence_ref"],
+      "properties": {
+        "purpose": { "const": "project-readiness-and-discovery" },
+        "status": { "enum": ["recorded", "not-applicable-no-personal-data", "blocked"] },
+        "evidence_ref": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "origin_evidence_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "classification": { "enum": ["public", "internal-redacted", "confidential-client"] },
+    "payload": {
+      "type": "object",
+      "required": [
+        "problem",
+        "desired_outcomes",
+        "known_constraints",
+        "known_risks",
+        "source_refs"
+      ],
+      "properties": {
+        "problem": { "type": "string", "minLength": 1 },
+        "desired_outcomes": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+        "known_constraints": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+        "known_risks": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+        "source_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "readiness_check": {
+      "type": "object",
+      "required": [
+        "status",
+        "validated_version",
+        "completeness",
+        "coherence",
+        "risks",
+        "gaps",
+        "required_follow_up",
+        "effort_estimate",
+        "cost_attribution",
+        "commercial_disposition",
+        "commercial_approval_ref",
+        "decision_ref",
+        "scope_boundary"
+      ],
+      "properties": {
+        "status": { "enum": ["pending", "accepted-as-input", "rejected", "quarantined"] },
+        "validated_version": { "type": ["string", "null"] },
+        "completeness": { "enum": ["unknown", "insufficient", "minimum-ready"] },
+        "coherence": { "enum": ["unknown", "conflicting", "minimum-coherent"] },
+        "risks": { "type": "array", "items": { "type": "string" } },
+        "gaps": { "type": "array", "items": { "type": "string" } },
+        "required_follow_up": { "type": "array", "items": { "type": "string" } },
+        "effort_estimate": {
+          "type": "object",
+          "required": ["status", "statement"],
+          "properties": {
+            "status": { "enum": ["not-estimated", "estimated", "approved"] },
+            "statement": { "type": "string", "minLength": 1 },
+            "hours_minimum": { "type": "number", "minimum": 0 },
+            "hours_maximum": { "type": "number", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "cost_attribution": {
+          "enum": [
+            "pending-human-decision",
+            "agency-process-in-amplytrix-price",
+            "separate-agency-engagement",
+            "amplytrix-discovery-phase",
+            "not-applicable"
+          ]
+        },
+        "commercial_disposition": {
+          "enum": [
+            "pending-human-decision",
+            "minimum-ready",
+            "agency-diagnostic-required",
+            "amplytrix-discovery-required",
+            "declined"
+          ]
+        },
+        "commercial_approval_ref": { "type": ["string", "null"] },
+        "decision_ref": { "type": ["string", "null"] },
+        "scope_boundary": { "const": "internal-minimum-readiness-check-not-full-agency-diagnostic" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "readiness_check": {
+            "properties": { "status": { "const": "accepted-as-input" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["readiness_check"]
+      },
+      "then": {
+        "properties": {
+          "transfer_basis": {
+            "properties": { "status": { "enum": ["recorded", "not-applicable-no-personal-data"] } }
+          },
+          "readiness_check": {
+            "properties": {
+              "validated_version": { "type": "string", "minLength": 1 },
+              "completeness": { "const": "minimum-ready" },
+              "coherence": { "const": "minimum-coherent" },
+              "commercial_disposition": { "const": "minimum-ready" },
+              "commercial_approval_ref": { "type": "string", "minLength": 1 },
+              "decision_ref": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "origin": { "const": "agency_briefing" } }, "required": ["origin"] },
+      "then": {
+        "properties": {
+          "source_system": { "const": "codematrix-agency" },
+          "transfer_basis": { "properties": { "status": { "const": "recorded" } } }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "origin": { "enum": ["client_documents", "third_party_documents"] } },
+        "required": ["origin"]
+      },
+      "then": {
+        "properties": {
+          "readiness_check": {
+            "properties": {
+              "cost_attribution": {
+                "enum": [
+                  "pending-human-decision",
+                  "agency-process-in-amplytrix-price",
+                  "separate-agency-engagement",
+                  "amplytrix-discovery-phase"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transfer_basis": {
+            "properties": { "status": { "const": "blocked" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["transfer_basis"]
+      },
+      "then": {
+        "properties": {
+          "readiness_check": { "properties": { "status": { "enum": ["rejected", "quarantined"] } } }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "readiness_check": {
+            "properties": {
+              "commercial_disposition": {
+                "enum": ["agency-diagnostic-required", "amplytrix-discovery-required"]
+              }
+            },
+            "required": ["commercial_disposition"]
+          }
+        },
+        "required": ["readiness_check"]
+      },
+      "then": {
+        "properties": {
+          "readiness_check": { "properties": { "status": { "enum": ["pending", "rejected"] } } }
+        }
+      }
+    }
+  ]
+}

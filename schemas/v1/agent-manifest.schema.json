@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:agent-manifest",
+  "title": "Amplytrix agent manifest v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "version",
+    "name",
+    "status",
+    "definition_ref",
+    "purpose",
+    "allowed_actions",
+    "forbidden_actions",
+    "human_gates",
+    "required_evidence"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "active", "deprecated", "blocked"] },
+    "definition_ref": { "type": "string", "minLength": 1 },
+    "purpose": { "type": "string", "minLength": 1 },
+    "allowed_actions": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "forbidden_actions": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "human_gates": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "required_evidence": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:review-evidence",
+  "title": "Amplytrix independent review evidence v1",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schema_version",
+    "evidence_pack_id",
+    "envelope_id",
+    "task_id",
+    "role",
+    "reviewer_id",
+    "review_of",
+    "governance_commit",
+    "independence_attestation",
+    "reviewed_at",
+    "findings",
+    "contrary_evidence",
+    "validation",
+    "unresolved_blocking_findings",
+    "confidence",
+    "verdict"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "evidence_pack_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "envelope_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "role": { "const": "reviewer" },
+    "reviewer_id": { "type": "string", "minLength": 1 },
+    "review_of": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "governance_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "independence_attestation": { "type": "string", "minLength": 20 },
+    "reviewed_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
+    "findings": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "contrary_evidence": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "validation": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "unresolved_blocking_findings": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "verdict": { "enum": ["pass", "changes-required", "blocked"] },
+    "limitations": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": { "verdict": { "const": "pass" } },
+        "required": ["verdict"]
+      },
+      "then": {
+        "type": "object",
+        "properties": { "unresolved_blocking_findings": { "maxItems": 0 } }
+      }
+    }
+  ]
+}
