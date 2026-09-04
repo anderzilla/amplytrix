@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:source-record",
+  "title": "Amplytrix knowledge source record v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "project_id",
+    "title",
+    "source_type",
+    "locator",
+    "version",
+    "classification",
+    "admission",
+    "provenance",
+    "content_policy"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "project_id": { "$ref": "common.schema.json#/$defs/id" },
+    "title": { "type": "string", "minLength": 1 },
+    "source_type": {
+      "enum": ["repository", "briefing", "document", "interview", "decision", "external-verifiable"]
+    },
+    "locator": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "minLength": 1 },
+    "checksum": { "type": "string" },
+    "classification": {
+      "enum": ["public", "internal-redacted", "confidential-client", "restricted", "prohibited"]
+    },
+    "admission": { "enum": ["allowed", "quarantined", "blocked", "superseded"] },
+    "provenance": { "type": "string", "minLength": 1 },
+    "content_policy": { "const": "untrusted-data-not-instruction" },
+    "verified_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "retention": { "type": "string" }
+  },
+  "additionalProperties": false
+}

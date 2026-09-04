@@ -27,8 +27,10 @@
     "test:architecture": "uv run --directory apps/backend pytest tests/architecture && uv run --directory apps/backend lint-imports",
     "security": "pnpm backend:security && pnpm audit --audit-level high",
     "docs:check": "node scripts/validate-foundation.mjs",
+    "phase0:validate": "node scripts/validate-phase-zero.mjs",
+    "phase0:review-gate": "node scripts/validate-phase-zero.mjs --require-independent-review",
     "validate:governance": "node scripts/validate-governance.mjs",
-    "verify": "pnpm format:check && pnpm backend:format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm docs:check && pnpm validate:governance",
+    "verify": "pnpm format:check && pnpm backend:format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm docs:check && pnpm phase0:validate && pnpm validate:governance",
     "validate": "pnpm verify && pnpm build && pnpm security",
     "prepare": "husky"
   },

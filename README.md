@@ -1,6 +1,10 @@
 # Amplytrix
 
-Polyglot foundation repository for Code Matrix's AI-assisted engineering SaaS. Phase Zero contains architecture, pragmatic DDD, governance, agent/skill specifications, and deployable health-only scaffolding; it intentionally contains no commercial features.
+Project intelligence and delivery platform for CodeMatrix's managed-service-first Amplytrix method.
+Phase Zero dogfoods the construction of Amplytrix through versioned intake, sources, scenarios,
+baseline, capabilities, evidence, and supervision while preserving the existing deployable
+health-only scaffolding. It intentionally contains no project persistence, portal, provider, MCP, or
+commercial runtime.
 
 ## Quick start
 
@@ -26,6 +30,9 @@ Operational decisions are indexed in the [source of truth](docs/source-of-truth/
 - `packages/api-contracts`: FastAPI-generated OpenAPI snapshot; future generated TypeScript client remains isolated.
 - `infrastructure`: local Docker and non-provisioning Terraform foundation.
 - `.codex`: portable project agents, skills, prompts, policies, and MCP example.
+- `schemas/v1`: versioned project-method contracts.
+- `registry`: deny-default agents, skills, and MCP admission state.
+- `projects/amplytrix-construction`: first managed-service dogfood package.
 
 Architecture status and open decisions are indexed in [ADRs](docs/adr/README.md). No deployment is automatic.
 

@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "default": "deny",
+  "entries": [],
+  "admission_required": [
+    "named external system and concrete dogfood need",
+    "versioned tool/data contract",
+    "authentication and least-privilege scope",
+    "data classification and project segregation",
+    "owner, revocation, failure and rollback path",
+    "prompt/tool injection and authorization tests",
+    "cost and human approval gates"
+  ],
+  "blocked_candidates": [
+    {
+      "id": "codematrix-knowledge-read",
+      "reason": "No approved network API, authentication contract, or repository-scoped MCP exists; Phase Zero uses pinned repository provenance only."
+    }
+  ]
+}

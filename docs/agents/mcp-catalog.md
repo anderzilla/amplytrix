@@ -15,3 +15,8 @@ Inventory on 2026-08-01 found Codex app resources/connectors including GitHub, F
 | Terraform/OpenAPI/dependency docs | Medium/not installed            | repository/public docs                                   | execution/content poisoning                                            | CLIs and official docs           |
 
 Owner is Security plus the relevant Platform/Design/Engineering owner. None is mandatory for local build. Copy `.codex/mcp.example.toml` to ignored `.codex/mcp.toml`, replace placeholder commands only with verified official packages, use scoped short-lived credentials via environment, start one server at a time, inspect exposed tools, test allowed read and denied out-of-scope/write, then record owner/version. Never configure production write or auto-deploy.
+
+The canonical product admission state is `registry/mcps.json`, which is deny-default and empty in
+Phase Zero. The CodeMatrix knowledge read candidate remains blocked until a concrete API/MCP contract,
+authentication, project scope, owner, revocation, tests, and approval exist. Repository provenance is
+used directly for dogfooding and is not mislabeled as an MCP.

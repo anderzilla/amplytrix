@@ -11,6 +11,8 @@ const required = [
   'docs/testing/test-strategy.md',
   'docs/agents/mcp-catalog.md',
   'docs/decisions/open-questions.md',
+  'docs/adr/0062-project-governed-managed-service.md',
+  'scripts/validate-phase-zero.mjs',
 ];
 await Promise.all(required.map((file) => access(file)));
 const adrs = (await readdir('docs/adr')).filter((file) => /^\d{4}-.+\.md$/.test(file));

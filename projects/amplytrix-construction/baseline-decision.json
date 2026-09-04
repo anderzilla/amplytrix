@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/v1/baseline-decision.schema.json",
+  "schema_version": "1.0.0",
+  "id": "amplytrix-phase-zero-baseline",
+  "project_id": "amplytrix-construction",
+  "scenario_id": "amplytrix-realistic",
+  "status": "accepted",
+  "decided_by": "CodeMatrix Founder",
+  "authority_ref": "ATUALIZAÇÃO DE ARQUITETURA and dogfood authorization, 2026-09-04",
+  "decided_at": "2026-09-04T12:00:00-03:00",
+  "scope": [
+    "normative architecture alignment",
+    "versioned Phase Zero schemas",
+    "declarative capability/MCP registry",
+    "Amplytrix construction dogfood package",
+    "deterministic validation",
+    "read-only independent review",
+    "private branch/push/PR"
+  ],
+  "cost": {
+    "kind": "none",
+    "statement": "No external spend; internal effort only, with no fixed commercial price or hours."
+  },
+  "schedule": "Complete Phase Zero as small reviewed commits and a private PR; no merge or deployment is authorized.",
+  "acceptance_criteria": [
+    "ADR and source-of-truth agree",
+    "three comparable scenarios exist",
+    "schemas and project references pass deterministic validation",
+    "MCP registry remains deny-default with no active entry",
+    "favorable and contrary evidence exist",
+    "exact-commit independent review passes",
+    "repository gates pass or environment blockers are explicit"
+  ],
+  "client_dependencies": [
+    "Founder retains decisions for scope, finance, contracts, acceptance, production, credentials, and external actions",
+    "a permitted independent reviewer is available"
+  ],
+  "exclusions": [
+    "persistence",
+    "product API",
+    "customer portal",
+    "operations console",
+    "Agency implementation",
+    "Command Center implementation",
+    "active MCP/provider",
+    "cloud provisioning",
+    "merge",
+    "deployment"
+  ],
+  "change_policy": "Any work outside this baseline requires a versioned change capsule and explicit human decision before execution."
+}

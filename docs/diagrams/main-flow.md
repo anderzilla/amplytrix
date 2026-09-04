@@ -1,4 +1,21 @@
-# Main dependency and request flow
+# Phase Zero project method
+
+```mermaid
+flowchart LR
+  IN["Multi-origin intake"] --> READY["Internal readiness check"]
+  READY --> SOURCES["Allowed sources + provenance"]
+  SOURCES --> DISC["Discovery"]
+  DISC --> SCEN["3-6 scenarios"]
+  SCEN --> HUMAN["Human baseline decision"]
+  HUMAN --> EXEC["Governed execution"]
+  EXEC --> EVID["Favorable + contrary evidence"]
+  EVID --> REVIEW["Independent review"]
+  REVIEW --> ACCEPT["Human acceptance"]
+  EXEC -. "outside baseline" .-> CAPSULE["Change capsule"]
+  CAPSULE --> HUMAN
+```
+
+## Future runtime dependency and request flow
 
 ```mermaid
 sequenceDiagram

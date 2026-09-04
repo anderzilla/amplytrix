@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:change-capsule",
+  "title": "Amplytrix change capsule v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "project_id",
+    "baseline_ref",
+    "status",
+    "trigger",
+    "cause",
+    "prevention",
+    "alternatives",
+    "benefits",
+    "risks",
+    "impact",
+    "decision_ref",
+    "rollback"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "project_id": { "$ref": "common.schema.json#/$defs/id" },
+    "baseline_ref": { "type": "string", "minLength": 1 },
+    "status": {
+      "enum": ["draft", "awaiting-decision", "approved", "rejected", "executing", "closed"]
+    },
+    "trigger": { "type": "string", "minLength": 1 },
+    "cause": { "type": "string", "minLength": 1 },
+    "prevention": { "type": "string", "minLength": 1 },
+    "alternatives": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "benefits": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "risks": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "impact": {
+      "type": "object",
+      "required": ["scope", "schedule", "cost", "client_effort"],
+      "properties": {
+        "scope": { "type": "string" },
+        "schedule": { "type": "string" },
+        "cost": { "$ref": "common.schema.json#/$defs/cost" },
+        "client_effort": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "decision_ref": { "type": ["string", "null"] },
+    "rollback": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

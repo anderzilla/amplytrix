@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:evidence",
+  "title": "Amplytrix evidence v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "project_id",
+    "task_id",
+    "claim",
+    "polarity",
+    "status",
+    "source_refs",
+    "observed_at",
+    "recorded_by",
+    "confidence",
+    "limitations"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "project_id": { "$ref": "common.schema.json#/$defs/id" },
+    "task_id": { "type": "string", "minLength": 1 },
+    "claim": { "type": "string", "minLength": 1 },
+    "polarity": { "enum": ["favorable", "contrary", "inconclusive"] },
+    "status": { "enum": ["proposed", "verified", "disputed", "superseded"] },
+    "source_refs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "observed_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "recorded_by": { "type": "string", "minLength": 1 },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "limitations": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "review_ref": { "type": "string" }
+  },
+  "additionalProperties": false
+}

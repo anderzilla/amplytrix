@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../schemas/v1/evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "evidence-project-method-fit",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "claim": "Repository-driven contracts can exercise intake, scenarios, baseline, capability admission, evidence, and supervision before a portal or database exists.",
+  "polarity": "favorable",
+  "status": "proposed",
+  "source_refs": [
+    "source-founder-directive",
+    "source-existing-repository",
+    "source-codematrix-governance"
+  ],
+  "observed_at": "2026-09-04T12:00:00-03:00",
+  "recorded_by": "Codex primary executor",
+  "confidence": "medium",
+  "limitations": [
+    "This proves contract coherence, not customer value or runtime behavior.",
+    "The hypothesis must be revisited after the first persistence walking slice."
+  ],
+  "review_ref": "projects/amplytrix-construction/governance/reviewer-evidence-pack.json"
+}

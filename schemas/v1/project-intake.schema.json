@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:project-intake",
+  "title": "Amplytrix project intake v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "intake_id",
+    "origin",
+    "source_system",
+    "source_artifact_id",
+    "source_artifact_version",
+    "created_at",
+    "idempotency_key",
+    "transfer_basis",
+    "origin_evidence_refs",
+    "classification",
+    "payload",
+    "readiness_check"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
+    "intake_id": { "$ref": "common.schema.json#/$defs/id" },
+    "origin": {
+      "enum": ["agency_briefing", "client_documents", "third_party_documents", "direct_discovery"]
+    },
+    "source_system": { "type": "string", "minLength": 1 },
+    "source_artifact_id": { "type": "string", "minLength": 1 },
+    "source_artifact_version": { "type": "string", "minLength": 1 },
+    "created_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "idempotency_key": { "type": "string", "minLength": 16 },
+    "transfer_basis": {
+      "type": "object",
+      "required": ["purpose", "status", "evidence_ref"],
+      "properties": {
+        "purpose": { "const": "project-readiness-and-discovery" },
+        "status": { "enum": ["recorded", "not-applicable-no-personal-data", "blocked"] },
+        "evidence_ref": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "origin_evidence_refs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "classification": { "enum": ["public", "internal-redacted", "confidential-client"] },
+    "payload": {
+      "type": "object",
+      "required": [
+        "problem",
+        "desired_outcomes",
+        "known_constraints",
+        "known_risks",
+        "source_refs"
+      ],
+      "properties": {
+        "problem": { "type": "string", "minLength": 1 },
+        "desired_outcomes": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+        "known_constraints": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+        "known_risks": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+        "source_refs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "readiness_check": {
+      "type": "object",
+      "required": [
+        "status",
+        "validated_version",
+        "completeness",
+        "coherence",
+        "risks",
+        "gaps",
+        "required_follow_up",
+        "effort_estimate",
+        "cost_attribution",
+        "commercial_disposition",
+        "commercial_approval_ref",
+        "decision_ref",
+        "scope_boundary"
+      ],
+      "properties": {
+        "status": { "enum": ["pending", "accepted-as-input", "rejected", "quarantined"] },
+        "validated_version": { "type": ["string", "null"] },
+        "completeness": { "enum": ["unknown", "insufficient", "minimum-ready"] },
+        "coherence": { "enum": ["unknown", "conflicting", "minimum-coherent"] },
+        "risks": { "type": "array", "items": { "type": "string" } },
+        "gaps": { "type": "array", "items": { "type": "string" } },
+        "required_follow_up": { "type": "array", "items": { "type": "string" } },
+        "effort_estimate": {
+          "type": "object",
+          "required": ["status", "statement"],
+          "properties": {
+            "status": { "enum": ["not-estimated", "estimated", "approved"] },
+            "statement": { "type": "string", "minLength": 1 },
+            "hours_minimum": { "type": "number", "minimum": 0 },
+            "hours_maximum": { "type": "number", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "cost_attribution": {
+          "enum": [
+            "pending-human-decision",
+            "agency-process-in-amplytrix-price",
+            "separate-agency-engagement",
+            "amplytrix-discovery-phase",
+            "not-applicable"
+          ]
+        },
+        "commercial_disposition": {
+          "enum": [
+            "pending-human-decision",
+            "minimum-ready",
+            "agency-diagnostic-required",
+            "amplytrix-discovery-required",
+            "declined"
+          ]
+        },
+        "commercial_approval_ref": { "type": ["string", "null"] },
+        "decision_ref": { "type": ["string", "null"] },
+        "scope_boundary": { "const": "internal-minimum-readiness-check-not-full-agency-diagnostic" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

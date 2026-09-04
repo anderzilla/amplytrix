@@ -1,0 +1,48 @@
+{
+  "evidence_pack_id": "AMP-2026-DOGFOOD-001-primary-evidence",
+  "envelope_id": "AMP-2026-DOGFOOD-001-primary",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "role": "implementer",
+  "provider": "OpenAI Codex",
+  "model": "GPT-5 Codex",
+  "date": "2026-09-04T12:00:00-03:00",
+  "kb_commit": "3ab73de9c65d0f1be0177b293dab6cbaf710e29b",
+  "scope": "Managed-service-first Phase Zero architecture and dogfood package.",
+  "sources": [
+    {
+      "url": "https://github.com/anderzilla/amplytrix",
+      "verified_on": "2026-09-04",
+      "note": "Canonical private repository and clean develop baseline."
+    },
+    {
+      "url": "https://github.com/anderzilla/CodeMatrixInternacional",
+      "verified_on": "2026-09-04",
+      "note": "Private RULE-034/DEC-035 provenance at pinned commit."
+    }
+  ],
+  "findings": [
+    "The existing modular-monolith foundation can host declarative Phase Zero without runtime changes.",
+    "Project intake supports Agency, client, third-party, and direct-discovery origins with a mandatory internal readiness gate.",
+    "The realistic repository-first scenario preserves cost and reversibility while exposing machine-checkable invariants.",
+    "No MCP, provider, cloud resource, persistence, API, UI, deployment, merge, or financial action is activated."
+  ],
+  "contrary_evidence": [
+    "Declarative consistency does not prove future runtime authorization, isolation, retrieval safety, or customer value.",
+    "The separate wiki cannot be synchronized safely while it contains unrelated local changes.",
+    "Identity, project isolation details, retention, UI topology, and Agency transport remain open before their implementation triggers."
+  ],
+  "assumptions": [
+    "Repository-driven dogfooding is sufficient for the internal Phase Zero.",
+    "Candidate bounded contexts will be validated by Event Storming before persistence."
+  ],
+  "divergences": [
+    "The previous subscription-first wording was superseded for MVP priority while subscription self-service remains a later modality."
+  ],
+  "confidence": "high",
+  "cost": {
+    "external_brl": 0,
+    "note": "Internal execution/review time only; no fixed hours or commercial price approved."
+  },
+  "recommendation": "Freeze a core commit for read-only independent review; keep completion blocked until findings are resolved and the exact final commit passes review.",
+  "proposed_gate": "A2"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../schemas/v1/evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "evidence-policy-runtime-gap",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "claim": "A valid declarative package does not prove that future authorization, isolation, retrieval, or execution runtime enforces the same policy.",
+  "polarity": "contrary",
+  "status": "verified",
+  "source_refs": ["source-existing-repository", "source-codematrix-governance"],
+  "observed_at": "2026-09-04T12:00:00-03:00",
+  "recorded_by": "Codex primary executor",
+  "confidence": "high",
+  "limitations": [
+    "Runtime risk cannot be quantified before the walking slice and threat-driven tests exist."
+  ],
+  "review_ref": "projects/amplytrix-construction/governance/reviewer-evidence-pack.json"
+}

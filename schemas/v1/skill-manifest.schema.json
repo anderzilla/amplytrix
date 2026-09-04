@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:skill-manifest",
+  "title": "Amplytrix skill manifest v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "version",
+    "name",
+    "status",
+    "definition_ref",
+    "trigger",
+    "outputs",
+    "stop_conditions"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "version": { "$ref": "common.schema.json#/$defs/version" },
+    "name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "active", "deprecated", "blocked"] },
+    "definition_ref": { "type": "string", "minLength": 1 },
+    "trigger": { "type": "string", "minLength": 1 },
+    "outputs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "stop_conditions": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" }
+  },
+  "additionalProperties": false
+}
