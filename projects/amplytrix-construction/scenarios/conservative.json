@@ -1,0 +1,22 @@
+{
+  "$schema": "../../../schemas/v1/scenario.schema.json",
+  "schema_version": "1.0.0",
+  "id": "amplytrix-conservative",
+  "project_id": "amplytrix-construction",
+  "kind": "conservative",
+  "status": "rejected",
+  "summary": "Document only the managed-service method and postpone machine-readable contracts.",
+  "gains": ["smallest change", "lowest immediate maintenance"],
+  "renunciations": ["no executable dogfood gates", "weak capability/evidence portability"],
+  "client_effort": ["Founder reviews narrative documents only"],
+  "risks": ["method remains aspirational", "later schemas diverge from practice"],
+  "advantages": ["fast rollback", "no dependency change"],
+  "timeline": "Shortest Phase Zero; no runtime readiness claim.",
+  "cost": { "kind": "none", "statement": "Internal documentation time only; no external spend." },
+  "consequences": [
+    "cannot validate cross-artifact invariants",
+    "delays structured intake and supervision"
+  ],
+  "assumptions": ["narrative documentation alone would be sufficient to learn"],
+  "evidence_refs": ["evidence-existing-foundation", "evidence-policy-runtime-gap"]
+}

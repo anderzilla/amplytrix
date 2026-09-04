@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:execution-job",
+  "title": "Amplytrix execution job v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "project_id",
+    "task_id",
+    "baseline_ref",
+    "capability_refs",
+    "status",
+    "inputs",
+    "outputs",
+    "limits",
+    "approval_refs",
+    "evidence_refs",
+    "idempotency_key",
+    "rollback"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "task_id": { "type": "string", "minLength": 1 },
+    "baseline_ref": { "type": "string", "minLength": 1 },
+    "capability_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "status": {
+      "enum": [
+        "planned",
+        "awaiting-approval",
+        "ready",
+        "running",
+        "blocked",
+        "failed",
+        "completed",
+        "rolled-back"
+      ]
+    },
+    "inputs": { "type": "array", "items": { "type": "string" } },
+    "outputs": { "type": "array", "items": { "type": "string" } },
+    "limits": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "approval_refs": { "type": "array", "items": { "type": "string" } },
+    "evidence_refs": { "type": "array", "items": { "type": "string" } },
+    "idempotency_key": { "type": "string", "minLength": 1 },
+    "rollback": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

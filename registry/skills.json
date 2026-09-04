@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0.0",
+  "skills": [
+    {
+      "$schema": "../schemas/v1/skill-manifest.schema.json",
+      "schema_version": "1.0.0",
+      "id": "skill-project-conduction",
+      "version": "1.0.0",
+      "name": "Project conduction",
+      "status": "active",
+      "definition_ref": ".codex/skills/project-conduction/SKILL.md",
+      "trigger": "Conduct an Amplytrix project or create its scenarios/baseline/execution package.",
+      "outputs": [
+        "validated intake",
+        "source manifest",
+        "scenarios",
+        "baseline decision",
+        "execution and acceptance evidence"
+      ],
+      "stop_conditions": [
+        "missing authority",
+        "prohibited data",
+        "unresolved material evidence",
+        "missing independent reviewer"
+      ]
+    },
+    {
+      "$schema": "../schemas/v1/skill-manifest.schema.json",
+      "schema_version": "1.0.0",
+      "id": "skill-evidence-supervision",
+      "version": "1.0.0",
+      "name": "Evidence supervision",
+      "status": "active",
+      "definition_ref": ".codex/skills/evidence-supervision/SKILL.md",
+      "trigger": "Review project evidence or completion eligibility independently.",
+      "outputs": ["findings", "contrary evidence", "confidence", "review status"],
+      "stop_conditions": [
+        "reviewer participated in production",
+        "review target is not an exact commit",
+        "required source is inaccessible"
+      ]
+    },
+    {
+      "$schema": "../schemas/v1/skill-manifest.schema.json",
+      "schema_version": "1.0.0",
+      "id": "skill-change-capsule",
+      "version": "1.0.0",
+      "name": "Change capsule",
+      "status": "active",
+      "definition_ref": ".codex/skills/change-capsule/SKILL.md",
+      "trigger": "An unforeseen or requested change is outside the approved baseline.",
+      "outputs": ["cause and prevention", "alternatives", "impact", "human decision request"],
+      "stop_conditions": [
+        "missing baseline",
+        "no decision owner",
+        "change implies unapproved finance or contract"
+      ]
+    }
+  ]
+}

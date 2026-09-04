@@ -1,0 +1,38 @@
+{
+  "$schema": "../../../schemas/v1/scenario.schema.json",
+  "schema_version": "1.0.0",
+  "id": "amplytrix-aggressive",
+  "project_id": "amplytrix-construction",
+  "kind": "aggressive",
+  "status": "rejected",
+  "summary": "Build portal, operations console, persistence, queues, agent runtime, RAG, and Agency integration immediately.",
+  "gains": ["earlier interactive demonstration", "more runtime feedback if successful"],
+  "renunciations": ["higher reversibility", "low-cost learning", "sequential risk reduction"],
+  "client_effort": [
+    "many architecture/vendor decisions",
+    "identity/data/cloud approvals",
+    "continuous acceptance"
+  ],
+  "risks": [
+    "premature coupling",
+    "security/privacy defects",
+    "cloud cost",
+    "unvalidated UX and demand"
+  ],
+  "advantages": ["broad end-to-end surface", "potentially faster path to external pilot"],
+  "timeline": "Long and uncertain; depends on identity, data, provider, legal, and cloud gates.",
+  "cost": {
+    "kind": "unknown",
+    "statement": "Material engineering and cloud/provider cost; not approved."
+  },
+  "consequences": [
+    "creates migrations and operational burden before evidence",
+    "may require service/UI rework",
+    "expands attack surface"
+  ],
+  "assumptions": [
+    "architecture and demand are already sufficiently known",
+    "cloud/provider approvals would be available"
+  ],
+  "evidence_refs": ["evidence-existing-foundation", "evidence-policy-runtime-gap"]
+}

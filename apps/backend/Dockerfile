@@ -13,7 +13,8 @@ ENV PATH=/app/.venv/bin:$PATH \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PORT=8080
-RUN apk upgrade --no-cache \
+RUN python -m pip uninstall --yes msgpack setuptools pip \
+    && apk upgrade --no-cache \
     && addgroup --system --gid 10001 app \
     && adduser --system --uid 10001 --ingroup app --home /nonexistent --shell /sbin/nologin app
 WORKDIR /app

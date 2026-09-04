@@ -1,3 +1,17 @@
 # Architecture
 
-The modular-monolith and inward dependency rules in ADR-0004 and ADR-0023–0039 remain current. Structural changes require a prompt beginning `ATUALIZAÇÃO DE ARQUITETURA`, affected scope confirmation, problem/options/pros/cons and technical, operational, financial, security, legal and future-consequence analysis. Wait for human selection; then use `architecture/<name>` from `develop`, create/supersede an ADR, synchronize diagrams/tests/docs/wiki, and validate. No silent architectural change.
+The modular-monolith and inward dependency rules in ADR-0004 and ADR-0023–0039 remain current.
+ADR-0062 makes the project the governance and isolation unit and establishes managed-service-first
+dogfooding before persistence, API, UI, or self-service automation.
+
+Project Governance, Discovery & Scenarios, Knowledge & Provenance, Capability Registry, Execution
+Orchestration, Evidence & Supervision, and Audit & Compliance are candidate boundaries. They
+communicate through application ports and versioned contracts, never internal tables. CodeMatrix
+Agency and Amplytrix have separate authentication, data, and runtime ownership; integration is only
+through versioned APIs/events with correlation, idempotency, and explicit data classification.
+
+Structural changes require a prompt beginning `ATUALIZAÇÃO DE ARQUITETURA`, affected scope
+confirmation, problem/options/pros/cons, and technical, operational, financial, security, legal, and
+future-consequence analysis. Wait for human selection; then use `architecture/<name>` from `develop`,
+create/supersede an ADR, synchronize diagrams/tests/docs/wiki, and validate. No silent architectural
+change.

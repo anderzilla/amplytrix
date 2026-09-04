@@ -14,3 +14,7 @@
 | OQ-10 | Approve Mercado Pago merchant/integration mode and Stripe rollout markets.                                                | Finance/legal/security | Before provider credentials                  |
 | OQ-11 | Define RPO/RTO, HA, retention and restore-test targets with budget.                                                       | Platform/business      | Before staging data                          |
 | OQ-12 | Decide whether PostgreSQL RLS is justified after pooling/migration benchmark.                                             | Architecture/security  | Before tenant persistence                    |
+| OQ-13 | Choose one app with isolated surfaces or separate portal/operations deployables.                                          | Architecture/security  | Before product UI implementation             |
+| OQ-14 | Define readiness effort estimation, Agency cost attribution, discovery packaging and human approval workflow.             | Product/finance/legal  | Before first client proposal                 |
+| OQ-15 | Define Agency→Amplytrix API/event transport, authentication, compatibility, consent and replay policy.                    | Architecture/security  | Before integration implementation            |
+| OQ-16 | Define project closure export, retention, deletion and legally/technically valid anonymization evidence.                  | Privacy/legal/security | Before collecting client data                |

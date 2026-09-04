@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../schemas/v1/scenario.schema.json",
+  "schema_version": "1.0.0",
+  "id": "amplytrix-realistic",
+  "project_id": "amplytrix-construction",
+  "kind": "realistic",
+  "status": "selected",
+  "summary": "Align architecture and dogfood the method with versioned repository contracts and deterministic gates before runtime.",
+  "gains": [
+    "method is executable without cloud",
+    "decisions/evidence become traceable",
+    "runtime remains reversible"
+  ],
+  "renunciations": ["manual orchestration remains", "no customer portal or live agent runtime"],
+  "client_effort": [
+    "Founder selects baseline and later gates",
+    "independent reviewer inspects exact commit"
+  ],
+  "risks": [
+    "declarative contracts may need revision after Event Storming",
+    "manual files can drift"
+  ],
+  "advantages": [
+    "zero external cost",
+    "small reversible commits",
+    "builds evidence before persistence"
+  ],
+  "timeline": "Phase Zero ends with validated private PR; persistence is a later walking slice.",
+  "cost": {
+    "kind": "unknown",
+    "statement": "Internal effort is measured; no external spend, fixed hours, or price is authorized."
+  },
+  "consequences": [
+    "adds schema/registry maintenance",
+    "provides a canonical dogfood package",
+    "defers UI topology"
+  ],
+  "assumptions": [
+    "repository-driven work is sufficient for the first internal project",
+    "Node gates can validate Phase Zero without Python 3.13"
+  ],
+  "evidence_refs": [
+    "evidence-existing-foundation",
+    "evidence-project-method-fit",
+    "evidence-policy-runtime-gap"
+  ]
+}

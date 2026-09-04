@@ -1,0 +1,59 @@
+{
+  "envelope_id": "AMP-2026-DOGFOOD-001-primary",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "role": "implementer",
+  "kb_commit": "3ab73de9c65d0f1be0177b293dab6cbaf710e29b",
+  "classification": "internal-redacted",
+  "action_level": "A2",
+  "scope": "Create the approved managed-service-first Phase Zero architecture, contracts, registries, dogfood package, validation, and private PR without runtime/cloud actions.",
+  "allowed": [
+    "Amplytrix architecture branch",
+    "read-only CodeMatrix governance references",
+    "repository validation",
+    "private push and PR"
+  ],
+  "forbidden": [
+    "secrets or personal data",
+    "wiki overwrite",
+    "merge or deploy",
+    "cloud/provider resource creation",
+    "financial or contractual action"
+  ],
+  "output_requirements": [
+    "ADR/source alignment",
+    "versioned schemas and registries",
+    "dogfood scenarios/baseline/evidence",
+    "validation results",
+    "exact-commit independent review"
+  ],
+  "collaboration": {
+    "review_required": true,
+    "materiality": "material",
+    "decision_owner": "CodeMatrix Founder",
+    "participants": [
+      {
+        "envelope_id": "AMP-2026-DOGFOOD-001-primary",
+        "role": "primary",
+        "scope": "architecture and implementation"
+      },
+      {
+        "envelope_id": "AMP-2026-DOGFOOD-001-reviewer",
+        "role": "reviewer",
+        "scope": "read-only exact-commit adversarial review"
+      }
+    ],
+    "providers_allowed": ["Codex internal agent collaboration"],
+    "data_flows": [
+      "Amplytrix repository and redacted governance references to reviewer; findings back to primary"
+    ],
+    "fallback": "Keep the PR draft/blocked if a permitted independent reviewer cannot pass the exact commit."
+  },
+  "budget": { "external_cost": 0, "currency": "BRL" },
+  "expires_on": "2026-09-30",
+  "stop_conditions": [
+    "secret or personal data",
+    "external cost/action",
+    "unresolved blocker/high finding",
+    "missing independent review"
+  ]
+}

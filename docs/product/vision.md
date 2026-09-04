@@ -1,6 +1,14 @@
 # Product vision
 
-Amplytrix is Code Matrix's subscription platform that amplifies developers, leads, architects, and engineering teams with governed AI-assisted technical assets. It behaves as a technical exoskeleton: recommendations remain explainable, reviewable, and under professional control. Phase Zero establishes trust and delivery foundations; discovery and validated customer outcomes precede commercial implementation.
+Amplytrix is CodeMatrix's project intelligence and delivery platform. It converts incomplete evidence
+into a governed source of truth, decision scenarios, a contracted baseline, coordinated execution,
+and auditable acceptance. It behaves as an accountable delivery exoskeleton: recommendations and
+actions remain explainable, reviewable, scoped, and under professional control.
+
+The first MVP is the managed service. The construction of Amplytrix is its first dogfood project.
+Reviewed packages and subscription self-service follow only after the method demonstrates repeatable
+outcomes and safe boundaries. Phase Zero establishes the contracts, registries, knowledge package,
+governance, and evidence required to run that dogfood without a complete portal.
 
 # Governance addition
 

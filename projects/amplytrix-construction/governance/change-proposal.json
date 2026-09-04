@@ -1,0 +1,40 @@
+{
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "kb_commit": "3ab73de9c65d0f1be0177b293dab6cbaf710e29b",
+  "summary": "Align Amplytrix to a project-governed managed-service MVP and add declarative Phase Zero dogfooding contracts and gates.",
+  "files": [
+    "PROJECT_CONSTITUTION.md",
+    "docs/adr/0062-project-governed-managed-service.md",
+    "docs/source-of-truth/",
+    "docs/architecture/",
+    "docs/domain/",
+    "docs/security/",
+    "schemas/v1/",
+    "registry/",
+    "projects/amplytrix-construction/",
+    ".codex/agents/",
+    ".codex/skills/",
+    "scripts/validate-phase-zero.mjs"
+  ],
+  "risk": "Material architecture/documentation change; no runtime migration. Primary residual risk is policy/runtime divergence.",
+  "tests": [
+    "pnpm phase0:validate",
+    "pnpm verify",
+    "pnpm validate",
+    "pnpm phase0:review-gate",
+    "read-only exact-commit independent review"
+  ],
+  "rollback": "Close the unmerged PR and delete the architecture branch after preserving review evidence; no runtime or data rollback is required.",
+  "approval_level": "A2",
+  "primary_evidence_pack_ref": "projects/amplytrix-construction/governance/primary-evidence-pack.json",
+  "review_evidence_pack_ref": "projects/amplytrix-construction/governance/reviewer-evidence-pack.json",
+  "evidence_pack_refs": [
+    "projects/amplytrix-construction/governance/primary-evidence-pack.json",
+    "projects/amplytrix-construction/governance/reviewer-evidence-pack.json"
+  ],
+  "review_status": "passed",
+  "unresolved_divergences": [],
+  "approval_state": "approved",
+  "founder_approval_ref": "ATUALIZAÇÃO DE ARQUITETURA 2026-09-04",
+  "completion_eligibility": "eligible_after_gate"
+}

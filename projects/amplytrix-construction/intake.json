@@ -1,0 +1,68 @@
+{
+  "$schema": "../../schemas/v1/project-intake.schema.json",
+  "schema_version": "1.0.0",
+  "intake_id": "amplytrix-construction-intake",
+  "origin": "direct_discovery",
+  "source_system": "codematrix-founder-interview",
+  "source_artifact_id": "founder-amplytrix-definition-2026-09-04",
+  "source_artifact_version": "1.0.0",
+  "created_at": "2026-09-04T12:00:00-03:00",
+  "idempotency_key": "amplytrix-construction-intake-v1",
+  "transfer_basis": {
+    "purpose": "project-readiness-and-discovery",
+    "status": "not-applicable-no-personal-data",
+    "evidence_ref": "source-founder-directive"
+  },
+  "origin_evidence_refs": ["source-founder-directive", "source-existing-repository"],
+  "classification": "internal-redacted",
+  "payload": {
+    "problem": "Turn the existing foundation and product definition into a project-governed managed-service MVP that can dogfood its own method.",
+    "desired_outcomes": [
+      "traceable project source of truth",
+      "comparable scenarios and approved baseline",
+      "versioned capability and evidence contracts",
+      "independent completion review"
+    ],
+    "known_constraints": [
+      "no cloud spend or deployment",
+      "no secrets or personal data",
+      "no product persistence/API/UI in Phase Zero",
+      "CodeMatrix Agency and Amplytrix remain isolated"
+    ],
+    "known_risks": [
+      "policy/runtime drift",
+      "untrusted source content",
+      "missing independent review",
+      "premature platform complexity"
+    ],
+    "source_refs": [
+      "source-founder-directive",
+      "source-existing-repository",
+      "source-codematrix-governance"
+    ]
+  },
+  "readiness_check": {
+    "status": "accepted-as-input",
+    "validated_version": "1.0.0",
+    "completeness": "minimum-ready",
+    "coherence": "minimum-coherent",
+    "risks": [
+      "Identity, persistence isolation, retention, and UI topology remain later decisions."
+    ],
+    "gaps": ["No validated customer demand or runtime load evidence exists yet."],
+    "required_follow_up": [
+      "Event Storming before persistence",
+      "independent exact-commit review",
+      "human decision before every later financial/external gate"
+    ],
+    "effort_estimate": {
+      "status": "not-estimated",
+      "statement": "Internal Phase Zero effort will be measured; no fixed hours are approved."
+    },
+    "cost_attribution": "not-applicable",
+    "commercial_disposition": "minimum-ready",
+    "commercial_approval_ref": "Founder architecture authorization 2026-09-04",
+    "decision_ref": "projects/amplytrix-construction/baseline-decision.json",
+    "scope_boundary": "internal-minimum-readiness-check-not-full-agency-diagnostic"
+  }
+}

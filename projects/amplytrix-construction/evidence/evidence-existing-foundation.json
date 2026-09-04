@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../schemas/v1/evidence.schema.json",
+  "schema_version": "1.0.0",
+  "id": "evidence-existing-foundation",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "claim": "The existing repository provides a clean, governed technical foundation that can host Phase Zero without a new repository or stack rewrite.",
+  "polarity": "favorable",
+  "status": "verified",
+  "source_refs": ["source-existing-repository"],
+  "observed_at": "2026-09-04T12:00:00-03:00",
+  "recorded_by": "Codex primary executor",
+  "confidence": "high",
+  "limitations": [
+    "No product persistence, project API, portal, or live agent runtime exists.",
+    "Python 3.13 validation depends on an available compatible runtime."
+  ],
+  "review_ref": "projects/amplytrix-construction/governance/reviewer-evidence-pack.json"
+}

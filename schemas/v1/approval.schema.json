@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:approval",
+  "title": "Amplytrix approval v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "id",
+    "project_id",
+    "subject_ref",
+    "gate",
+    "status",
+    "decided_by",
+    "decided_at",
+    "scope",
+    "conditions",
+    "evidence_refs"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "subject_ref": { "type": "string", "minLength": 1 },
+    "gate": {
+      "enum": [
+        "baseline",
+        "scope-change",
+        "external-action",
+        "production",
+        "credential",
+        "personal-data",
+        "financial",
+        "contract",
+        "professional-validation",
+        "acceptance"
+      ]
+    },
+    "status": { "enum": ["requested", "approved", "rejected", "expired", "revoked"] },
+    "decided_by": { "type": "string", "minLength": 1 },
+    "decided_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
+    "scope": { "type": "string", "minLength": 1 },
+    "conditions": { "type": "array", "items": { "type": "string" } },
+    "evidence_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
+  },
+  "additionalProperties": false
+}

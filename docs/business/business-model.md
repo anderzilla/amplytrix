@@ -1,6 +1,15 @@
 # Business model
 
-Subscription hypothesis with optional team/enterprise contracts and curated catalog value. Validate willingness to pay, retention, support cost, AI gross margin, Brazilian taxes, chargebacks, and enterprise procurement before pricing. Meter model/tool usage independently from provider billing so margin and portability remain visible.
+The first business model is a managed end-to-end project service. CodeMatrix conducts readiness,
+discovery, scenarios, baseline formalization, knowledge preparation, governed execution, deployment,
+and final acceptance under explicit client responsibilities and gates. Reviewed packages follow;
+subscription self-service and curated catalog value are later hypotheses.
+
+Agency briefing is the preferred prepared intake, but client/third-party material and direct discovery
+are accepted. The mandatory minimum readiness effort is measured and commercially attributed; a full
+Agency diagnostic remains a separate paid deliverable. Validate willingness to pay, delivery margin,
+support cost, AI/tool cost, taxes, and procurement before fixed pricing. No automated financial action
+is authorized.
 
 # Governance addition
 
