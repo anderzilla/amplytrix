@@ -36,6 +36,20 @@
       "version": "1.0.0",
       "manifest_ref": "registry/skills.json#/skills/2",
       "status": "active"
+    },
+    {
+      "id": "agent-known-error-librarian",
+      "type": "agent",
+      "version": "1.0.0",
+      "manifest_ref": "registry/agents.json#/agents/2",
+      "status": "active"
+    },
+    {
+      "id": "skill-known-error-learning",
+      "type": "skill",
+      "version": "1.0.0",
+      "manifest_ref": "registry/skills.json#/skills/3",
+      "status": "active"
     }
   ]
 }

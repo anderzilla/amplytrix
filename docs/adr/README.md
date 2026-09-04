@@ -32,3 +32,4 @@ Statuses: `proposed`, `accepted`, `superseded`, `rejected`. Accepted ADRs are im
 | 0059      | PostgreSQL-first vector data                 | proposed   |
 | 0060-0061 | Evidence-driven scale and pricing hypotheses | accepted   |
 | 0062      | Project-governed managed service first       | accepted   |
+| 0063      | Sanitized project-local known-error learning | accepted   |

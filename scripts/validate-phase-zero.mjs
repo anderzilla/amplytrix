@@ -36,7 +36,7 @@ const schemaDir = 'schemas/v1';
 const schemaFiles = (await readdir(join(root, schemaDir))).filter((file) =>
   file.endsWith('.schema.json'),
 );
-expect(schemaFiles.length >= 14, `expected at least 14 v1 schemas; found ${schemaFiles.length}`);
+expect(schemaFiles.length >= 15, `expected at least 15 v1 schemas; found ${schemaFiles.length}`);
 const schemas = new Map();
 const schemaIds = new Set();
 for (const file of schemaFiles) {
@@ -88,7 +88,11 @@ const validate = (schemaFile, instance, label) => {
 const projectRoot = 'projects/amplytrix-construction';
 const required = [
   'docs/adr/0062-project-governed-managed-service.md',
+  'docs/adr/0063-sanitized-known-error-learning.md',
+  'docs/architecture/known-error-library.md',
   'docs/governance/codematrix-collaboration.md',
+  '.codex/agents/known-error-librarian.md',
+  '.codex/skills/known-error-learning/SKILL.md',
   'registry/capabilities.json',
   'registry/agents.json',
   'registry/skills.json',
@@ -146,6 +150,51 @@ for (const [index, mcp] of (mcps?.entries ?? []).entries())
   validate('mcp-manifest.schema.json', mcp, `MCP manifest ${index}`);
 for (const [index, source] of (sources?.records ?? []).entries())
   validate('source-record.schema.json', source, `source record ${index}`);
+
+const knownErrorFiles = (
+  await readdir(join(root, projectRoot, 'knowledge', 'known-errors'))
+).filter((file) => file.endsWith('.json'));
+expect(knownErrorFiles.length > 0, 'known-error library is empty');
+const knownErrors = await Promise.all(
+  knownErrorFiles.map((file) => readJson(`${projectRoot}/knowledge/known-errors/${file}`)),
+);
+for (const [index, knownError] of knownErrors.entries())
+  validate('known-error.schema.json', knownError, `known error ${index}`);
+unique(
+  knownErrors.map((knownError) => knownError?.id),
+  'known-error IDs',
+);
+for (const knownError of knownErrors) {
+  expect(
+    knownError?.project_id === project?.id && knownError?.task_id === primary?.task_id,
+    `${knownError?.id}: known-error project/task linkage failed`,
+  );
+  const solutions = knownError?.solution_options ?? [];
+  unique(
+    solutions.map((solution) => solution.id),
+    `${knownError?.id}: solution IDs`,
+  );
+  const selected = solutions.filter((solution) => solution.decision === 'selected');
+  expect(selected.length === 1, `${knownError?.id}: exactly one solution must be selected`);
+  expect(
+    selected[0]?.id === knownError?.selected_solution_id,
+    `${knownError?.id}: selected solution ID does not match`,
+  );
+  if (knownError?.status === 'resolved') {
+    expect(
+      knownError.root_cause.status === 'confirmed',
+      `${knownError.id}: resolved record has an unconfirmed cause`,
+    );
+    expect(
+      knownError.validation.status === 'validated',
+      `${knownError.id}: resolved record lacks validated evidence`,
+    );
+    expect(
+      ['ci-validated', 'independently-validated'].includes(selected[0]?.validation_state),
+      `${knownError.id}: resolved solution was not validated independently or in CI`,
+    );
+  }
+}
 
 if (project && intake && baseline) {
   expect(project.id === baseline.project_id, 'baseline project does not match project');
@@ -429,5 +478,5 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(
-  `phase-zero-ok: ${schemaFiles.length} compiled schemas, ${capabilityById.size} capabilities, ${evidence.length} evidence records`,
+  `phase-zero-ok: ${schemaFiles.length} compiled schemas, ${capabilityById.size} capabilities, ${evidence.length} evidence records, ${knownErrors.length} known errors`,
 );

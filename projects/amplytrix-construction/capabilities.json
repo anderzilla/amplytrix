@@ -7,7 +7,9 @@
     { "id": "agent-evidence-supervisor", "version": "1.0.0" },
     { "id": "skill-project-conduction", "version": "1.0.0" },
     { "id": "skill-evidence-supervision", "version": "1.0.0" },
-    { "id": "skill-change-capsule", "version": "1.0.0" }
+    { "id": "skill-change-capsule", "version": "1.0.0" },
+    { "id": "agent-known-error-librarian", "version": "1.0.0" },
+    { "id": "skill-known-error-learning", "version": "1.0.0" }
   ],
   "mcp_allowed": [],
   "limits": [

@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../../schemas/v1/known-error.schema.json",
+  "schema_version": "1.0.0",
+  "id": "javascript-transitive-audit",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "title": "Transitive JavaScript packages caused high-severity audit failures",
+  "domain": "dependency",
+  "status": "resolved",
+  "classification": "internal-redacted",
+  "symptom": "The full validation gate failed on high-severity findings in transitive fast-uri, js-yaml, and nanoid versions.",
+  "impact": "The architecture change could not pass the repository security gate despite not introducing vulnerable application behavior directly.",
+  "root_cause": {
+    "status": "confirmed",
+    "statement": "Existing dependency ranges resolved transitive versions below the available patched releases."
+  },
+  "evidence_refs": [
+    "docs/development/dependency-evaluations/2026-09-04-transitive-security-overrides.md",
+    "pnpm-lock.yaml:security-overrides"
+  ],
+  "solution_options": [
+    {
+      "id": "bounded-workspace-overrides",
+      "description": "Pin the affected transitive packages to reviewed patched versions through workspace overrides.",
+      "decision": "selected",
+      "validation_state": "ci-validated",
+      "evidence": [
+        "pnpm audit reported no known vulnerabilities",
+        "GitHub dependency review passed"
+      ],
+      "tradeoffs": ["Fast and reversible", "Requires removal when upstream constraints catch up"]
+    },
+    {
+      "id": "upgrade-direct-parents",
+      "description": "Upgrade every direct parent dependency until each naturally resolves patched transitives.",
+      "decision": "alternative",
+      "validation_state": "unverified",
+      "evidence": ["Parent upgrades can eliminate override maintenance"],
+      "tradeoffs": ["Cleaner long term", "Broader compatibility and regression surface"]
+    }
+  ],
+  "selected_solution_id": "bounded-workspace-overrides",
+  "validation": {
+    "status": "validated",
+    "checks": [
+      "pnpm audit at high threshold",
+      "Lockfile supply-chain policy",
+      "GitHub dependency review"
+    ]
+  },
+  "prevention": [
+    "Run dependency audit before freezing a review commit",
+    "Track owner and removal condition for every security override"
+  ],
+  "customer_reuse": {
+    "eligibility": "candidate-after-review",
+    "requirements": [
+      "Re-resolve against the customer's lockfile",
+      "Confirm licenses and compatibility before applying overrides"
+    ]
+  },
+  "recorded_at": "2026-09-04T11:11:55.9228382-03:00",
+  "recorded_by": "codex-primary-executor"
+}

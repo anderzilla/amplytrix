@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:known-error",
+  "title": "Amplytrix known error record v1",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schema_version",
+    "id",
+    "project_id",
+    "task_id",
+    "title",
+    "domain",
+    "status",
+    "classification",
+    "symptom",
+    "impact",
+    "root_cause",
+    "evidence_refs",
+    "solution_options",
+    "selected_solution_id",
+    "validation",
+    "prevention",
+    "customer_reuse",
+    "recorded_at",
+    "recorded_by"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "task_id": { "type": "string", "minLength": 1 },
+    "title": { "type": "string", "minLength": 1 },
+    "domain": {
+      "enum": ["architecture", "ci", "dependency", "governance", "security", "testing"]
+    },
+    "status": { "enum": ["observed", "diagnosed", "resolved", "superseded"] },
+    "classification": { "const": "internal-redacted" },
+    "symptom": { "type": "string", "minLength": 1 },
+    "impact": { "type": "string", "minLength": 1 },
+    "root_cause": {
+      "type": "object",
+      "required": ["status", "statement"],
+      "properties": {
+        "status": { "enum": ["confirmed", "hypothesis", "unknown"] },
+        "statement": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "evidence_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "solution_options": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "decision", "validation_state", "evidence", "tradeoffs"],
+        "properties": {
+          "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+          "description": { "type": "string", "minLength": 1 },
+          "decision": { "enum": ["selected", "alternative", "rejected"] },
+          "validation_state": {
+            "enum": ["unverified", "locally-validated", "ci-validated", "independently-validated"]
+          },
+          "evidence": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+          "tradeoffs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "selected_solution_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "validation": {
+      "type": "object",
+      "required": ["status", "checks"],
+      "properties": {
+        "status": { "enum": ["pending", "validated", "failed"] },
+        "checks": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "prevention": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "customer_reuse": {
+      "type": "object",
+      "required": ["eligibility", "requirements"],
+      "properties": {
+        "eligibility": { "enum": ["blocked", "internal-sanitized", "candidate-after-review"] },
+        "requirements": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
+    "recorded_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
+    "recorded_by": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

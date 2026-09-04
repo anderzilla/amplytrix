@@ -1,0 +1,67 @@
+{
+  "$schema": "../../../../schemas/v1/known-error.schema.json",
+  "schema_version": "1.0.0",
+  "id": "gitleaks-idempotency-false-positive",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "title": "A public idempotency identifier matched the generic API key rule",
+  "domain": "security",
+  "status": "resolved",
+  "classification": "internal-redacted",
+  "symptom": "The GitHub secret scan reported one generic API key finding in the dogfood intake fixture.",
+  "impact": "The pull request was blocked even though the value was a public deterministic identifier rather than a credential.",
+  "root_cause": {
+    "status": "confirmed",
+    "statement": "The generic rule combined a key-like field name with an entropy-bearing example value and could not infer that the value was non-secret."
+  },
+  "evidence_refs": [
+    "github-actions:Validate:secrets:initial-failure",
+    "github-actions:Validate:secrets:corrective-pass",
+    ".gitleaksignore:exact-fingerprint"
+  ],
+  "solution_options": [
+    {
+      "id": "exact-fingerprint-ignore",
+      "description": "Ignore only the reviewed historical finding by its commit, path, rule, and line fingerprint.",
+      "decision": "selected",
+      "validation_state": "ci-validated",
+      "evidence": [
+        "The GitHub secrets job passed after the targeted ignore",
+        "All default secret rules remained enabled"
+      ],
+      "tradeoffs": [
+        "Narrowest suppression",
+        "Fingerprint must be maintained if history is rewritten"
+      ]
+    },
+    {
+      "id": "targeted-rule-allowlist",
+      "description": "Extend the default Gitleaks configuration with a path-and-line regex allowlist for this fixture.",
+      "decision": "alternative",
+      "validation_state": "unverified",
+      "evidence": ["Gitleaks supports targeted allowlists while retaining default rules"],
+      "tradeoffs": ["Readable policy", "A broader regex can suppress future real findings"]
+    }
+  ],
+  "selected_solution_id": "exact-fingerprint-ignore",
+  "validation": {
+    "status": "validated",
+    "checks": [
+      "Manual classification confirmed no credential or personal data",
+      "GitHub secrets job passed with default scanning intact"
+    ]
+  },
+  "prevention": [
+    "Use exact finding fingerprints instead of disabling generic rules",
+    "Never classify a scanner hit as false positive without inspecting the value and context"
+  ],
+  "customer_reuse": {
+    "eligibility": "candidate-after-review",
+    "requirements": [
+      "Generate a customer-specific fingerprint",
+      "Security reviewer confirms the matched value is non-secret"
+    ]
+  },
+  "recorded_at": "2026-09-04T11:11:55.9228382-03:00",
+  "recorded_by": "codex-primary-executor"
+}
