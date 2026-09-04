@@ -32,9 +32,9 @@
     "projects/amplytrix-construction/governance/primary-evidence-pack.json",
     "projects/amplytrix-construction/governance/reviewer-evidence-pack.json"
   ],
-  "review_status": "pending",
-  "unresolved_divergences": ["Independent exact-commit review is pending."],
+  "review_status": "passed",
+  "unresolved_divergences": [],
   "approval_state": "approved",
   "founder_approval_ref": "ATUALIZAÇÃO DE ARQUITETURA 2026-09-04",
-  "completion_eligibility": "draft"
+  "completion_eligibility": "eligible_after_gate"
 }
