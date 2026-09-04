@@ -15,9 +15,9 @@
     "statement": "The generic rule combined a key-like field name with an entropy-bearing example value and could not infer that the value was non-secret."
   },
   "evidence_refs": [
-    "github-actions:Validate:secrets:initial-failure",
-    "github-actions:Validate:secrets:corrective-pass",
-    ".gitleaksignore:exact-fingerprint"
+    "ci-secrets-initial-failure",
+    "ci-secrets-corrective-pass",
+    "repository-gitleaks-fingerprint"
   ],
   "solution_options": [
     {
@@ -25,10 +25,7 @@
       "description": "Ignore only the reviewed historical finding by its commit, path, rule, and line fingerprint.",
       "decision": "selected",
       "validation_state": "ci-validated",
-      "evidence": [
-        "The GitHub secrets job passed after the targeted ignore",
-        "All default secret rules remained enabled"
-      ],
+      "evidence": ["ci-secrets-corrective-pass", "repository-gitleaks-fingerprint"],
       "tradeoffs": [
         "Narrowest suppression",
         "Fingerprint must be maintained if history is rewritten"
@@ -39,7 +36,7 @@
       "description": "Extend the default Gitleaks configuration with a path-and-line regex allowlist for this fixture.",
       "decision": "alternative",
       "validation_state": "unverified",
-      "evidence": ["Gitleaks supports targeted allowlists while retaining default rules"],
+      "evidence": ["ci-secrets-initial-failure"],
       "tradeoffs": ["Readable policy", "A broader regex can suppress future real findings"]
     }
   ],
@@ -55,6 +52,13 @@
     "Use exact finding fingerprints instead of disabling generic rules",
     "Never classify a scanner hit as false positive without inspecting the value and context"
   ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "The record contains no detected value, credential, personal data, customer identity, raw confidential log, or proprietary payload."
+    ]
+  },
   "customer_reuse": {
     "eligibility": "candidate-after-review",
     "requirements": [

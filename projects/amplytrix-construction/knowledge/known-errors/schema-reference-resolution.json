@@ -14,20 +14,14 @@
     "status": "confirmed",
     "statement": "Schemas used URN identifiers as bases while retaining relative references that had no resolvable URI hierarchy."
   },
-  "evidence_refs": [
-    "independent-review:commit-4eb3bfa:schemas-did-not-compile",
-    "scripts/validate-phase-zero.mjs:ajv-draft-2020-compilation"
-  ],
+  "evidence_refs": ["review-phase-zero-pass", "repository-ajv-validator"],
   "solution_options": [
     {
       "id": "absolute-urn-references",
       "description": "Register every schema in Ajv Draft 2020-12 and use absolute URN references between schemas.",
       "decision": "selected",
       "validation_state": "independently-validated",
-      "evidence": [
-        "Phase Zero compiled all schemas",
-        "Independent exact-commit review confirmed compilation"
-      ],
+      "evidence": ["repository-ajv-validator", "review-phase-zero-pass"],
       "tradeoffs": [
         "Requires maintaining stable schema identifiers",
         "Preserves portable versioned references"
@@ -38,7 +32,7 @@
       "description": "Replace URN identifiers with hierarchical file URLs and keep relative references.",
       "decision": "alternative",
       "validation_state": "unverified",
-      "evidence": ["JSON Schema permits hierarchical identifiers"],
+      "evidence": ["repository-ajv-validator"],
       "tradeoffs": ["Simpler local resolution", "Couples identifiers to repository layout"]
     }
   ],
@@ -55,6 +49,13 @@
     "Compile every schema rather than checking JSON syntax only",
     "Keep a negative fixture for malformed review hashes and intake conditions"
   ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "No credential, personal data, customer identity, raw confidential log, or proprietary payload is present."
+    ]
+  },
   "customer_reuse": {
     "eligibility": "candidate-after-review",
     "requirements": [

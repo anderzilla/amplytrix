@@ -21,6 +21,7 @@
     "selected_solution_id",
     "validation",
     "prevention",
+    "sanitization",
     "customer_reuse",
     "recorded_at",
     "recorded_by"
@@ -48,10 +49,17 @@
       },
       "additionalProperties": false
     },
-    "evidence_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "evidence_refs": { "$ref": "#/$defs/evidenceRefs" },
     "solution_options": {
       "type": "array",
       "minItems": 2,
+      "contains": {
+        "type": "object",
+        "properties": { "decision": { "const": "selected" } },
+        "required": ["decision"]
+      },
+      "minContains": 1,
+      "maxContains": 1,
       "items": {
         "type": "object",
         "required": ["id", "description", "decision", "validation_state", "evidence", "tradeoffs"],
@@ -62,7 +70,7 @@
           "validation_state": {
             "enum": ["unverified", "locally-validated", "ci-validated", "independently-validated"]
           },
-          "evidence": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+          "evidence": { "$ref": "#/$defs/evidenceRefs" },
           "tradeoffs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
         },
         "additionalProperties": false
@@ -79,17 +87,93 @@
       "additionalProperties": false
     },
     "prevention": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "sanitization": {
+      "type": "object",
+      "required": ["status", "reviewed_by", "checks"],
+      "properties": {
+        "status": { "enum": ["pending", "verified"] },
+        "reviewed_by": { "type": "string", "minLength": 1 },
+        "checks": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
+      },
+      "additionalProperties": false
+    },
     "customer_reuse": {
       "type": "object",
       "required": ["eligibility", "requirements"],
       "properties": {
         "eligibility": { "enum": ["blocked", "internal-sanitized", "candidate-after-review"] },
-        "requirements": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
+        "requirements": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+        "approval_ref": { "type": "string", "minLength": 1 }
       },
       "additionalProperties": false
     },
     "recorded_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
     "recorded_by": { "type": "string", "minLength": 1 }
   },
-  "additionalProperties": false
+  "$defs": {
+    "evidenceRefs": {
+      "type": "array",
+      "items": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "resolved" } },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "root_cause": {
+            "properties": { "status": { "const": "confirmed" } },
+            "required": ["status"]
+          },
+          "validation": {
+            "properties": { "status": { "const": "validated" } },
+            "required": ["status"]
+          },
+          "sanitization": {
+            "properties": { "status": { "const": "verified" } },
+            "required": ["status"]
+          },
+          "solution_options": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "decision": { "const": "selected" },
+                "validation_state": {
+                  "enum": ["ci-validated", "independently-validated"]
+                }
+              },
+              "required": ["decision", "validation_state"]
+            },
+            "minContains": 1,
+            "maxContains": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "customer_reuse": {
+            "properties": { "eligibility": { "const": "internal-sanitized" } },
+            "required": ["eligibility"]
+          }
+        },
+        "required": ["customer_reuse"]
+      },
+      "then": {
+        "properties": {
+          "customer_reuse": {
+            "properties": { "approval_ref": { "type": "string", "minLength": 1 } },
+            "required": ["approval_ref"]
+          }
+        }
+      }
+    }
+  ]
 }

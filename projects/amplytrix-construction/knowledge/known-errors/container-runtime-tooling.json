@@ -6,7 +6,7 @@
   "task_id": "AMP-2026-DOGFOOD-001",
   "title": "Unused packaging tools introduced high-severity findings in the runtime image",
   "domain": "security",
-  "status": "resolved",
+  "status": "diagnosed",
   "classification": "internal-redacted",
   "symptom": "The container scan found vulnerable MessagePack and setuptools distributions in the backend runtime image.",
   "impact": "The image security gate failed even though the application lock selected a patched MessagePack and the runtime did not need either package.",
@@ -15,20 +15,17 @@
     "statement": "Packaging tools inherited outside the locked production virtual environment remained visible in the final Python image."
   },
   "evidence_refs": [
-    "github-actions:Validate:containers:initial-trivy-failure",
-    "apps/backend/uv.lock:msgpack-1.2.1",
-    "github-actions:Validate:containers:corrective-pass"
+    "ci-containers-initial-failure",
+    "repository-backend-lock",
+    "ci-containers-corrective-scan-pass"
   ],
   "solution_options": [
     {
       "id": "remove-unused-runtime-tooling",
       "description": "Uninstall MessagePack, setuptools, and pip from the final runtime stage before copying the locked application environment.",
       "decision": "selected",
-      "validation_state": "ci-validated",
-      "evidence": [
-        "Trivy container job passed after removal",
-        "Application build and backend tests remained green"
-      ],
+      "validation_state": "unverified",
+      "evidence": ["ci-containers-corrective-scan-pass", "repository-backend-lock"],
       "tradeoffs": ["Reduces attack surface", "Runtime debugging cannot rely on pip"]
     },
     {
@@ -36,7 +33,7 @@
       "description": "Keep the packaging tools but upgrade each to a patched release in the final image.",
       "decision": "alternative",
       "validation_state": "unverified",
-      "evidence": ["Patched versions were available for both findings"],
+      "evidence": ["ci-containers-initial-failure", "repository-backend-lock"],
       "tradeoffs": [
         "Preserves runtime package management",
         "Adds unnecessary packages and mutable installation behavior"
@@ -45,17 +42,24 @@
   ],
   "selected_solution_id": "remove-unused-runtime-tooling",
   "validation": {
-    "status": "validated",
+    "status": "pending",
     "checks": [
-      "GitHub container build",
-      "Trivy high and critical image scan",
-      "Backend validation suite"
+      "GitHub container build passed.",
+      "Trivy high and critical image scan passed.",
+      "Runtime startup, health response, and non-root execution require the new CI smoke test."
     ]
   },
   "prevention": [
     "Scan the assembled runtime image, not only application lockfiles",
     "Remove build and packaging tools that the running service does not require"
   ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "No credential, personal data, customer identity, raw confidential log, or proprietary payload is present."
+    ]
+  },
   "customer_reuse": {
     "eligibility": "candidate-after-review",
     "requirements": [

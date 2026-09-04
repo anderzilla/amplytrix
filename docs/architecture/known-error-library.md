@@ -5,6 +5,10 @@ there is observable evidence and keeps symptom, cause confidence, remediation ch
 and prevention separate. Search existing records before adding one; update a matching cause rather
 than cloning it under a new symptom.
 
+Evidence references resolve through the project validation evidence index. Repository and review
+records point to versioned artifacts; CI records identify the exact run, job, and commit. Free-text
+claims cannot establish `resolved` or `validated` state.
+
 Lifecycle: `observed` -> `diagnosed` -> `resolved` -> `superseded`. `Resolved` requires a confirmed
 cause, one selected solution, and a passing check in the relevant environment. Alternatives and
 failed attempts remain visible with tradeoffs.

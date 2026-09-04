@@ -9,6 +9,10 @@ Use this skill after a material failure is observed or a prior failure is revisi
 project's `knowledge/known-errors` directory first and update an existing record when the symptom and
 cause match; do not create duplicates for different manifestations of the same cause.
 
+Resolve every record and solution evidence reference through
+`knowledge/validation-evidence.json`. Add an indexed repository, review, or immutable CI run/job and
+commit reference before citing new evidence; never use a free-text claim as an evidence reference.
+
 Record only facts supported by repository, CI, test, or review evidence. Mark the root cause as a
 hypothesis until reproduced or otherwise confirmed. Preserve failed and rejected approaches with
 their tradeoffs, compare at least two viable solution options, and identify exactly one selected

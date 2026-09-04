@@ -14,20 +14,14 @@
     "status": "confirmed",
     "statement": "Existing dependency ranges resolved transitive versions below the available patched releases."
   },
-  "evidence_refs": [
-    "docs/development/dependency-evaluations/2026-09-04-transitive-security-overrides.md",
-    "pnpm-lock.yaml:security-overrides"
-  ],
+  "evidence_refs": ["repository-dependency-evaluation", "ci-dependency-fallback-pass"],
   "solution_options": [
     {
       "id": "bounded-workspace-overrides",
       "description": "Pin the affected transitive packages to reviewed patched versions through workspace overrides.",
       "decision": "selected",
       "validation_state": "ci-validated",
-      "evidence": [
-        "pnpm audit reported no known vulnerabilities",
-        "GitHub dependency review passed"
-      ],
+      "evidence": ["repository-dependency-evaluation", "ci-dependency-fallback-pass"],
       "tradeoffs": ["Fast and reversible", "Requires removal when upstream constraints catch up"]
     },
     {
@@ -35,7 +29,7 @@
       "description": "Upgrade every direct parent dependency until each naturally resolves patched transitives.",
       "decision": "alternative",
       "validation_state": "unverified",
-      "evidence": ["Parent upgrades can eliminate override maintenance"],
+      "evidence": ["repository-dependency-evaluation"],
       "tradeoffs": ["Cleaner long term", "Broader compatibility and regression surface"]
     }
   ],
@@ -44,14 +38,22 @@
     "status": "validated",
     "checks": [
       "pnpm audit at high threshold",
+      "pip-audit fallback",
       "Lockfile supply-chain policy",
-      "GitHub dependency review"
+      "The separately licensed GitHub dependency-review step was skipped and is not claimed as evidence."
     ]
   },
   "prevention": [
     "Run dependency audit before freezing a review commit",
     "Track owner and removal condition for every security override"
   ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "No credential, personal data, customer identity, raw confidential log, or proprietary payload is present."
+    ]
+  },
   "customer_reuse": {
     "eligibility": "candidate-after-review",
     "requirements": [

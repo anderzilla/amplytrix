@@ -14,20 +14,14 @@
     "status": "confirmed",
     "statement": "The gate constrained changed paths but not the fields or derived values permitted inside those paths."
   },
-  "evidence_refs": [
-    "independent-review:commit-99ed17c:high-finding",
-    "scripts/validate-phase-zero.mjs:exact-parent-field-comparison"
-  ],
+  "evidence_refs": ["review-phase-zero-pass", "repository-ajv-validator"],
   "solution_options": [
     {
       "id": "field-level-derived-transition",
       "description": "Compare allowed documents with the reviewed parent and permit only reviewer identity and derived review-state transitions.",
       "decision": "selected",
       "validation_state": "independently-validated",
-      "evidence": [
-        "Independent exact-commit review returned PASS",
-        "Exact-parent review gate passed on the evidence-only child"
-      ],
+      "evidence": ["review-phase-zero-pass", "repository-ajv-validator"],
       "tradeoffs": ["Adds validator complexity", "Retains explicit repository review state"]
     },
     {
@@ -35,7 +29,7 @@
       "description": "Permit only a new reviewer evidence file and derive all state outside Git.",
       "decision": "alternative",
       "validation_state": "unverified",
-      "evidence": ["A one-file child minimizes the mutable review surface"],
+      "evidence": ["review-phase-zero-pass"],
       "tradeoffs": [
         "Simpler gate",
         "Leaves repository status fields stale or requires a separate projection"
@@ -54,6 +48,13 @@
     "Treat evidence commits as semantic transitions, not filename allowlists",
     "Review the exact immutable parent and reject unrelated child changes"
   ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "No credential, personal data, customer identity, raw confidential log, or proprietary payload is present."
+    ]
+  },
   "customer_reuse": {
     "eligibility": "candidate-after-review",
     "requirements": [

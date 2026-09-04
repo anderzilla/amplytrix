@@ -36,7 +36,7 @@ const schemaDir = 'schemas/v1';
 const schemaFiles = (await readdir(join(root, schemaDir))).filter((file) =>
   file.endsWith('.schema.json'),
 );
-expect(schemaFiles.length >= 15, `expected at least 15 v1 schemas; found ${schemaFiles.length}`);
+expect(schemaFiles.length >= 16, `expected at least 16 v1 schemas; found ${schemaFiles.length}`);
 const schemas = new Map();
 const schemaIds = new Set();
 for (const file of schemaFiles) {
@@ -102,6 +102,7 @@ const required = [
   `${projectRoot}/baseline-decision.json`,
   `${projectRoot}/capabilities.json`,
   `${projectRoot}/knowledge/sources.json`,
+  `${projectRoot}/knowledge/validation-evidence.json`,
   `${projectRoot}/governance/task-envelope-primary.json`,
   `${projectRoot}/governance/task-envelope-reviewer.json`,
   `${projectRoot}/governance/primary-evidence-pack.json`,
@@ -123,6 +124,7 @@ const [
   reviewer,
   primaryEvidence,
   changeProposal,
+  validationEvidence,
 ] = await Promise.all([
   readJson(`${projectRoot}/project.json`),
   readJson(`${projectRoot}/intake.json`),
@@ -137,6 +139,7 @@ const [
   readJson(`${projectRoot}/governance/task-envelope-reviewer.json`),
   readJson(`${projectRoot}/governance/primary-evidence-pack.json`),
   readJson(`${projectRoot}/governance/change-proposal.json`),
+  readJson(`${projectRoot}/knowledge/validation-evidence.json`),
 ]);
 
 validate('project.schema.json', project, 'dogfood project');
@@ -150,6 +153,30 @@ for (const [index, mcp] of (mcps?.entries ?? []).entries())
   validate('mcp-manifest.schema.json', mcp, `MCP manifest ${index}`);
 for (const [index, source] of (sources?.records ?? []).entries())
   validate('source-record.schema.json', source, `source record ${index}`);
+
+validate('validation-evidence-index.schema.json', validationEvidence, 'validation evidence index');
+expect(
+  validationEvidence?.project_id === project?.id &&
+    validationEvidence?.task_id === primary?.task_id,
+  'validation evidence project/task linkage failed',
+);
+unique(
+  (validationEvidence?.records ?? []).map((record) => record.id),
+  'validation evidence IDs',
+);
+const validationEvidenceById = new Map(
+  (validationEvidence?.records ?? []).map((record) => [record.id, record]),
+);
+for (const record of validationEvidence?.records ?? []) {
+  if (record.kind === 'ci')
+    expect(
+      /^https:\/\/github\.com\/anderzilla\/amplytrix\/actions\/runs\/\d+\/job\/\d+$/.test(
+        record.source_ref,
+      ),
+      `${record.id}: CI evidence is not an immutable run/job reference`,
+    );
+  else await requireFile(record.source_ref);
+}
 
 const knownErrorFiles = (
   await readdir(join(root, projectRoot, 'knowledge', 'known-errors'))
@@ -179,6 +206,26 @@ for (const knownError of knownErrors) {
   expect(
     selected[0]?.id === knownError?.selected_solution_id,
     `${knownError?.id}: selected solution ID does not match`,
+  );
+  for (const evidenceRef of knownError?.evidence_refs ?? [])
+    expect(
+      validationEvidenceById.has(evidenceRef),
+      `${knownError?.id}: unresolved evidence ref ${evidenceRef}`,
+    );
+  for (const solution of solutions)
+    for (const evidenceRef of solution.evidence ?? [])
+      expect(
+        validationEvidenceById.has(evidenceRef),
+        `${knownError?.id}/${solution.id}: unresolved evidence ref ${evidenceRef}`,
+      );
+  expect(
+    knownError?.sanitization?.status === 'verified',
+    `${knownError?.id}: project library admits only verified sanitized records`,
+  );
+  expect(
+    knownError?.customer_reuse?.eligibility !== 'internal-sanitized' ||
+      Boolean(knownError.customer_reuse.approval_ref),
+    `${knownError?.id}: internal reuse lacks approval evidence`,
   );
   if (knownError?.status === 'resolved') {
     expect(
@@ -405,6 +452,24 @@ const invalidReviewEvidence = {
 expect(
   !ajv.getSchema(schemas.get('review-evidence.schema.json').$id)(invalidReviewEvidence),
   'negative test: non-hex review target passed',
+);
+const knownErrorValidator = ajv.getSchema(schemas.get('known-error.schema.json').$id);
+const invalidResolvedKnownError = structuredClone(knownErrors[0]);
+invalidResolvedKnownError.status = 'resolved';
+invalidResolvedKnownError.root_cause.status = 'hypothesis';
+invalidResolvedKnownError.validation.status = 'pending';
+expect(
+  !knownErrorValidator(invalidResolvedKnownError),
+  'negative test: resolved known error with hypothetical cause and pending validation passed',
+);
+const invalidReusableKnownError = structuredClone(knownErrors[0]);
+invalidReusableKnownError.customer_reuse = {
+  eligibility: 'internal-sanitized',
+  requirements: ['Approval is intentionally absent in this negative fixture.'],
+};
+expect(
+  !knownErrorValidator(invalidReusableKnownError),
+  'negative test: internally reusable known error without approval passed',
 );
 
 if (process.argv.includes('--require-independent-review')) {

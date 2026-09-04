@@ -25,7 +25,9 @@ learning.
 Each material failure is recorded under its project with symptom, impact, evidence, cause
 confidence, at least two solution options, one selected solution, validation state, prevention, and
 reuse restrictions. A cause is not confirmed by repetition alone, and a solution is not validated
-until a relevant reproducible check passes. Failed approaches remain visible.
+until a relevant reproducible check passes. Evidence resolves through a project index to a versioned
+repository artifact, exact review, or immutable CI run/job and commit. Failed approaches remain
+visible.
 
 The Known Error Librarian may read project evidence and propose repository updates. It cannot grant
 authority, perform unapproved remediation, access production/customer data, or publish externally.
