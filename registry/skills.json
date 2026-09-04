@@ -55,6 +55,29 @@
         "no decision owner",
         "change implies unapproved finance or contract"
       ]
+    },
+    {
+      "$schema": "../schemas/v1/skill-manifest.schema.json",
+      "schema_version": "1.0.0",
+      "id": "skill-known-error-learning",
+      "version": "1.0.0",
+      "name": "Known-error learning",
+      "status": "active",
+      "definition_ref": ".codex/skills/known-error-learning/SKILL.md",
+      "trigger": "A material check failure, incident, review finding, or corrected defect should become reusable project learning.",
+      "outputs": [
+        "sanitized known-error record",
+        "cause confidence",
+        "solution alternatives",
+        "validation evidence",
+        "prevention and reuse constraints"
+      ],
+      "stop_conditions": [
+        "evidence contains secrets or personal data",
+        "cause is asserted without support",
+        "remediation lacks task authority",
+        "customer reuse lacks human approval"
+      ]
     }
   ]
 }

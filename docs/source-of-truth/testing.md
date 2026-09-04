@@ -6,3 +6,7 @@ Phase Zero additionally validates JSON/schema syntax, versioning, project/source
 exactly one selected scenario, baseline consistency, readiness commercial metadata, favorable and
 contrary evidence, deny-default MCP state, and distinct primary/reviewer envelopes with the same task
 and governance commit. Deterministic checks never substitute for exact-commit independent review.
+
+Known-error records additionally require unique IDs, project/task linkage, at least two solution
+options, exactly one selected solution, and relevant evidence before `resolved` or `validated` may be
+claimed.

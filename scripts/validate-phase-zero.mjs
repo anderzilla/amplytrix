@@ -36,7 +36,7 @@ const schemaDir = 'schemas/v1';
 const schemaFiles = (await readdir(join(root, schemaDir))).filter((file) =>
   file.endsWith('.schema.json'),
 );
-expect(schemaFiles.length >= 14, `expected at least 14 v1 schemas; found ${schemaFiles.length}`);
+expect(schemaFiles.length >= 16, `expected at least 16 v1 schemas; found ${schemaFiles.length}`);
 const schemas = new Map();
 const schemaIds = new Set();
 for (const file of schemaFiles) {
@@ -88,7 +88,11 @@ const validate = (schemaFile, instance, label) => {
 const projectRoot = 'projects/amplytrix-construction';
 const required = [
   'docs/adr/0062-project-governed-managed-service.md',
+  'docs/adr/0063-sanitized-known-error-learning.md',
+  'docs/architecture/known-error-library.md',
   'docs/governance/codematrix-collaboration.md',
+  '.codex/agents/known-error-librarian.md',
+  '.codex/skills/known-error-learning/SKILL.md',
   'registry/capabilities.json',
   'registry/agents.json',
   'registry/skills.json',
@@ -98,6 +102,7 @@ const required = [
   `${projectRoot}/baseline-decision.json`,
   `${projectRoot}/capabilities.json`,
   `${projectRoot}/knowledge/sources.json`,
+  `${projectRoot}/knowledge/validation-evidence.json`,
   `${projectRoot}/governance/task-envelope-primary.json`,
   `${projectRoot}/governance/task-envelope-reviewer.json`,
   `${projectRoot}/governance/primary-evidence-pack.json`,
@@ -119,6 +124,7 @@ const [
   reviewer,
   primaryEvidence,
   changeProposal,
+  validationEvidence,
 ] = await Promise.all([
   readJson(`${projectRoot}/project.json`),
   readJson(`${projectRoot}/intake.json`),
@@ -133,6 +139,7 @@ const [
   readJson(`${projectRoot}/governance/task-envelope-reviewer.json`),
   readJson(`${projectRoot}/governance/primary-evidence-pack.json`),
   readJson(`${projectRoot}/governance/change-proposal.json`),
+  readJson(`${projectRoot}/knowledge/validation-evidence.json`),
 ]);
 
 validate('project.schema.json', project, 'dogfood project');
@@ -146,6 +153,95 @@ for (const [index, mcp] of (mcps?.entries ?? []).entries())
   validate('mcp-manifest.schema.json', mcp, `MCP manifest ${index}`);
 for (const [index, source] of (sources?.records ?? []).entries())
   validate('source-record.schema.json', source, `source record ${index}`);
+
+validate('validation-evidence-index.schema.json', validationEvidence, 'validation evidence index');
+expect(
+  validationEvidence?.project_id === project?.id &&
+    validationEvidence?.task_id === primary?.task_id,
+  'validation evidence project/task linkage failed',
+);
+unique(
+  (validationEvidence?.records ?? []).map((record) => record.id),
+  'validation evidence IDs',
+);
+const validationEvidenceById = new Map(
+  (validationEvidence?.records ?? []).map((record) => [record.id, record]),
+);
+for (const record of validationEvidence?.records ?? []) {
+  if (record.kind === 'ci')
+    expect(
+      /^https:\/\/github\.com\/anderzilla\/amplytrix\/actions\/runs\/\d+\/job\/\d+$/.test(
+        record.source_ref,
+      ),
+      `${record.id}: CI evidence is not an immutable run/job reference`,
+    );
+  else await requireFile(record.source_ref);
+}
+
+const knownErrorFiles = (
+  await readdir(join(root, projectRoot, 'knowledge', 'known-errors'))
+).filter((file) => file.endsWith('.json'));
+expect(knownErrorFiles.length > 0, 'known-error library is empty');
+const knownErrors = await Promise.all(
+  knownErrorFiles.map((file) => readJson(`${projectRoot}/knowledge/known-errors/${file}`)),
+);
+for (const [index, knownError] of knownErrors.entries())
+  validate('known-error.schema.json', knownError, `known error ${index}`);
+unique(
+  knownErrors.map((knownError) => knownError?.id),
+  'known-error IDs',
+);
+for (const knownError of knownErrors) {
+  expect(
+    knownError?.project_id === project?.id && knownError?.task_id === primary?.task_id,
+    `${knownError?.id}: known-error project/task linkage failed`,
+  );
+  const solutions = knownError?.solution_options ?? [];
+  unique(
+    solutions.map((solution) => solution.id),
+    `${knownError?.id}: solution IDs`,
+  );
+  const selected = solutions.filter((solution) => solution.decision === 'selected');
+  expect(selected.length === 1, `${knownError?.id}: exactly one solution must be selected`);
+  expect(
+    selected[0]?.id === knownError?.selected_solution_id,
+    `${knownError?.id}: selected solution ID does not match`,
+  );
+  for (const evidenceRef of knownError?.evidence_refs ?? [])
+    expect(
+      validationEvidenceById.has(evidenceRef),
+      `${knownError?.id}: unresolved evidence ref ${evidenceRef}`,
+    );
+  for (const solution of solutions)
+    for (const evidenceRef of solution.evidence ?? [])
+      expect(
+        validationEvidenceById.has(evidenceRef),
+        `${knownError?.id}/${solution.id}: unresolved evidence ref ${evidenceRef}`,
+      );
+  expect(
+    knownError?.sanitization?.status === 'verified',
+    `${knownError?.id}: project library admits only verified sanitized records`,
+  );
+  expect(
+    knownError?.customer_reuse?.eligibility !== 'internal-sanitized' ||
+      Boolean(knownError.customer_reuse.approval_ref),
+    `${knownError?.id}: internal reuse lacks approval evidence`,
+  );
+  if (knownError?.status === 'resolved') {
+    expect(
+      knownError.root_cause.status === 'confirmed',
+      `${knownError.id}: resolved record has an unconfirmed cause`,
+    );
+    expect(
+      knownError.validation.status === 'validated',
+      `${knownError.id}: resolved record lacks validated evidence`,
+    );
+    expect(
+      ['ci-validated', 'independently-validated'].includes(selected[0]?.validation_state),
+      `${knownError.id}: resolved solution was not validated independently or in CI`,
+    );
+  }
+}
 
 if (project && intake && baseline) {
   expect(project.id === baseline.project_id, 'baseline project does not match project');
@@ -357,6 +453,24 @@ expect(
   !ajv.getSchema(schemas.get('review-evidence.schema.json').$id)(invalidReviewEvidence),
   'negative test: non-hex review target passed',
 );
+const knownErrorValidator = ajv.getSchema(schemas.get('known-error.schema.json').$id);
+const invalidResolvedKnownError = structuredClone(knownErrors[0]);
+invalidResolvedKnownError.status = 'resolved';
+invalidResolvedKnownError.root_cause.status = 'hypothesis';
+invalidResolvedKnownError.validation.status = 'pending';
+expect(
+  !knownErrorValidator(invalidResolvedKnownError),
+  'negative test: resolved known error with hypothetical cause and pending validation passed',
+);
+const invalidReusableKnownError = structuredClone(knownErrors[0]);
+invalidReusableKnownError.customer_reuse = {
+  eligibility: 'internal-sanitized',
+  requirements: ['Approval is intentionally absent in this negative fixture.'],
+};
+expect(
+  !knownErrorValidator(invalidReusableKnownError),
+  'negative test: internally reusable known error without approval passed',
+);
 
 if (process.argv.includes('--require-independent-review')) {
   const packPath = `${projectRoot}/governance/reviewer-evidence-pack.json`;
@@ -429,5 +543,5 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(
-  `phase-zero-ok: ${schemaFiles.length} compiled schemas, ${capabilityById.size} capabilities, ${evidence.length} evidence records`,
+  `phase-zero-ok: ${schemaFiles.length} compiled schemas, ${capabilityById.size} capabilities, ${evidence.length} evidence records, ${knownErrors.length} known errors`,
 );

@@ -4,6 +4,10 @@ The modular-monolith and inward dependency rules in ADR-0004 and ADR-0023–0039
 ADR-0062 makes the project the governance and isolation unit and establishes managed-service-first
 dogfooding before persistence, API, UI, or self-service automation.
 
+ADR-0063 adds a project-local, schema-validated known-error library and a constrained librarian
+agent. Only evidence-backed sanitized patterns may be recorded. Cross-project or client-facing reuse
+is a later human-approved projection, never direct access to another project's records.
+
 Project Governance, Discovery & Scenarios, Knowledge & Provenance, Capability Registry, Execution
 Orchestration, Evidence & Supervision, and Audit & Compliance are candidate boundaries. They
 communicate through application ports and versioned contracts, never internal tables. CodeMatrix

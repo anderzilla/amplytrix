@@ -1,0 +1,77 @@
+{
+  "$schema": "../../../../schemas/v1/known-error.schema.json",
+  "schema_version": "1.0.0",
+  "id": "container-runtime-tooling",
+  "project_id": "amplytrix-construction",
+  "task_id": "AMP-2026-DOGFOOD-001",
+  "title": "Unused packaging tools introduced high-severity findings in the runtime image",
+  "domain": "security",
+  "status": "resolved",
+  "classification": "internal-redacted",
+  "symptom": "The container scan found vulnerable MessagePack and setuptools distributions in the backend runtime image.",
+  "impact": "The image security gate failed even though the application lock selected a patched MessagePack and the runtime did not need either package.",
+  "root_cause": {
+    "status": "confirmed",
+    "statement": "Packaging tools inherited outside the locked production virtual environment remained visible in the final Python image."
+  },
+  "evidence_refs": [
+    "ci-containers-initial-failure",
+    "repository-backend-lock",
+    "ci-containers-corrective-scan-pass",
+    "ci-containers-runtime-smoke-pass"
+  ],
+  "solution_options": [
+    {
+      "id": "remove-unused-runtime-tooling",
+      "description": "Uninstall MessagePack, setuptools, and pip from the final runtime stage before copying the locked application environment.",
+      "decision": "selected",
+      "validation_state": "ci-validated",
+      "evidence": [
+        "ci-containers-corrective-scan-pass",
+        "ci-containers-runtime-smoke-pass",
+        "repository-backend-lock"
+      ],
+      "tradeoffs": ["Reduces attack surface", "Runtime debugging cannot rely on pip"]
+    },
+    {
+      "id": "upgrade-runtime-tooling",
+      "description": "Keep the packaging tools but upgrade each to a patched release in the final image.",
+      "decision": "alternative",
+      "validation_state": "unverified",
+      "evidence": ["ci-containers-initial-failure", "repository-backend-lock"],
+      "tradeoffs": [
+        "Preserves runtime package management",
+        "Adds unnecessary packages and mutable installation behavior"
+      ]
+    }
+  ],
+  "selected_solution_id": "remove-unused-runtime-tooling",
+  "validation": {
+    "status": "validated",
+    "checks": [
+      "GitHub container build passed.",
+      "Trivy high and critical image scan passed.",
+      "Runtime startup, liveness response, and user 10001:10001 execution passed in the same CI job."
+    ]
+  },
+  "prevention": [
+    "Scan the assembled runtime image, not only application lockfiles",
+    "Remove build and packaging tools that the running service does not require"
+  ],
+  "sanitization": {
+    "status": "verified",
+    "reviewed_by": "codex-primary-executor",
+    "checks": [
+      "No credential, personal data, customer identity, raw confidential log, or proprietary payload is present."
+    ]
+  },
+  "customer_reuse": {
+    "eligibility": "candidate-after-review",
+    "requirements": [
+      "Confirm the target runtime does not require package installation",
+      "Rebuild and scan the customer's exact image"
+    ]
+  },
+  "recorded_at": "2026-09-04T11:11:55.9228382-03:00",
+  "recorded_by": "codex-primary-executor"
+}

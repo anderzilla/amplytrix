@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:amplytrix:schema:v1:validation-evidence-index",
+  "title": "Amplytrix validation evidence index v1",
+  "type": "object",
+  "required": ["$schema", "schema_version", "project_id", "task_id", "records"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "task_id": { "type": "string", "minLength": 1 },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "commit", "source_ref", "claims", "observed_at"],
+        "properties": {
+          "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+          "kind": { "enum": ["ci", "repository", "review"] },
+          "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+          "source_ref": { "type": "string", "minLength": 1 },
+          "claims": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+          "observed_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

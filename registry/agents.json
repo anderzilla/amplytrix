@@ -72,6 +72,43 @@
         "contrary evidence search",
         "prioritized findings"
       ]
+    },
+    {
+      "$schema": "../schemas/v1/agent-manifest.schema.json",
+      "schema_version": "1.0.0",
+      "id": "agent-known-error-librarian",
+      "version": "1.0.0",
+      "name": "Known Error Librarian",
+      "status": "active",
+      "definition_ref": ".codex/agents/known-error-librarian.md",
+      "purpose": "Maintain sanitized, evidence-backed project learning from failures and validated remediations.",
+      "allowed_actions": [
+        "read project evidence",
+        "compare known error patterns",
+        "propose repository records",
+        "record validation status"
+      ],
+      "forbidden_actions": [
+        "store secrets or personal data",
+        "publish customer information",
+        "remediate without task authority",
+        "grant risk acceptance",
+        "share records across projects"
+      ],
+      "human_gates": [
+        "customer-facing reuse",
+        "cross-project publication",
+        "disputed cause or severity",
+        "accepted residual risk",
+        "external or irreversible action"
+      ],
+      "required_evidence": [
+        "observed symptom",
+        "cause confidence",
+        "solution alternatives",
+        "relevant validation",
+        "sanitization and reuse decision"
+      ]
     }
   ]
 }
