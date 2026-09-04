@@ -16,15 +16,15 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
-    "id": { "$ref": "common.schema.json#/$defs/id" },
-    "version": { "$ref": "common.schema.json#/$defs/version" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
     "name": { "type": "string", "minLength": 1 },
     "status": { "enum": ["draft", "active", "deprecated", "blocked"] },
     "definition_ref": { "type": "string", "minLength": 1 },
     "trigger": { "type": "string", "minLength": 1 },
-    "outputs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-    "stop_conditions": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" }
+    "outputs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "stop_conditions": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
   },
   "additionalProperties": false
 }

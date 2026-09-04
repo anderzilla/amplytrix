@@ -20,8 +20,8 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
-    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
     "name": { "type": "string", "minLength": 1 },
     "status": {
       "enum": [
@@ -47,7 +47,7 @@
       "required": ["task_id", "authority_refs", "governance_commit", "action_level"],
       "properties": {
         "task_id": { "type": "string", "minLength": 1 },
-        "authority_refs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+        "authority_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
         "governance_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
         "action_level": { "enum": ["A0", "A1", "A2", "A3", "A4"] }
       },

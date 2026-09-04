@@ -18,9 +18,9 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
-    "id": { "$ref": "common.schema.json#/$defs/id" },
-    "project_id": { "$ref": "common.schema.json#/$defs/id" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
     "subject_ref": { "type": "string", "minLength": 1 },
     "gate": {
       "enum": [
@@ -38,10 +38,10 @@
     },
     "status": { "enum": ["requested", "approved", "rejected", "expired", "revoked"] },
     "decided_by": { "type": "string", "minLength": 1 },
-    "decided_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "decided_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
     "scope": { "type": "string", "minLength": 1 },
     "conditions": { "type": "array", "items": { "type": "string" } },
-    "evidence_refs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" }
+    "evidence_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
   },
   "additionalProperties": false
 }

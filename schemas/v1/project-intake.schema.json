@@ -20,15 +20,15 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
-    "intake_id": { "$ref": "common.schema.json#/$defs/id" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "intake_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
     "origin": {
       "enum": ["agency_briefing", "client_documents", "third_party_documents", "direct_discovery"]
     },
     "source_system": { "type": "string", "minLength": 1 },
     "source_artifact_id": { "type": "string", "minLength": 1 },
     "source_artifact_version": { "type": "string", "minLength": 1 },
-    "created_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "created_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
     "idempotency_key": { "type": "string", "minLength": 16 },
     "transfer_basis": {
       "type": "object",
@@ -40,7 +40,7 @@
       },
       "additionalProperties": false
     },
-    "origin_evidence_refs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "origin_evidence_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
     "classification": { "enum": ["public", "internal-redacted", "confidential-client"] },
     "payload": {
       "type": "object",
@@ -53,10 +53,10 @@
       ],
       "properties": {
         "problem": { "type": "string", "minLength": 1 },
-        "desired_outcomes": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-        "known_constraints": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-        "known_risks": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-        "source_refs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" }
+        "desired_outcomes": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+        "known_constraints": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+        "known_risks": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+        "source_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
       },
       "additionalProperties": false
     },
@@ -121,5 +121,102 @@
       "additionalProperties": false
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "readiness_check": {
+            "properties": { "status": { "const": "accepted-as-input" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["readiness_check"]
+      },
+      "then": {
+        "properties": {
+          "transfer_basis": {
+            "properties": { "status": { "enum": ["recorded", "not-applicable-no-personal-data"] } }
+          },
+          "readiness_check": {
+            "properties": {
+              "validated_version": { "type": "string", "minLength": 1 },
+              "completeness": { "const": "minimum-ready" },
+              "coherence": { "const": "minimum-coherent" },
+              "commercial_disposition": { "const": "minimum-ready" },
+              "commercial_approval_ref": { "type": "string", "minLength": 1 },
+              "decision_ref": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "origin": { "const": "agency_briefing" } }, "required": ["origin"] },
+      "then": {
+        "properties": {
+          "source_system": { "const": "codematrix-agency" },
+          "transfer_basis": { "properties": { "status": { "const": "recorded" } } }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "origin": { "enum": ["client_documents", "third_party_documents"] } },
+        "required": ["origin"]
+      },
+      "then": {
+        "properties": {
+          "readiness_check": {
+            "properties": {
+              "cost_attribution": {
+                "enum": [
+                  "pending-human-decision",
+                  "agency-process-in-amplytrix-price",
+                  "separate-agency-engagement",
+                  "amplytrix-discovery-phase"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "transfer_basis": {
+            "properties": { "status": { "const": "blocked" } },
+            "required": ["status"]
+          }
+        },
+        "required": ["transfer_basis"]
+      },
+      "then": {
+        "properties": {
+          "readiness_check": { "properties": { "status": { "enum": ["rejected", "quarantined"] } } }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "readiness_check": {
+            "properties": {
+              "commercial_disposition": {
+                "enum": ["agency-diagnostic-required", "amplytrix-discovery-required"]
+              }
+            },
+            "required": ["commercial_disposition"]
+          }
+        },
+        "required": ["readiness_check"]
+      },
+      "then": {
+        "properties": {
+          "readiness_check": { "properties": { "status": { "enum": ["pending", "rejected"] } } }
+        }
+      }
+    }
+  ]
 }

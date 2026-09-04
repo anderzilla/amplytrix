@@ -18,17 +18,17 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
-    "id": { "$ref": "common.schema.json#/$defs/id" },
-    "version": { "$ref": "common.schema.json#/$defs/version" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
     "name": { "type": "string", "minLength": 1 },
     "status": { "enum": ["draft", "active", "deprecated", "blocked"] },
     "definition_ref": { "type": "string", "minLength": 1 },
     "purpose": { "type": "string", "minLength": 1 },
-    "allowed_actions": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-    "forbidden_actions": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-    "human_gates": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-    "required_evidence": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" }
+    "allowed_actions": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "forbidden_actions": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "human_gates": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "required_evidence": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" }
   },
   "additionalProperties": false
 }

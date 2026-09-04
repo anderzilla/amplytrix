@@ -6,35 +6,35 @@
       "id": "agent-project-conductor",
       "type": "agent",
       "version": "1.0.0",
-      "manifest_ref": "registry/agents.json#agent-project-conductor",
+      "manifest_ref": "registry/agents.json#/agents/0",
       "status": "active"
     },
     {
       "id": "agent-evidence-supervisor",
       "type": "agent",
       "version": "1.0.0",
-      "manifest_ref": "registry/agents.json#agent-evidence-supervisor",
+      "manifest_ref": "registry/agents.json#/agents/1",
       "status": "active"
     },
     {
       "id": "skill-project-conduction",
       "type": "skill",
       "version": "1.0.0",
-      "manifest_ref": "registry/skills.json#skill-project-conduction",
+      "manifest_ref": "registry/skills.json#/skills/0",
       "status": "active"
     },
     {
       "id": "skill-evidence-supervision",
       "type": "skill",
       "version": "1.0.0",
-      "manifest_ref": "registry/skills.json#skill-evidence-supervision",
+      "manifest_ref": "registry/skills.json#/skills/1",
       "status": "active"
     },
     {
       "id": "skill-change-capsule",
       "type": "skill",
       "version": "1.0.0",
-      "manifest_ref": "registry/skills.json#skill-change-capsule",
+      "manifest_ref": "registry/skills.json#/skills/2",
       "status": "active"
     }
   ]

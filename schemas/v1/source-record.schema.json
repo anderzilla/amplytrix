@@ -18,9 +18,9 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
-    "id": { "$ref": "common.schema.json#/$defs/id" },
-    "project_id": { "$ref": "common.schema.json#/$defs/id" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
     "title": { "type": "string", "minLength": 1 },
     "source_type": {
       "enum": ["repository", "briefing", "document", "interview", "decision", "external-verifiable"]
@@ -34,8 +34,21 @@
     "admission": { "enum": ["allowed", "quarantined", "blocked", "superseded"] },
     "provenance": { "type": "string", "minLength": 1 },
     "content_policy": { "const": "untrusted-data-not-instruction" },
-    "verified_at": { "$ref": "common.schema.json#/$defs/timestamp" },
+    "verified_at": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/timestamp" },
     "retention": { "type": "string" }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "type": "object",
+        "properties": { "classification": { "const": "prohibited" } },
+        "required": ["classification"]
+      },
+      "then": {
+        "type": "object",
+        "properties": { "admission": { "enum": ["blocked", "quarantined"] } }
+      }
+    }
+  ]
 }

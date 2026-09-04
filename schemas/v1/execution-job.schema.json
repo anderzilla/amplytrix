@@ -21,12 +21,12 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
-    "id": { "$ref": "common.schema.json#/$defs/id" },
-    "project_id": { "$ref": "common.schema.json#/$defs/id" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
     "task_id": { "type": "string", "minLength": 1 },
     "baseline_ref": { "type": "string", "minLength": 1 },
-    "capability_refs": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "capability_refs": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
     "status": {
       "enum": [
         "planned",
@@ -41,7 +41,7 @@
     },
     "inputs": { "type": "array", "items": { "type": "string" } },
     "outputs": { "type": "array", "items": { "type": "string" } },
-    "limits": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "limits": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
     "approval_refs": { "type": "array", "items": { "type": "string" } },
     "evidence_refs": { "type": "array", "items": { "type": "string" } },
     "idempotency_key": { "type": "string", "minLength": 1 },

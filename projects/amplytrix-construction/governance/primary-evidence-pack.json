@@ -24,7 +24,9 @@
     "The existing modular-monolith foundation can host declarative Phase Zero without runtime changes.",
     "Project intake supports Agency, client, third-party, and direct-discovery origins with a mandatory internal readiness gate.",
     "The realistic repository-first scenario preserves cost and reversibility while exposing machine-checkable invariants.",
-    "No MCP, provider, cloud resource, persistence, API, UI, deployment, merge, or financial action is activated."
+    "No MCP, provider, cloud resource, persistence, API, UI, deployment, merge, or financial action is activated.",
+    "pnpm validate passed on Python 3.13.9: format, lint, strict typing, 22 backend tests at 97.19% coverage, architecture contracts, Phase Zero, governance, build, Bandit, Semgrep, pip-audit, and pnpm audit.",
+    "The first independent review of commit 4eb3bfa62f29570475495442b73debcf0b82491e returned CHANGES_REQUIRED; its four HIGH gate findings are addressed in the subsequent correction commit and require re-review."
   ],
   "contrary_evidence": [
     "Declarative consistency does not prove future runtime authorization, isolation, retrieval safety, or customer value.",
@@ -36,7 +38,8 @@
     "Candidate bounded contexts will be validated by Event Storming before persistence."
   ],
   "divergences": [
-    "The previous subscription-first wording was superseded for MVP priority while subscription self-service remains a later modality."
+    "The previous subscription-first wording was superseded for MVP priority while subscription self-service remains a later modality.",
+    "The first reviewer reported Python 3.13 unavailable in its session; the primary environment executed the full gate under Python 3.13.9, so reproducibility evidence is environment-specific rather than absent."
   ],
   "confidence": "high",
   "cost": {

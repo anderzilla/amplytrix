@@ -22,3 +22,12 @@ npm registry/lockfile risk and is checked by frozen install, integrity hashes, b
 Removal path: DevSecOps removes each override after parent dependency upgrades resolve to an equal or
 newer safe compatible version and the full validation/audit passes. Do not retain overrides as an
 unowned substitute for routine dependency upgrades.
+
+The Phase Zero validator also declares `ajv@8.20.0` and `ajv-formats@3.0.1` directly. Both are MIT,
+compatible with Node 24, and were already present transitively or aligned with the same ecosystem.
+Direct declaration is required for deterministic Draft 2020-12 compilation, instance validation,
+and date-time formats rather than relying on an undeclared transitive package. Alternatives were the
+previous shallow custom checks (rejected after independent review) or a bespoke schema engine
+(higher correctness/security maintenance). Owner and removal path are Architecture/DevSecOps; remove
+only if an equivalent maintained standards validator replaces them and all negative contract tests
+pass.

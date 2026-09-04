@@ -11,8 +11,10 @@
 | fake or self review                      | distinct envelopes, same task/governance commit; exact-commit read-only review   | independent reviewer |
 | policy/runtime divergence                | explicit contrary evidence; future walking-slice contract/isolation tests        | architecture/QA      |
 
-Run `pnpm phase0:validate` for deterministic checks. After recording the review evidence pack, run
-`pnpm phase0:review-gate`. Full `pnpm verify` remains required; Python-dependent checks require the
+Run `pnpm phase0:validate` for Draft 2020-12 compilation, instance validation, relationship checks,
+and negative fixtures. After recording the review evidence in an evidence-only child commit, run
+`pnpm phase0:review-gate`; it binds the pack to the parent/core commit and rejects non-governance
+changes after review. Full `pnpm verify` remains required; Python-dependent checks require the
 repository's Python 3.13 runtime and must be reported blocked rather than run under 3.12. Negative
 future tests cover duplicate intake, replay with changed payload, missing consent/transfer basis,
 cross-project source/capability IDs, absent contrary evidence, self-review, expired approval,

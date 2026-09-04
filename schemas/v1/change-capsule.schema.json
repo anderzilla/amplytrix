@@ -21,9 +21,9 @@
   ],
   "properties": {
     "$schema": { "type": "string" },
-    "schema_version": { "$ref": "common.schema.json#/$defs/version" },
-    "id": { "$ref": "common.schema.json#/$defs/id" },
-    "project_id": { "$ref": "common.schema.json#/$defs/id" },
+    "schema_version": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/version" },
+    "id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
+    "project_id": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/id" },
     "baseline_ref": { "type": "string", "minLength": 1 },
     "status": {
       "enum": ["draft", "awaiting-decision", "approved", "rejected", "executing", "closed"]
@@ -31,16 +31,16 @@
     "trigger": { "type": "string", "minLength": 1 },
     "cause": { "type": "string", "minLength": 1 },
     "prevention": { "type": "string", "minLength": 1 },
-    "alternatives": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-    "benefits": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
-    "risks": { "$ref": "common.schema.json#/$defs/nonEmptyStrings" },
+    "alternatives": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "benefits": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
+    "risks": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/nonEmptyStrings" },
     "impact": {
       "type": "object",
       "required": ["scope", "schedule", "cost", "client_effort"],
       "properties": {
         "scope": { "type": "string" },
         "schedule": { "type": "string" },
-        "cost": { "$ref": "common.schema.json#/$defs/cost" },
+        "cost": { "$ref": "urn:amplytrix:schema:v1:common#/$defs/cost" },
         "client_effort": { "type": "string" }
       },
       "additionalProperties": false
