@@ -1,6 +1,6 @@
 # Security policy
 
-Do not open public issues for vulnerabilities. Report privately to the security contact designated by Code Matrix (pending in `docs/decisions/open-questions.md`) with affected version, reproduction, impact, and safe evidence. Do not include personal data or active secrets. The team will acknowledge, triage severity, coordinate remediation and disclosure, and retain incident evidence under the approved policy. Supported versions will be listed after the first release.
+Do not open public issues for vulnerabilities. Report privately to `anderson.hg25@gmail.com` (interim security/privacy contact, `docs/security/lgpd-readiness.md#interim-contacts-and-retention`; a dedicated Code Matrix address is a pending formalization tracked as OQ-01/OQ-04 in `docs/decisions/open-questions.md`) with affected version, reproduction, impact, and safe evidence. Do not include personal data or active secrets. The team will acknowledge, triage severity, coordinate remediation and disclosure, and retain incident evidence under the approved policy. Supported versions will be listed after the first release.
 
 Repository policy: no secrets; least privilege; production writes require human approval; critical known vulnerabilities block release; suspected credential exposure triggers immediate revocation and the incident runbook.
 
