@@ -63,6 +63,34 @@ If 2026-09-18 arrives with any item unmet: record the gap as a risk in
 start work that depends on the unmet deliverable. The gate stays closed until the evidence exists —
 extending the date does not substitute for it.
 
+### Evidence log
+
+Ahead of the sprint window, so the gate above can actually be checked at 2026-09-14 rather than
+started from zero:
+
+- **Data classification (OQ-04)** — interim decision recorded 2026-09-09: `docs/decisions/open-questions.md`
+  (status column), `docs/security/lgpd-readiness.md#interim-contacts-and-retention`,
+  `docs/security/data-classification.md` (retention note), `SECURITY.md` (real interim contact
+  replacing the "pending" placeholder). Positive criterion: a real, reachable contact and a real
+  retention default exist before any user/client data is collected. Negative criterion: no
+  production-readiness or legal-compliance claim beyond that interim scope. Independent-review pass:
+  contact and retention wording checked against `docs/decisions/open-questions.md`'s own trigger
+  ("before collecting user data") and against `PROJECT_CONSTITUTION.md`'s prohibition on
+  overclaiming; no BLOCKER/CRITICAL/HIGH raised, residual gap (full LGPD readiness checklist) carried
+  in `docs/decisions/risk-register.md`, not hidden.
+- **Risk baseline (OQ-16)** — interim decision recorded 2026-09-09:
+  `docs/security/lgpd-readiness.md#closure-export-retention-and-deletion`,
+  `docs/decisions/risk-register.md` ("Client data is reused without valid legal basis" row).
+  Positive criterion: a written closure sequence (export window, deletion, sanitized-retention
+  exception, anonymization non-assumption) exists before client data is collected. Negative
+  criterion: anonymization is never treated as sufficient by default, and sanitized retention stays
+  gated on the existing ADR-0063 approval mechanism rather than a new, weaker one. Independent-review
+  pass: procedure checked against ADR-0063 and `PROJECT_CONSTITUTION.md`'s reuse prohibition; no
+  BLOCKER/CRITICAL/HIGH raised, residual gap (end-to-end exercise against real data, impact
+  assessment) carried in the risk register, not claimed closed.
+- **Budget (OQ-14)** and **Backlog (OQ-01)** — not started; both need a decision only the sponsor can
+  make (real cost/effort figures; legal entity and license), not something to draft speculatively.
+
 ## Future sprints
 
 To be detailed as the program advances. Each new sprint follows this format: Objective ->
