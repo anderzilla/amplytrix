@@ -5,6 +5,54 @@ evidence is attached to the delivering commit; the sprint's calendar end date al
 gate. This roadmap complements, and never overrides, `PROJECT_CONSTITUTION.md`'s Definition of
 Ready/Done, `docs/decisions/open-questions.md`, and `docs/decisions/risk-register.md`.
 
+## Program timeline
+
+All 30 sprints are tracked as GitHub issues (`type:sprint` label, one per row below) on the
+[Amplytrix · Roadmap 2026–2027](https://github.com/users/anderzilla/projects/1) board. Each issue's
+own checklist (Entregas / Qualidade e documentação) is the source of truth for that sprint's
+day-to-day progress — this table is the source of truth for the sequence, dates, and phase, so the
+two are not duplicated field-by-field. Sprints run back-to-back in two-week windows unless noted;
+`S00` and `S07` are short (5-day) checkpoints, and `S07 -> S08` carries a deliberate ~2.5-week gap
+(year-end break).
+
+| Sprint | Phase | Window                   | Objective               | Issue                                                                   |
+| ------ | ----- | ------------------------ | ----------------------- | ----------------------------------------------------------------------- |
+| S00    | F0    | 2026-09-14 -> 2026-09-18 | Programa e gates        | [#9](https://github.com/anderzilla/amplytrix/issues/9) — detailed below |
+| S01    | F1    | 2026-09-21 -> 2026-10-02 | Comprador e problema    | [#10](https://github.com/anderzilla/amplytrix/issues/10)                |
+| S02    | F1    | 2026-10-05 -> 2026-10-16 | Oferta e amostra        | [#11](https://github.com/anderzilla/amplytrix/issues/11)                |
+| S03    | F2    | 2026-10-19 -> 2026-10-30 | Método operacional      | [#12](https://github.com/anderzilla/amplytrix/issues/12)                |
+| S04    | F2    | 2026-11-02 -> 2026-11-13 | UX CodeMatrix           | [#13](https://github.com/anderzilla/amplytrix/issues/13)                |
+| S05    | F3    | 2026-11-16 -> 2026-11-27 | Governance slice        | [#14](https://github.com/anderzilla/amplytrix/issues/14)                |
+| S06    | F3    | 2026-11-30 -> 2026-12-11 | Cenários e baseline     | [#15](https://github.com/anderzilla/amplytrix/issues/15)                |
+| S07    | F3    | 2026-12-14 -> 2026-12-18 | Evidência e exportação  | [#16](https://github.com/anderzilla/amplytrix/issues/16)                |
+| S08    | F4    | 2027-01-04 -> 2027-01-15 | Persistência            | [#17](https://github.com/anderzilla/amplytrix/issues/17)                |
+| S09    | F4    | 2027-01-18 -> 2027-01-29 | API                     | [#18](https://github.com/anderzilla/amplytrix/issues/18)                |
+| S10    | F4    | 2027-02-01 -> 2027-02-12 | Console interno         | [#19](https://github.com/anderzilla/amplytrix/issues/19)                |
+| S11    | F4    | 2027-02-15 -> 2027-02-26 | Recuperação operacional | [#20](https://github.com/anderzilla/amplytrix/issues/20)                |
+| S12    | F5    | 2027-03-01 -> 2027-03-12 | Abstração de provedores | [#21](https://github.com/anderzilla/amplytrix/issues/21)                |
+| S13    | F5    | 2027-03-15 -> 2027-03-26 | Autoridade e custo      | [#22](https://github.com/anderzilla/amplytrix/issues/22)                |
+| S14    | F5    | 2027-03-29 -> 2027-04-09 | Red-team técnico        | [#23](https://github.com/anderzilla/amplytrix/issues/23)                |
+| S15    | F6    | 2027-04-12 -> 2027-04-23 | Piloto 1                | [#24](https://github.com/anderzilla/amplytrix/issues/24)                |
+| S16    | F6    | 2027-04-26 -> 2027-05-07 | Piloto 2                | [#25](https://github.com/anderzilla/amplytrix/issues/25)                |
+| S17    | F6    | 2027-05-10 -> 2027-05-21 | Piloto 3 e decisão      | [#26](https://github.com/anderzilla/amplytrix/issues/26)                |
+| S18    | F7    | 2027-05-24 -> 2027-06-04 | Pacote avulso 1         | [#27](https://github.com/anderzilla/amplytrix/issues/27)                |
+| S19    | F7    | 2027-06-07 -> 2027-06-18 | Pacote avulso 2         | [#28](https://github.com/anderzilla/amplytrix/issues/28)                |
+| S20    | F7    | 2027-06-21 -> 2027-07-02 | Repetibilidade          | [#29](https://github.com/anderzilla/amplytrix/issues/29)                |
+| S21    | F8    | 2027-07-05 -> 2027-07-16 | Portal somente leitura  | [#30](https://github.com/anderzilla/amplytrix/issues/30)                |
+| S22    | F8    | 2027-07-19 -> 2027-07-30 | Aprovações no portal    | [#31](https://github.com/anderzilla/amplytrix/issues/31)                |
+| S23    | F8    | 2027-08-02 -> 2027-08-13 | Identidade e isolamento | [#32](https://github.com/anderzilla/amplytrix/issues/32)                |
+| S24    | F8    | 2027-08-16 -> 2027-08-27 | Portal beta             | [#33](https://github.com/anderzilla/amplytrix/issues/33)                |
+| S25    | F9    | 2027-08-30 -> 2027-09-10 | Catálogo e entitlements | [#34](https://github.com/anderzilla/amplytrix/issues/34)                |
+| S26    | F9    | 2027-09-13 -> 2027-09-24 | Billing                 | [#35](https://github.com/anderzilla/amplytrix/issues/35)                |
+| S27    | F9    | 2027-09-27 -> 2027-10-08 | Ciclo comercial         | [#36](https://github.com/anderzilla/amplytrix/issues/36)                |
+| S28    | F10   | 2027-10-11 -> 2027-10-22 | Staging e operação      | [#37](https://github.com/anderzilla/amplytrix/issues/37)                |
+| S29    | F10   | 2027-10-25 -> 2027-11-05 | Lançamento controlado   | [#38](https://github.com/anderzilla/amplytrix/issues/38)                |
+
+Only S00 has a detailed gate section below today. Each sprint gets one — Objective, deliverables and
+owners, exit gate, evidence log — added to this file as its window approaches, following the S00
+format; "approaches" is a planning convenience, not a gate condition — the gate itself still depends
+only on evidence, per the rule above.
+
 ## Sprint 2026-09-14 -> 2026-09-18 — Program and gates
 
 ### Objective
@@ -91,7 +139,13 @@ started from zero:
 - **Budget (OQ-14)** and **Backlog (OQ-01)** — not started; both need a decision only the sponsor can
   make (real cost/effort figures; legal entity and license), not something to draft speculatively.
 
-## Future sprints
+## Board
 
-To be detailed as the program advances. Each new sprint follows this format: Objective ->
-Deliverables/Owners -> Exit gate.
+The [Amplytrix · Roadmap 2026–2027](https://github.com/users/anderzilla/projects/1) GitHub Project is
+the sprint/kanban view of this document: columns Backlog / Ready / In progress / In review / Done
+track each sprint issue's status, and an Iteration field (once populated per the Program timeline
+table above) drives the Current/Next iteration and Roadmap views. This markdown file stays the
+narrative and gate record; the board stays the at-a-glance status. When they disagree, this file and
+the linked issue's own checklist are authoritative — the board's column/iteration placement is a
+projection of them, not an independent source of truth, and should be corrected to match rather than
+the other way around.
