@@ -1,0 +1,57 @@
+{
+  "envelope_id": "AMP-2026-PROJECT-DOCS-001-reviewer",
+  "task_id": "AMP-2026-PROJECT-DOCS-001",
+  "role": "reviewer",
+  "kb_commit": "6c1317a970a8b0efd4d691acaa868afb630d0a58",
+  "classification": "internal-redacted",
+  "action_level": "A2",
+  "scope": "Consolidar documentação descritiva do Amplytrix e avaliar práticas gerais de IA dos Reels, sem mudança normativa ou runtime",
+  "allowed": [
+    "Ler código e documentos",
+    "Consultar fontes públicas",
+    "Editar documentação desta tarefa",
+    "Validar e publicar branch/PR privado"
+  ],
+  "forbidden": [
+    "Merge/deploy",
+    "Dados reais ou segredos",
+    "Instalar plugins externos do Reel",
+    "Alterar arquitetura ou gates",
+    "Gastos ou obrigações"
+  ],
+  "output_requirements": [
+    "Guia do projeto e lacunas do MVP",
+    "Pesquisa citada com limites de observação",
+    "Revisão independente do commit",
+    "Validações documentais e limitações"
+  ],
+  "collaboration": {
+    "review_required": true,
+    "materiality": "material",
+    "decision_owner": "Founder / CodeMatrix",
+    "participants": [
+      {
+        "envelope_id": "AMP-2026-PROJECT-DOCS-001-primary",
+        "role": "primary",
+        "scope": "Pesquisa e documentação"
+      },
+      {
+        "envelope_id": "AMP-2026-PROJECT-DOCS-001-reviewer",
+        "role": "reviewer",
+        "scope": "Revisão independente read-only do commit"
+      }
+    ],
+    "providers_allowed": ["Codex internal agent collaboration"],
+    "data_flows": ["Documentação redigida e fontes públicas para revisor"],
+    "fallback": "Manter draft PR se revisão não passar"
+  },
+  "budget": {
+    "external_cost": 0,
+    "currency": "BRL"
+  },
+  "stop_conditions": [
+    "Segredos ou dados não autorizados",
+    "Necessidade de custo ou ativação externa",
+    "Ausência de revisão independente"
+  ]
+}
