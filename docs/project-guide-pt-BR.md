@@ -146,6 +146,11 @@ necessidade de gasto não aprovado, dados não autorizados, falha de isolamento 
 IA não paga, compra, renova, assina nem assume obrigação financeira. Recusa, exportação e saída
 do cliente precisam permanecer possíveis, sem retenção artificial.
 
+Na CI desta documentação, as auditorias do backend e de dependências JavaScript reportaram
+vulnerabilidades nas versões herdadas da base. Isso acrescenta uma pendência técnica para os
+gates do MVP; os checks documentais passaram, mas não certificam segurança do runtime. Ver
+[observações e evidência de CI](reviews/AMP-2026-PROJECT-DOCS-001/ci-observations.md).
+
 Medir sucesso da tarefa, retrabalho, esforço humano, satisfação, custo e tempo por entrega,
 incidentes e pedidos de exportação/descarte. Monetização é futura e humana; sem alteração de
 preço, persuasão comercial ou gamificação nesta documentação.
