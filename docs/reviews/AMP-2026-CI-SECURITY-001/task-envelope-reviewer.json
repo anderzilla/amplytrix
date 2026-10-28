@@ -1,0 +1,51 @@
+{
+  "envelope_id": "AMP-2026-CI-SECURITY-001-reviewer",
+  "task_id": "AMP-2026-CI-SECURITY-001",
+  "role": "reviewer",
+  "kb_commit": "6c1317a970a8b0efd4d691acaa868afb630d0a58",
+  "classification": "internal-redacted",
+  "action_level": "A2",
+  "scope": "Read-only independent exact-commit security and evidence review.",
+  "allowed": ["Repository reads", "Non-mutating checks", "Independent findings"],
+  "forbidden": [
+    "Merge",
+    "Deploy",
+    "Paid resources",
+    "Secrets or real customer data",
+    "Gate bypass"
+  ],
+  "output_requirements": [
+    "Dependency evaluation",
+    "Validation and contrary evidence",
+    "Independent exact-commit review"
+  ],
+  "collaboration": {
+    "review_required": true,
+    "materiality": "material",
+    "decision_owner": "Founder",
+    "participants": [
+      {
+        "envelope_id": "AMP-2026-CI-SECURITY-001-primary",
+        "role": "primary",
+        "scope": "Remediation"
+      },
+      {
+        "envelope_id": "AMP-2026-CI-SECURITY-001-reviewer",
+        "role": "reviewer",
+        "scope": "Read-only independent review"
+      }
+    ],
+    "providers_allowed": ["Codex internal agent collaboration"],
+    "data_flows": ["Public repository and validation evidence to independent reviewer"],
+    "fallback": "Keep gates blocked on missing review or failures"
+  },
+  "budget": {
+    "external_cost": 0,
+    "currency": "BRL"
+  },
+  "stop_conditions": [
+    "Unauthorized data or cost",
+    "Blocking unresolved finding",
+    "Missing independent review"
+  ]
+}

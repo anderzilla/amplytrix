@@ -21,6 +21,10 @@ pnpm dev
 
 Read in order: [project constitution](PROJECT_CONSTITUTION.md), [agent instructions](AGENTS.md), [system overview](docs/architecture/system-overview.md), and [local setup](docs/development/local-setup.md).
 
+For a Portuguese overview of the verified state, managed-service MVP gaps, and cross-agent AI
+capability proposals, read the [project guide](docs/project-guide-pt-BR.md). It is a dated synthesis,
+not a replacement for the source of truth or an authorization to activate providers.
+
 Operational decisions are indexed in the [source of truth](docs/source-of-truth/README.md); historical rationale remains in [ADRs](docs/adr/README.md). Development follows `task/*|architecture/* -> develop -> homolog -> master`. The GitHub Wiki is a navigational publication synchronized from reviewed repository documentation, never an independent authority.
 
 ## Workspace

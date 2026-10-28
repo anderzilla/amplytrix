@@ -1,0 +1,56 @@
+{
+  "evidence_pack_id": "AMP-2026-PROJECT-DOCS-001-primary-evidence",
+  "envelope_id": "AMP-2026-PROJECT-DOCS-001-primary",
+  "task_id": "AMP-2026-PROJECT-DOCS-001",
+  "role": "implementer",
+  "provider": "OpenAI Codex",
+  "model": "session model",
+  "date": "2026-10-27T23:01:56.334607+00:00",
+  "kb_commit": "6c1317a970a8b0efd4d691acaa868afb630d0a58",
+  "scope": "Documentação descritiva e pesquisa de capacidades de IA; base Amplytrix a12793d440a3a0fcb3093bbd0c1f3a09643fb7a0",
+  "sources": [
+    {
+      "url": "https://www.instagram.com/reel/DewrTi7I68P/",
+      "verified_on": "2026-10-27"
+    },
+    {
+      "url": "https://playwright.dev/docs/best-practices",
+      "verified_on": "2026-10-27"
+    },
+    {
+      "url": "https://agentskills.io/specification",
+      "verified_on": "2026-10-27"
+    },
+    {
+      "url": "https://github.com/Graphify-Labs/graphify",
+      "verified_on": "2026-10-27"
+    },
+    {
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "verified_on": "2026-10-27"
+    }
+  ],
+  "findings": [
+    "Legenda completa e trechos visuais; sem transcrição auditiva integral",
+    "Método gerenciado primeiro; runtime não operacional no commit-base",
+    "Founder pediu aplicação a IAs em geral; sem dependência de Claude Code",
+    "Somente documentação; sem alteração normativa ou instalação dos plugins do post",
+    "pnpm install --frozen-lockfile passou sem alteração de manifest/lockfile",
+    "Prettier dos arquivos alterados, foundation, governance, phase-zero, links Markdown locais e git diff --check passaram",
+    "Suite completa de runtime não executada: mudança somente documental; Python no PATH 3.12, inferior ao 3.13 exigido, não usado para validar backend",
+    "Node 24.19.0; pnpm 11.25.0; uv 0.12.17; dependências conforme lockfile, sem plugins do Reel"
+  ],
+  "contrary_evidence": [
+    "Pacotes exatos do autor não identificados inequivocamente",
+    "Calendário não prova execução; issues consultadas abertas",
+    "Nenhuma economia ou compatibilidade operacional foi medida"
+  ],
+  "assumptions": ["Próxima etapa técnica exige baseline e controles próprios"],
+  "divergences": [],
+  "confidence": "medium",
+  "cost": {
+    "external_purchase": 0,
+    "session_usage": "not quantified"
+  },
+  "recommendation": "Revisar commit e publicar draft PR documental para develop"
+}
